@@ -1,0 +1,233 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Claude Code Headless Output Schema",
+  "description": "Unified output format for all Claude Code headless commands",
+  "type": "object",
+  "required": ["command_type", "status", "session_summary", "files", "comments"],
+  "properties": {
+    "command_type": {
+      "type": "string",
+      "enum": ["create-prd", "doc-code-for-dev", "doc-code-usage", "free-agent", "generate-tasks"],
+      "description": "The type of command that was executed"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["complete", "incomplete", "user_query", "error"],
+      "description": "The completion status of the command execution"
+    },
+    "session_summary": {
+      "type": "string",
+      "description": "1-3 sentence summary of what was accomplished in this session"
+    },
+    "tasks": {
+      "type": "array",
+      "description": "Hierarchical list of tasks with their current status",
+      "items": {
+        "type": "object",
+        "required": ["task_id", "description", "status"],
+        "properties": {
+          "task_id": {
+            "type": "string",
+            "description": "Hierarchical ID like '1.0', '1.1', '2.0', etc."
+          },
+          "description": {
+            "type": "string",
+            "description": "Clear description of what this task involves"
+          },
+          "status": {
+            "type": "string",
+            "enum": ["pending", "in_progress", "completed", "skipped", "blocked"],
+            "description": "Current status of this task"
+          },
+          "parent_task_id": {
+            "type": ["string", "null"],
+            "description": "ID of parent task, null for top-level tasks"
+          },
+          "notes": {
+            "type": "string",
+            "description": "Additional details about completion, issues, or blockers"
+          }
+        }
+      }
+    },
+    "files": {
+      "type": "object",
+      "required": ["created", "modified", "deleted"],
+      "properties": {
+        "created": {
+          "type": "array",
+          "description": "Files created during this session",
+          "items": {
+            "type": "object",
+            "required": ["path", "purpose", "type"],
+            "properties": {
+              "path": {
+                "type": "string",
+                "description": "Relative path from working directory"
+              },
+              "purpose": {
+                "type": "string",
+                "description": "Why this file was created"
+              },
+              "type": {
+                "type": "string",
+                "enum": ["markdown", "code", "config", "documentation", "test", "data"],
+                "description": "Type of file created"
+              }
+            }
+          }
+        },
+        "modified": {
+          "type": "array",
+          "description": "Files modified during this session",
+          "items": {
+            "type": "object",
+            "required": ["path", "changes"],
+            "properties": {
+              "path": {
+                "type": "string",
+                "description": "Relative path from working directory"
+              },
+              "changes": {
+                "type": "string",
+                "description": "Description of what was changed"
+              }
+            }
+          }
+        },
+        "deleted": {
+          "type": "array",
+          "description": "Files deleted during this session",
+          "items": {
+            "type": "object",
+            "required": ["path", "reason"],
+            "properties": {
+              "path": {
+                "type": "string",
+                "description": "Relative path from working directory"
+              },
+              "reason": {
+                "type": "string",
+                "description": "Why this file was deleted"
+              }
+            }
+          }
+        }
+      }
+    },
+    "artifacts": {
+      "type": "object",
+      "description": "Command-specific output artifacts",
+      "properties": {
+        "prd_filename": {
+          "type": "string",
+          "description": "Path to generated PRD file (create-prd command)"
+        },
+        "documentation_filename": {
+          "type": "string",
+          "description": "Path to generated documentation (doc-code commands)"
+        },
+        "git_commit": {
+          "type": ["string", "null"],
+          "description": "Git commit hash if changes were committed"
+        }
+      }
+    },
+    "queries_for_user": {
+      "type": "array",
+      "description": "Questions that need user input before proceeding",
+      "items": {
+        "type": "object",
+        "required": ["query_number", "query", "type"],
+        "properties": {
+          "query_number": {
+            "type": "integer",
+            "description": "Sequential number for this query"
+          },
+          "query": {
+            "type": "string",
+            "description": "The question to ask the user"
+          },
+          "type": {
+            "type": "string",
+            "enum": ["text", "multiple_choice", "boolean"],
+            "description": "Type of response expected"
+          },
+          "choices": {
+            "type": "array",
+            "description": "Available choices (required for multiple_choice type)",
+            "items": {
+              "type": "object",
+              "required": ["id", "value"],
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "Unique identifier for this choice"
+                },
+                "value": {
+                  "type": "string",
+                  "description": "Display text for this choice"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "comments": {
+      "type": "array",
+      "description": "Important notes, warnings, or observations",
+      "items": {
+        "type": "string"
+      }
+    },
+    "context": {
+      "type": "string",
+      "description": "Complete state dump for resumption (required for user_query or incomplete status)"
+    },
+    "metrics": {
+      "type": "object",
+      "description": "Optional performance and activity metrics",
+      "properties": {
+        "duration_seconds": {
+          "type": "number",
+          "description": "How long the command took to execute"
+        },
+        "files_analyzed": {
+          "type": "integer",
+          "description": "Number of files analyzed (for doc-code commands)"
+        },
+        "lines_of_code": {
+          "type": "integer",
+          "description": "Lines of code written or analyzed"
+        }
+      }
+    },
+    "errors": {
+      "type": "array",
+      "description": "Errors encountered during execution",
+      "items": {
+        "type": "object",
+        "required": ["message", "type", "fatal"],
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Error message"
+          },
+          "type": {
+            "type": "string",
+            "description": "Type of error (e.g., 'FileNotFound', 'PermissionError', 'ValidationError')"
+          },
+          "fatal": {
+            "type": "boolean",
+            "description": "Whether this error prevented completion"
+          },
+          "context": {
+            "type": "string",
+            "description": "Additional context about when/where the error occurred"
+          }
+        }
+      }
+    }
+  }
+}

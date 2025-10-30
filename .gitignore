@@ -1,0 +1,53 @@
+# Working directories
+workspace/
+work/
+test-projects/
+PRDs/
+output/
+
+# Output files
+claude-output.json
+**/claude-output.json
+*.log
+
+# Request files (user-specific)
+request.json
+*-request.json
+
+# Generated artifacts (unless you want to track them)
+docs/generated/
+
+# OS files
+.DS_Store
+Thumbs.db
+*~
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+.claude/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+ENV/
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Temporary files
+*.tmp
+*.bak
+*.backup
