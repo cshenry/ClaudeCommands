@@ -1,0 +1,16 @@
+{
+  "request_type": "create-prd",
+  "description": "Create PRD for user profile editing feature",
+  "context": {
+    "feature_request": "Add ability for users to edit their profile information including name, email, avatar, and bio. Users should be able to update their information through a dedicated profile settings page.",
+    "target_users": "End users of the web application (both free and premium accounts)",
+    "existing_system": "We have a user authentication system with JWT tokens, user database in PostgreSQL, and a basic profile display page",
+    "business_goals": "Improve user engagement by allowing personalization, reduce support tickets about profile updates"
+  },
+  "constraints": {
+    "technical_stack": "React frontend, Node.js backend, PostgreSQL database",
+    "timeline": "2 weeks for MVP",
+    "complexity": "medium",
+    "security_requirements": "Must validate all inputs, require re-authentication for email changes"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "request_type": "doc-code-usage",
+  "description": "Document public API of the user service",
+  "context": {
+    "codebase_path": "./src/services/user",
+    "public_apis": [
+      "src/services/user/api/index.ts",
+      "src/services/user/client.ts"
+    ],
+    "target_users": "Frontend developers consuming the user service API",
+    "api_type": "REST API and JavaScript SDK"
+  },
+  "constraints": {
+    "depth": "comprehensive with examples",
+    "include_code_samples": true,
+    "include_error_handling": true,
+    "format": "markdown with interactive examples"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "request_type": "doc-code-for-dev",
+  "description": "Document architecture of the user service module",
+  "context": {
+    "codebase_path": "./src/services/user",
+    "focus_areas": [
+      "authentication flow",
+      "user management",
+      "profile system",
+      "session handling"
+    ],
+    "entry_points": [
+      "src/services/user/index.ts",
+      "src/services/user/auth.ts"
+    ],
+    "documentation_purpose": "Onboard new developers and guide future maintenance"
+  },
+  "constraints": {
+    "depth": "comprehensive",
+    "include_diagrams": false,
+    "target_audience": "senior and mid-level developers",
+    "format": "markdown with code examples"
+  }
+}

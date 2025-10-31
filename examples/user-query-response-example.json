@@ -1,0 +1,13 @@
+{
+  "request_type": "create-prd",
+  "description": "Resume PRD creation with user responses",
+  "resume_session": true,
+  "context": {
+    "previous_session": "Initial PRD creation that paused for clarifications"
+  },
+  "user_responses": {
+    "query_1": "We should support both email and username login",
+    "query_2": "Password reset should use email verification with a time-limited token",
+    "query_3": "Yes, we want social login with Google and GitHub OAuth"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "request_type": "generate-tasks",
+  "description": "Generate task list for user profile editing PRD",
+  "context": {
+    "prd_file": "PRDs/0001-user-profile-editing.md",
+    "codebase_path": "./src",
+    "existing_patterns": "We use React functional components with hooks, Redux for state management, Jest + React Testing Library for testing, Express.js for API endpoints"
+  },
+  "constraints": {
+    "task_granularity": "medium",
+    "include_testing": true,
+    "development_phases": ["MVP", "Enhanced Features", "Polish"]
+  }
+}

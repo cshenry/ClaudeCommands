@@ -1,0 +1,19 @@
+{
+  "request_type": "free-agent",
+  "description": "Rename function across entire codebase",
+  "context": {
+    "task": "Rename all occurrences of the function 'getCwd' to 'getCurrentWorkingDirectory' across the entire codebase. Update both function definitions and all call sites. Ensure tests are updated as well.",
+    "working_directory": "./src",
+    "file_types": [
+      "*.ts",
+      "*.tsx",
+      "*.js",
+      "*.jsx"
+    ]
+  },
+  "constraints": {
+    "preserve_functionality": true,
+    "update_tests": true,
+    "verify_after": "Run tests to ensure nothing broke"
+  }
+}
