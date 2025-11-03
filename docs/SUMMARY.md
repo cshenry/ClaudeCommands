@@ -144,9 +144,11 @@ my-project/
 {
   "command_type": "create-prd",
   "status": "complete",
+  "session_id": "session-abc123",
+  "parent_session_id": null,
   "session_summary": "Created PRD with 8 requirements",
-  
-  "tasks": [                  // NEW: Tasks in JSON
+
+  "tasks": [                  // Tasks tracked in JSON
     {
       "task_id": "1.0",
       "description": "Generate PRD content",

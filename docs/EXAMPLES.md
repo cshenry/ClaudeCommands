@@ -89,6 +89,8 @@ my-project/
 {
   "command_type": "create-prd",
   "status": "complete",
+  "session_id": "session-20240115-abc123",
+  "parent_session_id": null,
   "session_summary": "Created comprehensive PRD for user profile editing feature with 8 functional requirements and 4 user stories",
   "tasks": [
     {
@@ -185,6 +187,8 @@ my-project/
 {
   "command_type": "generate-tasks",
   "status": "user_query",
+  "session_id": "session-20240115-def456",
+  "parent_session_id": null,
   "session_summary": "Generated 5 high-level tasks for user profile editing feature implementation",
   "tasks": [
     {
@@ -241,16 +245,19 @@ my-project/
 
 ### User Response File: `response.json`
 
+User creates a new session that continues from the previous session. Claude Code automatically links sessions via parent_session_id.
+
 ```json
 {
   "request_type": "generate-tasks",
   "description": "Continue task generation",
-  "previous_context": "PRD analyzed. Found 8 functional requirements. Existing codebase uses React/Express/PostgreSQL. Identified patterns: React hooks, REST API, Jest testing. Ready to generate detailed sub-tasks.",
   "user_responses": {
     "query_1": "Go"
   }
 }
 ```
+
+Note: The new session will automatically have `parent_session_id: "session-20240115-def456"` which gives Claude access to the full context from Phase 1.
 
 ### Command Invocation (Phase 2)
 
@@ -269,6 +276,8 @@ claude code headless \
 {
   "command_type": "generate-tasks",
   "status": "complete",
+  "session_id": "session-20240115-ghi789",
+  "parent_session_id": "session-20240115-def456",
   "session_summary": "Generated complete task list with 5 parent tasks and 28 sub-tasks for user profile editing feature",
   "tasks": [
     {
@@ -402,6 +411,8 @@ my-project/
 {
   "command_type": "doc-code-for-dev",
   "status": "complete",
+  "session_id": "session-20240115-jkl012",
+  "parent_session_id": null,
   "session_summary": "Created comprehensive architecture documentation for authentication service covering 15 modules and 4 major data flows",
   "files": {
     "created": [
@@ -486,6 +497,8 @@ my-project/
 {
   "command_type": "doc-code-usage",
   "status": "complete",
+  "session_id": "session-20240115-mno345",
+  "parent_session_id": null,
   "session_summary": "Created comprehensive usage documentation with API reference for 42 public methods and 15 complete examples",
   "files": {
     "created": [
