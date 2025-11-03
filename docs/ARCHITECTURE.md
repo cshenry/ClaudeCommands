@@ -106,8 +106,8 @@ This document describes the complete architecture of the Claude Code headless ex
 **Purpose**: The actual deliverables (PRDs, documentation, code, etc.)
 
 **Locations**:
-- PRDs: `PRDs/[NNNN]-[name].md`
-- Documentation: `docs/[name]-documentation.md`
+- PRDs: `orchestrator/PRD/[NNNN]-[name].md`
+- Documentation: `orchestrator/docs/[name]-documentation.md`
 - Code: Project-appropriate locations
 - Tests: Alongside code files
 
@@ -244,7 +244,7 @@ PRD (markdown) → Tasks (in JSON output) → Implementation updates JSON
   "files": {
     "created": [
       {
-        "path": "PRDs/0001-feature.md",
+        "path": "orchestrator/PRD/0001-feature.md",
         "purpose": "Product Requirements Document",
         "type": "markdown"
       },

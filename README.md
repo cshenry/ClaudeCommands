@@ -49,10 +49,10 @@ cat claude-output.json | jq '.status, .session_summary'
 
 | Command | Purpose | Output |
 |---------|---------|--------|
-| `create-prd` | Generate Product Requirements Documents | PRD in `PRDs/` |
+| `create-prd` | Generate Product Requirements Documents | PRD in `orchestrator/PRD/` |
 | `generate-tasks` | Break PRDs into implementation tasks | Tasks in JSON |
-| `doc-code-for-dev` | Document internal architecture | Docs in `docs/` |
-| `doc-code-usage` | Document public APIs and usage | Docs in `docs/` |
+| `doc-code-for-dev` | Document internal architecture | Docs in `orchestrator/docs/` |
+| `doc-code-usage` | Document public APIs and usage | Docs in `orchestrator/docs/` |
 | `free-agent` | Execute simple tasks from natural language | Varies |
 
 ### 3. Unified Output Format

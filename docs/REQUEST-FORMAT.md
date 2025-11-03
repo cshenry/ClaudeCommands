@@ -64,7 +64,7 @@ This document defines the standard format for request files passed to Claude Cod
   "request_type": "generate-tasks",
   "description": "Generate task list for user profile editing PRD",
   "context": {
-    "prd_file": "PRDs/0001-user-profile-editing.md",
+    "prd_file": "orchestrator/PRD/0001-user-profile-editing.md",
     "codebase_path": "./src",
     "existing_patterns": "We use React functional components with hooks, Jest for testing"
   },
