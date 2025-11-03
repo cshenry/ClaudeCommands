@@ -158,13 +158,13 @@ For commands that implement tasks:
 ## File Creation Guidelines
 
 ### PRD Files (create-prd command)
-- Save to: `PRDs/[sequence]-[feature-name].md`
+- Save to: `orchestrator/PRD/[sequence]-[feature-name].md`
 - Sequence is zero-padded 4 digits (0001, 0002, etc.)
 - Include full markdown PRD content
 - Reference filename in JSON output's `artifacts.prd_filename`
 
 ### Documentation Files (doc-code commands)
-- Save to: `docs/[project-name]-[doc-type].md`
+- Save to: `orchestrator/docs/[project-name]-[doc-type].md`
 - Types: architecture-documentation, usage-documentation
 - Include full markdown documentation
 - Reference filename in JSON output's `artifacts.documentation_filename`
@@ -227,11 +227,11 @@ You would:
 1. Read both files
 2. Ask clarifying questions (if needed)
 3. Generate PRD content
-4. Save PRD to `PRDs/0001-user-profile-editing.md`
+4. Save PRD to `orchestrator/PRD/0001-user-profile-editing.md`
 5. Create comprehensive JSON output with:
    - Status: "complete"
    - Session summary
-   - File created: PRDs/0001-user-profile-editing.md
+   - File created: orchestrator/PRD/0001-user-profile-editing.md
    - Any relevant comments
    - Reference to PRD filename in artifacts
 

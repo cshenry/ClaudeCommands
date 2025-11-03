@@ -266,8 +266,8 @@ module2
 ## Output Files
 
 1. **Save Documentation**
-   - Filename: `docs/[project-name]-architecture-documentation.md`
-   - Create `docs/` directory if it doesn't exist
+   - Filename: `orchestrator/docs/[project-name]-architecture-documentation.md`
+   - Create `orchestrator/docs/` directory if it doesn't exist
    - Use kebab-case for project name
 
 2. **Reference in JSON**
