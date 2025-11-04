@@ -1,6 +1,12 @@
 {
   "request_type": "create-prd",
   "description": "Resume PRD creation with user responses",
+  "allowed_tools": [
+    "Read",
+    "Write",
+    "Bash",
+    "Glob"
+  ],
   "resume_session": true,
   "context": {
     "previous_session": "Initial PRD creation that paused for clarifications"

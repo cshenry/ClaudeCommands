@@ -1,6 +1,12 @@
 {
   "request_type": "create-prd",
   "description": "Create PRD for user profile editing feature",
+  "allowed_tools": [
+    "Read",
+    "Write",
+    "Bash",
+    "Glob"
+  ],
   "context": {
     "feature_request": "Add ability for users to edit their profile information including name, email, avatar, and bio. Users should be able to update their information through a dedicated profile settings page.",
     "target_users": "End users of the web application (both free and premium accounts)",
