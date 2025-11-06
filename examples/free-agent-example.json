@@ -1,6 +1,14 @@
 {
   "request_type": "free-agent",
   "description": "Rename function across entire codebase",
+  "allowed_tools": [
+    "Read",
+    "Write",
+    "Edit",
+    "Bash",
+    "Glob",
+    "Grep"
+  ],
   "context": {
     "task": "Rename all occurrences of the function 'getCwd' to 'getCurrentWorkingDirectory' across the entire codebase. Update both function definitions and all call sites. Ensure tests are updated as well.",
     "working_directory": "./src",

@@ -1,6 +1,14 @@
 {
   "request_type": "doc-code-usage",
   "description": "Document public API of the user service",
+  "allowed_tools": [
+    "Read",
+    "Write",
+    "Bash",
+    "Glob",
+    "Grep",
+    "Task"
+  ],
   "context": {
     "codebase_path": "./src/services/user",
     "public_apis": [

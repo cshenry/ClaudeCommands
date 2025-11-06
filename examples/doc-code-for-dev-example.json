@@ -1,6 +1,14 @@
 {
   "request_type": "doc-code-for-dev",
   "description": "Document architecture of the user service module",
+  "allowed_tools": [
+    "Read",
+    "Write",
+    "Bash",
+    "Glob",
+    "Grep",
+    "Task"
+  ],
   "context": {
     "codebase_path": "./src/services/user",
     "focus_areas": [

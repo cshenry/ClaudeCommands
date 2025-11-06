@@ -1,6 +1,13 @@
 {
   "request_type": "generate-tasks",
   "description": "Generate task list for user profile editing PRD",
+  "allowed_tools": [
+    "Read",
+    "Bash",
+    "Glob",
+    "Grep",
+    "Task"
+  ],
   "context": {
     "prd_file": "orchestrator/PRD/0001-user-profile-editing.md",
     "codebase_path": "./src",
