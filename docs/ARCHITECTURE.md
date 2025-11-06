@@ -106,8 +106,8 @@ This document describes the complete architecture of the Claude Code headless ex
 **Purpose**: The actual deliverables (PRDs, documentation, code, etc.)
 
 **Locations**:
-- PRDs: `PRDs/[NNNN]-[name].md`
-- Documentation: `docs/[name]-documentation.md`
+- PRDs: `orchestrator/PRD/[NNNN]-[name].md`
+- Documentation: `orchestrator/docs/[name]-documentation.md`
 - Code: Project-appropriate locations
 - Tests: Alongside code files
 
@@ -144,37 +144,50 @@ This document describes the complete architecture of the Claude Code headless ex
 ```
 ┌─────────────────────────────────────────────────────────┐
 │              Execution Paused for User Input             │
+│                    (Session abc123)                      │
 │                                                          │
 │  Previous Output:                                        │
 │  {                                                       │
 │    "status": "user_query",                               │
-│    "queries_for_user": [...questions...],                │
-│    "context": "...saved state..."                        │
+│    "session_id": "session-abc123",                       │
+│    "parent_session_id": null,                            │
+│    "queries_for_user": [...questions...]                 │
 │  }                                                       │
 └─────────────────────────────────────────────────────────┘
                             │
                             ↓
 ┌─────────────────────────────────────────────────────────┐
 │                   User Provides Answers                  │
+│              (New Session xyz789 created)                │
 │                                                          │
 │  New request.json:                                       │
 │  {                                                       │
-│    "previous_context": "...from output...",              │
+│    "request_type": "create-prd",                         │
 │    "user_responses": {                                   │
 │      "query_1": "answer",                                │
 │      "query_2": {"choice_id": "..."}                     │
 │    }                                                     │
 │  }                                                       │
+│                                                          │
+│  Note: parent_session_id automatically set to abc123     │
 └─────────────────────────────────────────────────────────┘
                             │
                             ↓
 ┌─────────────────────────────────────────────────────────┐
 │                 Claude Resumes Execution                 │
+│                    (Session xyz789)                      │
 │                                                          │
-│  ├─ Loads previous context                               │
+│  ├─ Loads context from parent session abc123             │
 │  ├─ Incorporates user responses                          │
 │  ├─ Continues from where it left off                     │
 │  └─ Completes execution or asks more questions           │
+│                                                          │
+│  Output includes:                                        │
+│  {                                                       │
+│    "session_id": "session-xyz789",                       │
+│    "parent_session_id": "session-abc123",                │
+│    "status": "complete"                                  │
+│  }                                                       │
 └─────────────────────────────────────────────────────────┘
 ```
 
@@ -244,7 +257,7 @@ PRD (markdown) → Tasks (in JSON output) → Implementation updates JSON
   "files": {
     "created": [
       {
-        "path": "PRDs/0001-feature.md",
+        "path": "orchestrator/PRD/0001-feature.md",
         "purpose": "Product Requirements Document",
         "type": "markdown"
       },

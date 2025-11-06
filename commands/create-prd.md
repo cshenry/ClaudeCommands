@@ -46,13 +46,13 @@ You will receive a request file containing:
    - Avoid jargon where possible
 
 4. **Determine Sequence Number**
-   - Check the `PRDs/` directory for existing PRDs
+   - Check the `orchestrator/PRD/` directory for existing PRDs
    - Use next sequential number (0001, 0002, 0003, etc.)
    - If directory doesn't exist, create it and start at 0001
 
 5. **Save PRD File**
-   - Filename format: `PRDs/[NNNN]-[feature-name].md`
-   - Example: `PRDs/0001-user-profile-editing.md`
+   - Filename format: `orchestrator/PRD/[NNNN]-[feature-name].md`
+   - Example: `orchestrator/PRD/0001-user-profile-editing.md`
    - Use kebab-case for feature name
    - Document the filename in JSON output's `artifacts.prd_filename`
 

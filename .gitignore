@@ -2,9 +2,8 @@
 workspace/
 work/
 test-projects/
-PRDs/
+orchestrator/
 output/
-
 # Output files
 claude-output.json
 **/claude-output.json
@@ -12,8 +11,6 @@ claude-output.json
 # Request files (user-specific)
 request.json
 *-request.json
-# Generated artifacts (unless you want to track them)
-docs/generated/
 # OS files
 .DS_Store
 Thumbs.db

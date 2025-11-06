@@ -33,10 +33,14 @@ Your job is to execute the command according to the instructions and produce a c
 - Make reasonable assumptions and document them in comments
 - Complete as much work as possible before requesting user input
 
-### 5. Stateful Resumption
-- If you need user input, save complete context for resumption
-- Include enough detail to pick up exactly where you left off
-- Don't make the user repeat information
+### 5. Session Management & Stateful Resumption
+- Claude Code provides a session ID that maintains conversation context automatically
+- Always include `session_id` in your output to enable seamless continuation
+- When resuming work from a previous session, include `parent_session_id` to link sessions
+- The session ID allows Claude Code to preserve full conversation history
+- If you need user input, the context is preserved via session ID
+- Include enough detail in `session_summary` to understand what was accomplished
+- Don't make the user repeat information - session maintains context
 
 ## Unified JSON Output Schema
 
@@ -44,6 +48,8 @@ Your job is to execute the command according to the instructions and produce a c
 {
   "command_type": "string (create-prd | doc-code-for-dev | doc-code-usage | free-agent | generate-tasks)",
   "status": "string (complete | incomplete | user_query | error)",
+  "session_id": "string - Claude Code session ID for this execution",
+  "parent_session_id": "string | null - Session ID of previous session when resuming work",
   "session_summary": "string - Brief summary of what was accomplished",
   
   "tasks": [
@@ -101,8 +107,8 @@ Your job is to execute the command according to the instructions and produce a c
   "comments": [
     "string - important notes, warnings, observations"
   ],
-  
-  "context": "string - complete state dump for resumption if status is user_query or incomplete",
+
+  "context": "string - optional supplementary state details. Session ID preserves full context automatically, so this field is only needed for additional implementation-specific state not captured in the conversation.",
   
   "metrics": {
     "duration_seconds": "number (optional)",
@@ -123,24 +129,28 @@ Your job is to execute the command according to the instructions and produce a c
 ## Required Fields by Status
 
 ### Status: "complete"
-- `command_type`, `status`, `session_summary`, `files`, `comments`
+- `command_type`, `status`, `session_id`, `session_summary`, `files`, `comments`
+- `parent_session_id` (if this session continues work from a previous session)
 - Plus any command-specific artifacts (prd_filename, documentation_filename, etc.)
 - `tasks` array if the command involves tasks
 
 ### Status: "user_query"
-- `command_type`, `status`, `session_summary`, `queries_for_user`, `context`
+- `command_type`, `status`, `session_id`, `session_summary`, `queries_for_user`
 - `files` (for work done so far)
 - `comments` (explaining why input is needed)
+- `context` (optional - session_id maintains context automatically)
+- Note: When user provides answers, they'll create a new session with `parent_session_id` linking back to this one
 
 ### Status: "incomplete"
-- `command_type`, `status`, `session_summary`, `files`, `context`, `comments`
+- `command_type`, `status`, `session_id`, `session_summary`, `files`, `comments`
 - Explanation in `comments` of what's incomplete and why
 - `errors` array if errors caused incompleteness
+- `context` (optional - session_id maintains context automatically)
 
 ### Status: "error"
-- `command_type`, `status`, `session_summary`, `errors`, `comments`
+- `command_type`, `status`, `session_id`, `session_summary`, `errors`, `comments`
 - `files` (if any work was done before error)
-- `context` (if recoverable)
+- `context` (optional - for additional recovery details beyond what session maintains)
 
 ## Task Management
 
@@ -158,13 +168,13 @@ For commands that implement tasks:
 ## File Creation Guidelines
 
 ### PRD Files (create-prd command)
-- Save to: `PRDs/[sequence]-[feature-name].md`
+- Save to: `orchestrator/PRD/[sequence]-[feature-name].md`
 - Sequence is zero-padded 4 digits (0001, 0002, etc.)
 - Include full markdown PRD content
 - Reference filename in JSON output's `artifacts.prd_filename`
 
 ### Documentation Files (doc-code commands)
-- Save to: `docs/[project-name]-[doc-type].md`
+- Save to: `orchestrator/docs/[project-name]-[doc-type].md`
 - Types: architecture-documentation, usage-documentation
 - Include full markdown documentation
 - Reference filename in JSON output's `artifacts.documentation_filename`
@@ -227,12 +237,21 @@ You would:
 1. Read both files
 2. Ask clarifying questions (if needed)
 3. Generate PRD content
-4. Save PRD to `PRDs/0001-user-profile-editing.md`
+4. Save PRD to `orchestrator/PRD/0001-user-profile-editing.md`
 5. Create comprehensive JSON output with:
    - Status: "complete"
+   - Session ID: (provided by Claude Code automatically)
+   - Parent session ID: null (this is a new session)
    - Session summary
-   - File created: PRDs/0001-user-profile-editing.md
+   - File created: orchestrator/PRD/0001-user-profile-editing.md
    - Any relevant comments
    - Reference to PRD filename in artifacts
 
 The user then reads `claude-output.json` to understand everything you did.
+
+**If you needed clarification:**
+- Set status to "user_query"
+- Include session_id in output
+- Add queries_for_user array
+- When user provides answers in a new session, that session will have parent_session_id pointing to this session
+- Claude Code uses the session chain to maintain full context

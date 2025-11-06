@@ -58,13 +58,13 @@ I've redesigned your Claude Code headless system to be **consistent, unified, an
 - Document internal architecture
 - For developers who will modify code
 - Creates comprehensive markdown docs
-- Saves to `docs/[project]-architecture-documentation.md`
+- Saves to `orchestrator/docs/[project]-architecture-documentation.md`
 
 ### 9. **commands/doc-code-usage.md**
 - Document public APIs and usage
 - For external users of the code
 - Shows how to USE, not how it works internally
-- Saves to `docs/[project]-usage-documentation.md`
+- Saves to `orchestrator/docs/[project]-usage-documentation.md`
 
 ### 10. **commands/free-agent.md**
 - Execute simple tasks from natural language
@@ -144,9 +144,11 @@ my-project/
 {
   "command_type": "create-prd",
   "status": "complete",
+  "session_id": "session-abc123",
+  "parent_session_id": null,
   "session_summary": "Created PRD with 8 requirements",
-  
-  "tasks": [                  // NEW: Tasks in JSON
+
+  "tasks": [                  // Tasks tracked in JSON
     {
       "task_id": "1.0",
       "description": "Generate PRD content",
@@ -157,7 +159,7 @@ my-project/
   "files": {                  // NEW: All files tracked
     "created": [
       {
-        "path": "PRDs/0001-feature.md",
+        "path": "orchestrator/PRD/0001-feature.md",
         "purpose": "Product Requirements Document",
         "type": "markdown"
       }
@@ -165,9 +167,9 @@ my-project/
     "modified": [],
     "deleted": []
   },
-  
+
   "artifacts": {              // Command-specific outputs
-    "prd_filename": "PRDs/0001-feature.md"
+    "prd_filename": "orchestrator/PRD/0001-feature.md"
   },
   
   "comments": [               // Important notes

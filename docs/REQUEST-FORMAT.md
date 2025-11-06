@@ -4,6 +4,14 @@
 
 This document defines the standard format for request files passed to Claude Code in headless mode. Request files contain the specific user requirements for a particular command execution.
 
+## Session Management
+
+Claude Code automatically manages sessions using session IDs:
+- Each execution has a unique `session_id` in the output
+- When resuming work from a previous session, Claude Code automatically sets `parent_session_id`
+- Session IDs preserve full conversation history - no need for manual `previous_context` fields
+- For multi-turn interactions (user_query status), create a new request with user responses
+
 ## File Format
 
 **Format**: JSON
@@ -22,7 +30,10 @@ This document defines the standard format for request files passed to Claude Cod
   "constraints": {
     // Optional constraints or preferences
   },
-  "previous_context": "string - if resuming from user_query status"
+  "user_responses": {
+    // If resuming from user_query status - answers to queries
+    // Session ID automatically links to previous session
+  }
 }
 ```
 
@@ -64,7 +75,7 @@ This document defines the standard format for request files passed to Claude Cod
   "request_type": "generate-tasks",
   "description": "Generate task list for user profile editing PRD",
   "context": {
-    "prd_file": "PRDs/0001-user-profile-editing.md",
+    "prd_file": "orchestrator/PRD/0001-user-profile-editing.md",
     "codebase_path": "./src",
     "existing_patterns": "We use React functional components with hooks, Jest for testing"
   },
@@ -165,13 +176,12 @@ This document defines the standard format for request files passed to Claude Cod
 
 ## Resumption Pattern
 
-When resuming after a `user_query` status, include the previous context:
+When resuming after a `user_query` status, create a new request with user responses:
 
 ```json
 {
   "request_type": "create-prd",
   "description": "Continue PRD creation with user responses",
-  "previous_context": "User was asked clarifying questions about authentication requirements",
   "user_responses": {
     "query_1": "Yes, integrate with existing OAuth system",
     "query_2": {
@@ -179,6 +189,25 @@ When resuming after a `user_query` status, include the previous context:
       "choice_value": "Support both email/password and social login"
     }
   }
+}
+```
+
+**Session Handling:**
+- Claude Code automatically creates a new session for the resumption
+- The new session's `parent_session_id` links to the original session
+- Full conversation context is preserved via session IDs - no need for `previous_context` field
+- `user_responses`: Map of query numbers to answers
+  - For text queries: `"query_N": "answer text"`
+  - For multiple choice: `{"choice_id": "...", "choice_value": "..."}`
+  - For boolean: `true` or `false`
+
+**Output will include:**
+```json
+{
+  "session_id": "session-xyz789",
+  "parent_session_id": "session-abc123",
+  "status": "complete",
+  ...
 }
 ```
 

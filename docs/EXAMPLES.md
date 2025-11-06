@@ -77,9 +77,10 @@ After execution, you'll find:
 
 ```
 my-project/
-├── PRDs/
-│   └── 0001-user-profile-editing.md     # Generated PRD
-└── claude-output.json                    # Execution report
+├── orchestrator/
+│   └── PRD/
+│       └── 0001-user-profile-editing.md     # Generated PRD
+└── claude-output.json                        # Execution report
 ```
 
 ### Sample Output JSON
@@ -88,6 +89,8 @@ my-project/
 {
   "command_type": "create-prd",
   "status": "complete",
+  "session_id": "session-20240115-abc123",
+  "parent_session_id": null,
   "session_summary": "Created comprehensive PRD for user profile editing feature with 8 functional requirements and 4 user stories",
   "tasks": [
     {
@@ -113,7 +116,7 @@ my-project/
   "files": {
     "created": [
       {
-        "path": "PRDs/0001-user-profile-editing.md",
+        "path": "orchestrator/PRD/0001-user-profile-editing.md",
         "purpose": "Product Requirements Document for user profile editing feature",
         "type": "markdown"
       }
@@ -122,7 +125,7 @@ my-project/
     "deleted": []
   },
   "artifacts": {
-    "prd_filename": "PRDs/0001-user-profile-editing.md"
+    "prd_filename": "orchestrator/PRD/0001-user-profile-editing.md"
   },
   "comments": [
     "PRD includes 8 functional requirements covering data validation, image upload, and error handling",
@@ -145,7 +148,7 @@ my-project/
   "request_type": "generate-tasks",
   "description": "Generate implementation tasks for user profile editing PRD",
   "context": {
-    "prd_file": "PRDs/0001-user-profile-editing.md",
+    "prd_file": "orchestrator/PRD/0001-user-profile-editing.md",
     "codebase_path": "./src",
     "existing_patterns": "React functional components with hooks, Express REST API, Jest and React Testing Library for tests, Multer for file uploads"
   },
@@ -172,9 +175,10 @@ claude code headless \
 
 ```
 my-project/
-├── PRDs/
-│   └── 0001-user-profile-editing.md
-└── claude-output.json              # Contains complete task list
+├── orchestrator/
+│   └── PRD/
+│       └── 0001-user-profile-editing.md
+└── claude-output.json                   # Contains complete task list
 ```
 
 ### Sample Output JSON (First Phase - Parent Tasks)
@@ -183,6 +187,8 @@ my-project/
 {
   "command_type": "generate-tasks",
   "status": "user_query",
+  "session_id": "session-20240115-def456",
+  "parent_session_id": null,
   "session_summary": "Generated 5 high-level tasks for user profile editing feature implementation",
   "tasks": [
     {
@@ -239,16 +245,19 @@ my-project/
 
 ### User Response File: `response.json`
 
+User creates a new session that continues from the previous session. Claude Code automatically links sessions via parent_session_id.
+
 ```json
 {
   "request_type": "generate-tasks",
   "description": "Continue task generation",
-  "previous_context": "PRD analyzed. Found 8 functional requirements. Existing codebase uses React/Express/PostgreSQL. Identified patterns: React hooks, REST API, Jest testing. Ready to generate detailed sub-tasks.",
   "user_responses": {
     "query_1": "Go"
   }
 }
 ```
+
+Note: The new session will automatically have `parent_session_id: "session-20240115-def456"` which gives Claude access to the full context from Phase 1.
 
 ### Command Invocation (Phase 2)
 
@@ -267,6 +276,8 @@ claude code headless \
 {
   "command_type": "generate-tasks",
   "status": "complete",
+  "session_id": "session-20240115-ghi789",
+  "parent_session_id": "session-20240115-def456",
   "session_summary": "Generated complete task list with 5 parent tasks and 28 sub-tasks for user profile editing feature",
   "tasks": [
     {
@@ -388,8 +399,9 @@ claude code headless \
 
 ```
 my-project/
-├── docs/
-│   └── authentication-service-architecture-documentation.md
+├── orchestrator/
+│   └── docs/
+│       └── authentication-service-architecture-documentation.md
 └── claude-output.json
 ```
 
@@ -399,11 +411,13 @@ my-project/
 {
   "command_type": "doc-code-for-dev",
   "status": "complete",
+  "session_id": "session-20240115-jkl012",
+  "parent_session_id": null,
   "session_summary": "Created comprehensive architecture documentation for authentication service covering 15 modules and 4 major data flows",
   "files": {
     "created": [
       {
-        "path": "docs/authentication-service-architecture-documentation.md",
+        "path": "orchestrator/docs/authentication-service-architecture-documentation.md",
         "purpose": "Architecture documentation for authentication service",
         "type": "documentation"
       }
@@ -412,7 +426,7 @@ my-project/
     "deleted": []
   },
   "artifacts": {
-    "documentation_filename": "docs/authentication-service-architecture-documentation.md"
+    "documentation_filename": "orchestrator/docs/authentication-service-architecture-documentation.md"
   },
   "metrics": {
     "files_analyzed": 47,
@@ -471,8 +485,9 @@ claude code headless \
 
 ```
 my-project/
-├── docs/
-│   └── api-client-usage-documentation.md
+├── orchestrator/
+│   └── docs/
+│       └── api-client-usage-documentation.md
 └── claude-output.json
 ```
 
@@ -482,11 +497,13 @@ my-project/
 {
   "command_type": "doc-code-usage",
   "status": "complete",
+  "session_id": "session-20240115-mno345",
+  "parent_session_id": null,
   "session_summary": "Created comprehensive usage documentation with API reference for 42 public methods and 15 complete examples",
   "files": {
     "created": [
       {
-        "path": "docs/api-client-usage-documentation.md",
+        "path": "orchestrator/docs/api-client-usage-documentation.md",
         "purpose": "Usage documentation for API client library",
         "type": "documentation"
       }
@@ -495,7 +512,7 @@ my-project/
     "deleted": []
   },
   "artifacts": {
-    "documentation_filename": "docs/api-client-usage-documentation.md"
+    "documentation_filename": "orchestrator/docs/api-client-usage-documentation.md"
   },
   "comments": [
     "Documented 42 public methods across 6 client classes",
