@@ -17,6 +17,33 @@ This system provides a standardized approach to running Claude Code in headless 
 - ✅ **Stateful resumption support**
 - ✅ **Comprehensive documentation**
 
+## Installation
+
+To install the ClaudeCommands system files to your home directory:
+
+```bash
+# Clone the repository
+git clone <repository-url>
+cd ClaudeCommands
+
+# Run the installation script
+./scripts/install.sh
+```
+
+This will:
+- Copy `SYSTEM-PROMPT.md` to `~/.claude/CLAUDE.md`
+- Copy all command files to `~/.claude/commands/`
+
+After installation, you can use the installed files with:
+
+```bash
+claude code headless \
+  --system-prompt ~/.claude/CLAUDE.md \
+  --command ~/.claude/commands/<command>.md \
+  --request ./request.json \
+  --output ./claude-output.json
+```
+
 ## Quick Start
 
 ### 1. Basic Usage
@@ -107,6 +134,7 @@ Every command produces a `claude-output.json` with:
 │   ├── generate-tasks-example.json
 │   └── ...
 └── scripts/                       # Automation scripts
+    ├── install.sh                 # Installation script
     ├── run-command.sh
     └── validate-output.sh
 ```
