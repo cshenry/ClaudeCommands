@@ -602,9 +602,7 @@ workspace/
     "modified": [],
     "deleted": []
   },
-  "artifacts": {
-    "git_commit": "a1b2c3d4e5f6..."
-  },
+  "artifacts": {},
   "comments": [
     "Cloned from: https://github.com/example/my-project (branch: develop)",
     "Repository size: 15.3 MB, 234 files",

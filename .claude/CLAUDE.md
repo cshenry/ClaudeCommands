@@ -161,8 +161,7 @@ Use this schema for all JSON output files:
 
   "artifacts": {
     "prd_filename": "string (for create-prd command)",
-    "documentation_filename": "string (for doc-code commands)",
-    "git_commit": "string | null (commit hash if committed)"
+    "documentation_filename": "string (for doc-code commands)"
   },
 
   "queries_for_user": [

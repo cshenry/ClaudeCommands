@@ -134,10 +134,6 @@
         "documentation_filename": {
           "type": "string",
           "description": "Path to generated documentation (doc-code commands)"
-        },
-        "git_commit": {
-          "type": ["string", "null"],
-          "description": "Git commit hash if changes were committed"
         }
       }
     },
