@@ -1,0 +1,54 @@
+{
+  "request_type": "analyze-email",
+  "description": "Analyze project update email from client",
+  "allowed_tools": [
+    "Read",
+    "Write",
+    "Bash",
+    "Glob",
+    "WebFetch"
+  ],
+  "context": {
+    "email_content": {
+      "subject": "Q4 Budget Review - Approval Needed by Friday",
+      "sender": {
+        "name": "Jane Doe",
+        "email": "jane.doe@example.com"
+      },
+      "recipients": {
+        "to": ["you@yourcompany.com"],
+        "cc": ["finance@example.com", "manager@yourcompany.com"],
+        "bcc": []
+      },
+      "date_received": "2025-11-09T14:30:00Z",
+      "body": "Hi,\n\nI hope this email finds you well. I'm reaching out regarding the Q4 budget proposal we discussed last week.\n\nAs discussed, we need your approval on the revised budget allocation for the Website Redesign project. The updated spreadsheet is attached (Budget_Proposal_Q4.xlsx).\n\nKey changes from our last version:\n- Increased development budget by 15% to accommodate the new features\n- Reallocated $20K from marketing to infrastructure\n- Added contingency fund of $10K\n\nCould you please review and approve by end of this week (Friday, Nov 15)? We need to submit final numbers to the board on Monday.\n\nAlso, quick question - are we still on track for the December launch, or should we adjust the timeline in the budget?\n\nLet me know if you need any clarification on the numbers.\n\nBest regards,\nJane Doe\nFinance Manager\nExample Corp",
+      "attachments": ["Budget_Proposal_Q4.xlsx"],
+      "thread_id": "thread-abc-123",
+      "message_id": "msg-xyz-789"
+    },
+    "rag_database": {
+      "endpoint": "https://api.rag-service.example.com/v1/query",
+      "api_key": "rag_api_key_placeholder",
+      "index_name": "projects",
+      "enabled": true
+    },
+    "user_preferences": {
+      "default_response_tone": "professional",
+      "auto_classify_threshold": 0.7,
+      "timezone": "America/New_York",
+      "working_hours": {
+        "start": "09:00",
+        "end": "17:00"
+      }
+    }
+  },
+  "constraints": {
+    "classification_confidence_threshold": 0.7,
+    "project_match_threshold": 0.5,
+    "include_alternative_projects": true,
+    "max_alternative_projects": 3,
+    "generate_draft_response": true,
+    "response_max_length": 500,
+    "save_analysis_to_disk": true
+  }
+}

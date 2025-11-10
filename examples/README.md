@@ -54,6 +54,25 @@ Example request for executing simple tasks.
 ./scripts/run-command.sh free-agent examples/free-agent-example.json
 ```
 
+### analyze-email-example.json
+Example request for analyzing email documents with AI.
+
+**Use case**: Classify emails, extract tasks, assign to projects via RAG, and generate draft responses
+**Output**: Structured JSON analysis file in `orchestrator/email-analysis/` directory
+
+```bash
+./scripts/run-command.sh analyze-email examples/analyze-email-example.json
+```
+
+**Features**:
+- Email classification (unimportant, personal, professional)
+- Project assignment using RAG database queries
+- Task extraction with urgency and deadline detection
+- Draft response generation with placeholders
+- Structured JSON output with comprehensive metadata
+
+See `analyze-email-output-example.json` for a complete example of the analysis output format.
+
 ### user-query-response-example.json
 Example of responding to user queries during execution.
 
