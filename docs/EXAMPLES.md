@@ -77,7 +77,7 @@ After execution, you'll find:
 
 ```
 my-project/
-├── orchestrator/
+├── agent-io/
 │   └── PRD/
 │       └── 0001-user-profile-editing.md     # Generated PRD
 └── claude-output.json                        # Execution report
@@ -116,7 +116,7 @@ my-project/
   "files": {
     "created": [
       {
-        "path": "orchestrator/PRD/0001-user-profile-editing.md",
+        "path": "agent-io/PRD/0001-user-profile-editing.md",
         "purpose": "Product Requirements Document for user profile editing feature",
         "type": "markdown"
       }
@@ -125,7 +125,7 @@ my-project/
     "deleted": []
   },
   "artifacts": {
-    "prd_filename": "orchestrator/PRD/0001-user-profile-editing.md"
+    "prd_filename": "agent-io/PRD/0001-user-profile-editing.md"
   },
   "comments": [
     "PRD includes 8 functional requirements covering data validation, image upload, and error handling",
@@ -148,7 +148,7 @@ my-project/
   "request_type": "generate-tasks",
   "description": "Generate implementation tasks for user profile editing PRD",
   "context": {
-    "prd_file": "orchestrator/PRD/0001-user-profile-editing.md",
+    "prd_file": "agent-io/PRD/0001-user-profile-editing.md",
     "codebase_path": "./src",
     "existing_patterns": "React functional components with hooks, Express REST API, Jest and React Testing Library for tests, Multer for file uploads"
   },
@@ -175,7 +175,7 @@ claude code headless \
 
 ```
 my-project/
-├── orchestrator/
+├── agent-io/
 │   └── PRD/
 │       └── 0001-user-profile-editing.md
 └── claude-output.json                   # Contains complete task list
@@ -399,7 +399,7 @@ claude code headless \
 
 ```
 my-project/
-├── orchestrator/
+├── agent-io/
 │   └── docs/
 │       └── authentication-service-architecture-documentation.md
 └── claude-output.json
@@ -417,7 +417,7 @@ my-project/
   "files": {
     "created": [
       {
-        "path": "orchestrator/docs/authentication-service-architecture-documentation.md",
+        "path": "agent-io/docs/authentication-service-architecture-documentation.md",
         "purpose": "Architecture documentation for authentication service",
         "type": "documentation"
       }
@@ -426,7 +426,7 @@ my-project/
     "deleted": []
   },
   "artifacts": {
-    "documentation_filename": "orchestrator/docs/authentication-service-architecture-documentation.md"
+    "documentation_filename": "agent-io/docs/authentication-service-architecture-documentation.md"
   },
   "metrics": {
     "files_analyzed": 47,
@@ -485,7 +485,7 @@ claude code headless \
 
 ```
 my-project/
-├── orchestrator/
+├── agent-io/
 │   └── docs/
 │       └── api-client-usage-documentation.md
 └── claude-output.json
@@ -503,7 +503,7 @@ my-project/
   "files": {
     "created": [
       {
-        "path": "orchestrator/docs/api-client-usage-documentation.md",
+        "path": "agent-io/docs/api-client-usage-documentation.md",
         "purpose": "Usage documentation for API client library",
         "type": "documentation"
       }
@@ -512,7 +512,7 @@ my-project/
     "deleted": []
   },
   "artifacts": {
-    "documentation_filename": "orchestrator/docs/api-client-usage-documentation.md"
+    "documentation_filename": "agent-io/docs/api-client-usage-documentation.md"
   },
   "comments": [
     "Documented 42 public methods across 6 client classes",

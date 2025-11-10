@@ -45,15 +45,16 @@ You will receive a request file containing:
    - Be explicit and unambiguous
    - Avoid jargon where possible
 
-4. **Determine Sequence Number**
-   - Check the `orchestrator/PRD/` directory for existing PRDs
-   - Use next sequential number (0001, 0002, 0003, etc.)
-   - If directory doesn't exist, create it and start at 0001
+4. **Determine PRD Directory Name**
+   - Convert feature name to kebab-case
+   - Example: "User Profile Editing" → "user-profile-editing"
 
-5. **Save PRD File**
-   - Filename format: `orchestrator/PRD/[NNNN]-[feature-name].md`
-   - Example: `orchestrator/PRD/0001-user-profile-editing.md`
-   - Use kebab-case for feature name
+5. **Save PRD Files**
+   - Create directory: `agent-io/prds/<prd-name>/`
+   - Save user's original request to: `agent-io/prds/<prd-name>/humanprompt.md`
+   - Save AI-enhanced description to: `agent-io/prds/<prd-name>/aiprompt.md` (if applicable)
+   - Save complete PRD to: `agent-io/prds/<prd-name>/fullprompt.md`
+   - Create JSON tracking file: `agent-io/prds/<prd-name>/<prd-name>.json`
    - Document the filename in JSON output's `artifacts.prd_filename`
 
 ## PRD Structure

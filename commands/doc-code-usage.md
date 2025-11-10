@@ -359,8 +359,8 @@ Description and examples of advanced usage.
 ## Output Files
 
 1. **Save Documentation**
-   - Filename: `orchestrator/docs/[project-name]-usage-documentation.md`
-   - Create `orchestrator/docs/` directory if it doesn't exist
+   - Filename: `agent-io/docs/[project-name]-usage.md`
+   - Create `agent-io/docs/` directory if it doesn't exist
    - Use kebab-case for project name
 
 2. **Reference in JSON**

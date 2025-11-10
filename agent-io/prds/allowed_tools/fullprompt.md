@@ -14,7 +14,7 @@ The `-AllowedTools` flag in Claude Code restricts which tools (permissions) Clau
 
 **Allowed Tools:**
 - `Read` - Read existing PRD files to determine sequence numbering
-- `Write` - Create new PRD markdown files in orchestrator/PRD/ directory
+- `Write` - Create new PRD markdown files in agent-io/PRD/ directory
 - `Bash` - Create directories if they don't exist (mkdir -p)
 - `Glob` - Find existing PRD files to determine the next sequence number
 
