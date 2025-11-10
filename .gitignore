@@ -19,7 +19,6 @@ Thumbs.db
 .idea/
 *.swp
 *.swo
-.claude/
 # Python
 __pycache__/
 *.py[cod]
