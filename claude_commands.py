@@ -203,6 +203,78 @@ class ClaudeCommandsCLI:
             print(f"      {projects[project_name]}")
             print()
 
+    def install(self) -> None:
+        """Install SYSTEM-PROMPT.md and commands to ~/.claude directory."""
+        # Get user's home directory
+        home_dir = Path.home()
+        claude_dir = home_dir / ".claude"
+
+        # Create ~/.claude directory if it doesn't exist
+        print(f"Installing Claude Commands to {claude_dir}\n")
+        claude_dir.mkdir(exist_ok=True)
+
+        # Copy SYSTEM-PROMPT.md to ~/.claude/CLAUDE.md
+        target_prompt = claude_dir / "CLAUDE.md"
+
+        if target_prompt.exists():
+            print(f"⚠ Warning: {target_prompt} already exists")
+            response = input("Overwrite? (y/N): ")
+            if response.lower() != 'y':
+                print("  Skipping CLAUDE.md installation")
+                skip_prompt = True
+            else:
+                skip_prompt = False
+        else:
+            skip_prompt = False
+
+        if not skip_prompt:
+            shutil.copy2(self.system_prompt, target_prompt)
+            print(f"  ✓ Copied SYSTEM-PROMPT.md to {target_prompt}")
+
+        # Copy commands directory to ~/.claude/commands
+        target_commands = claude_dir / "commands"
+
+        if target_commands.exists():
+            existing_count = len(list(target_commands.glob("*.md")))
+            print(f"\n⚠ Warning: {target_commands} already contains {existing_count} command file(s)")
+            response = input("Overwrite existing commands? (y/N): ")
+            if response.lower() != 'y':
+                print("  Skipping command files installation")
+                skip_commands = True
+            else:
+                skip_commands = False
+        else:
+            skip_commands = False
+
+        if not skip_commands:
+            if target_commands.exists():
+                shutil.rmtree(target_commands)
+            shutil.copytree(self.commands_dir, target_commands)
+
+            # Count the number of commands copied
+            command_files = list(target_commands.glob("*.md"))
+            print(f"  ✓ Copied {len(command_files)} command file(s) to {target_commands}")
+
+        # Show summary
+        print("\n" + "="*60)
+        print("✓ Installation Complete")
+        print("="*60)
+        print(f"\nInstalled files:")
+        print(f"  System prompt: {target_prompt}")
+        print(f"  Commands:      {target_commands}")
+
+        print(f"\nAvailable commands:")
+        for cmd_file in sorted(target_commands.glob("*.md")):
+            print(f"  - {cmd_file.stem}")
+
+        print(f"\nUsage:")
+        print(f"  claude code headless \\")
+        print(f"    --system-prompt {target_prompt} \\")
+        print(f"    --command {target_commands}/<command>.md \\")
+        print(f"    --request <request>.json \\")
+        print(f"    --output <output>.json")
+        print()
+
 
 def main():
     """Main CLI entry point."""
@@ -211,6 +283,7 @@ def main():
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
+  claude-commands install
   claude-commands addproject ~/my-project
   claude-commands update
   claude-commands list
@@ -246,6 +319,12 @@ Examples:
         help='List all tracked projects'
     )
 
+    # install command
+    subparsers.add_parser(
+        'install',
+        help='Install SYSTEM-PROMPT.md and commands to ~/.claude directory'
+    )
+
     args = parser.parse_args()
 
     if not args.command:
@@ -256,7 +335,9 @@ Examples:
     cli = ClaudeCommandsCLI()
 
     # Execute command
-    if args.command == 'addproject':
+    if args.command == 'install':
+        cli.install()
+    elif args.command == 'addproject':
         cli.addproject(args.directory)
     elif args.command == 'update':
         cli.update()

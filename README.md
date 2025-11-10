@@ -27,8 +27,11 @@ To install the ClaudeCommands system files to your home directory:
 git clone <repository-url>
 cd ClaudeCommands
 
-# Run the installation script
-./scripts/install.sh
+# Install the CLI tool
+pip install -e .
+
+# Run the install command
+claude-commands install
 ```
 
 This will:
@@ -163,7 +166,6 @@ Every command produces a `claude-output.json` with:
 │   ├── generate-tasks-example.json
 │   └── ...
 └── scripts/                       # Automation scripts
-    ├── install.sh                 # Installation script
     ├── run-command.sh
     └── validate-output.sh
 ```
