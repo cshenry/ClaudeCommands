@@ -2,11 +2,10 @@
 workspace/
 work/
 test-projects/
-orchestrator/
 output/
+# CLI data (local project tracking)
+data/projects.json
 # Output files
-claude-output.json
-**/claude-output.json
 *.log
 # Request files (user-specific)
 request.json
@@ -20,7 +19,6 @@ Thumbs.db
 .idea/
 *.swp
 *.swo
-.claude/
 # Python
 __pycache__/
 *.py[cod]

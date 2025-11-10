@@ -58,13 +58,13 @@ I've redesigned your Claude Code headless system to be **consistent, unified, an
 - Document internal architecture
 - For developers who will modify code
 - Creates comprehensive markdown docs
-- Saves to `orchestrator/docs/[project]-architecture-documentation.md`
+- Saves to `agent-io/docs/[project]-architecture-documentation.md`
 
 ### 9. **commands/doc-code-usage.md**
 - Document public APIs and usage
 - For external users of the code
 - Shows how to USE, not how it works internally
-- Saves to `orchestrator/docs/[project]-usage-documentation.md`
+- Saves to `agent-io/docs/[project]-usage-documentation.md`
 
 ### 10. **commands/free-agent.md**
 - Execute simple tasks from natural language
@@ -159,7 +159,7 @@ my-project/
   "files": {                  // NEW: All files tracked
     "created": [
       {
-        "path": "orchestrator/PRD/0001-feature.md",
+        "path": "agent-io/prds/0001-feature.md",
         "purpose": "Product Requirements Document",
         "type": "markdown"
       }
@@ -169,7 +169,7 @@ my-project/
   },
 
   "artifacts": {              // Command-specific outputs
-    "prd_filename": "orchestrator/PRD/0001-feature.md"
+    "prd_filename": "agent-io/prds/0001-feature.md"
   },
   
   "comments": [               // Important notes

@@ -1,0 +1,161 @@
+{
+  "email_metadata": {
+    "subject": "Q4 Budget Review - Approval Needed by Friday",
+    "sender": {
+      "name": "Jane Doe",
+      "email": "jane.doe@example.com"
+    },
+    "recipients": {
+      "to": ["you@yourcompany.com"],
+      "cc": ["finance@example.com", "manager@yourcompany.com"],
+      "bcc": []
+    },
+    "date_received": "2025-11-09T14:30:00Z",
+    "thread_id": "thread-abc-123",
+    "message_id": "msg-xyz-789",
+    "attachments": ["Budget_Proposal_Q4.xlsx"]
+  },
+
+  "classification": {
+    "category": "professional",
+    "confidence": 0.98,
+    "reasoning": "Email is from a business stakeholder (Finance Manager) requesting approval on a work-related budget proposal with a specific deadline. Contains actionable items and project references. Formal business tone and structure.",
+    "urgency_level": "high",
+    "is_actionable": true,
+    "sentiment": "neutral"
+  },
+
+  "project_assignment": {
+    "status": "assigned",
+    "primary_project": {
+      "project_id": "proj-2024-042",
+      "project_name": "Website Redesign",
+      "similarity_score": 0.92,
+      "match_reasoning": "Email explicitly mentions 'Website Redesign project' and discusses budget allocation for development and infrastructure. High semantic similarity with project description and recent project communications."
+    },
+    "alternative_projects": [
+      {
+        "project_id": "proj-2024-038",
+        "project_name": "Q4 Financial Planning",
+        "similarity_score": 0.76,
+        "match_reasoning": "Email relates to Q4 budget processes and involves Finance department collaboration."
+      },
+      {
+        "project_id": "proj-2024-045",
+        "project_name": "Infrastructure Modernization",
+        "similarity_score": 0.68,
+        "match_reasoning": "Email mentions infrastructure budget reallocation, which connects to this ongoing initiative."
+      }
+    ],
+    "rag_query_used": "Website Redesign Q4 budget development infrastructure Finance Jane Doe",
+    "keywords_extracted": ["Website Redesign", "Q4 budget", "development", "infrastructure", "approval", "December launch", "board submission"]
+  },
+
+  "tasks": [
+    {
+      "task_id": "T001",
+      "description": "Review and approve the Q4 budget proposal for Website Redesign project",
+      "task_type": "review",
+      "owner": "self",
+      "urgency": "high",
+      "deadline": {
+        "date": "2025-11-15T17:00:00Z",
+        "is_explicit": true,
+        "original_text": "by end of this week (Friday, Nov 15)",
+        "suggested_deadline": null
+      },
+      "status": "pending",
+      "context": "Review attached Budget_Proposal_Q4.xlsx with focus on: 15% increase in development budget, $20K reallocation from marketing to infrastructure, and $10K contingency fund. Approval needed before board submission on Monday Nov 18.",
+      "dependencies": [],
+      "estimated_effort": "1 hour"
+    },
+    {
+      "task_id": "T002",
+      "description": "Review attached budget spreadsheet (Budget_Proposal_Q4.xlsx)",
+      "task_type": "review",
+      "owner": "self",
+      "urgency": "high",
+      "deadline": {
+        "date": "2025-11-15T17:00:00Z",
+        "is_explicit": true,
+        "original_text": "by end of this week (Friday, Nov 15)",
+        "suggested_deadline": null
+      },
+      "status": "pending",
+      "context": "Examine the three key changes: development budget +15%, marketing to infrastructure reallocation ($20K), and new $10K contingency fund.",
+      "dependencies": [],
+      "estimated_effort": "30 minutes"
+    },
+    {
+      "task_id": "T003",
+      "description": "Respond to question about December launch timeline",
+      "task_type": "respond",
+      "owner": "self",
+      "urgency": "high",
+      "deadline": {
+        "date": "2025-11-15T17:00:00Z",
+        "is_explicit": false,
+        "original_text": null,
+        "suggested_deadline": "2025-11-15T17:00:00Z"
+      },
+      "status": "pending",
+      "context": "Jane asked if December launch is still on track or if timeline should be adjusted in budget. Need to confirm current project timeline and communicate any changes.",
+      "dependencies": ["T001"],
+      "estimated_effort": "15 minutes"
+    }
+  ],
+
+  "draft_response": {
+    "should_respond": true,
+    "response_urgency": "today",
+    "suggested_subject": "Re: Q4 Budget Review - Approval Needed by Friday",
+    "draft_body": "Hi Jane,\n\nThank you for sending over the updated Q4 budget proposal for the Website Redesign project.\n\nI've received the Budget_Proposal_Q4.xlsx attachment and will review the revised allocations today. I appreciate you highlighting the key changes:\n- 15% development budget increase for new features\n- $20K reallocation from marketing to infrastructure  \n- $10K contingency fund addition\n\nI'll provide my approval by end of day Thursday (Nov 14) to ensure you have time to prepare for the Monday board submission.\n\nRegarding the December launch timeline - [YOUR_INPUT_NEEDED: Confirm if still on track or provide updated timeline]. I'll make sure this is reflected accurately in my budget approval.\n\nIf I have any questions about the numbers while reviewing, I'll reach out promptly.\n\nBest regards,\n[Your Name]",
+    "tone": "professional",
+    "requires_attachments": false,
+    "placeholders": [
+      {
+        "placeholder": "[YOUR_INPUT_NEEDED: Confirm if still on track or provide updated timeline]",
+        "description": "Insert confirmation of December launch status or provide updated timeline information",
+        "location": "paragraph 4"
+      },
+      {
+        "placeholder": "[Your Name]",
+        "description": "Insert your name and title",
+        "location": "closing"
+      }
+    ],
+    "key_points_to_address": [
+      "Acknowledge receipt of budget proposal and attachment",
+      "Confirm timeline for review and approval (before Friday deadline)",
+      "Address question about December launch timeline",
+      "Offer to follow up if clarification needed on numbers"
+    ]
+  },
+
+  "summary": {
+    "one_line": "Budget approval request for Website Redesign project requiring review of Q4 proposal by Friday Nov 15",
+    "detailed": "Jane Doe from Finance is requesting approval of the Q4 budget proposal for the Website Redesign project by end of week (Friday, Nov 15). The proposal includes a 15% development budget increase, $20K reallocation from marketing to infrastructure, and a new $10K contingency fund. Also requires confirmation of December launch timeline for board submission on Monday.",
+    "key_entities": [
+      {"type": "person", "value": "Jane Doe"},
+      {"type": "person", "value": "Finance Manager"},
+      {"type": "project", "value": "Website Redesign"},
+      {"type": "document", "value": "Budget_Proposal_Q4.xlsx"},
+      {"type": "date", "value": "2025-11-15"},
+      {"type": "date", "value": "2025-12-01"},
+      {"type": "organization", "value": "Example Corp"},
+      {"type": "department", "value": "Finance"},
+      {"type": "amount", "value": "$20K"},
+      {"type": "amount", "value": "$10K"}
+    ]
+  },
+
+  "analysis_metadata": {
+    "analyzed_at": "2025-11-09T15:45:23Z",
+    "analysis_version": "1.0",
+    "model_used": "claude-sonnet-4-5",
+    "processing_time_seconds": 4.23,
+    "confidence_overall": 0.94,
+    "requires_human_review": false,
+    "review_reason": null
+  }
+}

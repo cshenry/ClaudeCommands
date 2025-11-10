@@ -9,7 +9,7 @@
     "Task"
   ],
   "context": {
-    "prd_file": "orchestrator/PRD/0001-user-profile-editing.md",
+    "prd_file": "agent-io/prds/user-profile-editing/fullprompt.md",
     "codebase_path": "./src",
     "existing_patterns": "We use React functional components with hooks, Redux for state management, Jest + React Testing Library for testing, Express.js for API endpoints"
   },

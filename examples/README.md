@@ -8,7 +8,7 @@ This directory contains example request files for each command type.
 Example request for creating a Product Requirements Document (PRD).
 
 **Use case**: Define a new feature with requirements
-**Output**: PRD file in `orchestrator/PRD/` directory
+**Output**: PRD file in `agent-io/PRD/` directory
 
 ```bash
 ./scripts/run-command.sh create-prd examples/create-prd-example.json
@@ -28,7 +28,7 @@ Example request for generating implementation tasks from a PRD.
 Example request for documenting code architecture.
 
 **Use case**: Create internal architecture documentation for developers
-**Output**: Architecture docs in `orchestrator/docs/` directory
+**Output**: Architecture docs in `agent-io/docs/` directory
 
 ```bash
 ./scripts/run-command.sh doc-code-for-dev examples/doc-code-for-dev-example.json
@@ -38,7 +38,7 @@ Example request for documenting code architecture.
 Example request for documenting public API usage.
 
 **Use case**: Create usage documentation for API consumers
-**Output**: Usage docs in `orchestrator/docs/` directory
+**Output**: Usage docs in `agent-io/docs/` directory
 
 ```bash
 ./scripts/run-command.sh doc-code-usage examples/doc-code-usage-example.json
@@ -53,6 +53,25 @@ Example request for executing simple tasks.
 ```bash
 ./scripts/run-command.sh free-agent examples/free-agent-example.json
 ```
+
+### analyze-email-example.json
+Example request for analyzing email documents with AI.
+
+**Use case**: Classify emails, extract tasks, assign to projects via RAG, and generate draft responses
+**Output**: Structured JSON analysis file in `orchestrator/email-analysis/` directory
+
+```bash
+./scripts/run-command.sh analyze-email examples/analyze-email-example.json
+```
+
+**Features**:
+- Email classification (unimportant, personal, professional)
+- Project assignment using RAG database queries
+- Task extraction with urgency and deadline detection
+- Draft response generation with placeholders
+- Structured JSON output with comprehensive metadata
+
+See `analyze-email-output-example.json` for a complete example of the analysis output format.
 
 ### user-query-response-example.json
 Example of responding to user queries during execution.

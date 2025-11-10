@@ -14,7 +14,7 @@ We redesigned your Claude Code headless execution system from scratch to be unif
 ### The Problem You Had
 - Multiple inconsistent output formats across commands
 - Tasks tracked in separate markdown files
-- PRDs saved in wrong directory (`/tasks` instead of `orchestrator/PRD/`)
+- PRDs saved in wrong directory (`/tasks` instead of `agent-io/PRD/`)
 - Duplicate instructions across command files
 - No standard way to track file operations
 - Inconsistent patterns across commands
@@ -25,7 +25,7 @@ We redesigned your Claude Code headless execution system from scratch to be unif
 1. Single JSON output format for ALL commands
 2. Single system prompt used by all commands
 3. Tasks tracked IN the JSON output (not separate files)
-4. PRDs saved to `orchestrator/PRD/` directory
+4. PRDs saved to `agent-io/PRD/` directory
 5. Complete file operation tracking
 6. Stateful resumption support
 7. Comprehensive documentation
@@ -80,7 +80,7 @@ Every execution needs:
 - Complete audit trail
 
 ### 5. PRD Location
-- PRDs saved to `orchestrator/PRD/[NNNN]-[name].md`
+- PRDs saved to `agent-io/PRD/[NNNN]-[name].md`
 - Sequence starting from 0001
 - Referenced in JSON output artifacts
 
@@ -304,7 +304,7 @@ claude-output.json
 **/claude-output.json
 
 # Generated artifacts (unless you want to track them)
-orchestrator/
+agent-io/
 
 # OS files
 .DS_Store

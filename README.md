@@ -16,6 +16,7 @@ This system provides a standardized approach to running Claude Code in headless 
 - ✅ **Complete file operation tracking**
 - ✅ **Stateful resumption support**
 - ✅ **Comprehensive documentation**
+- ✅ **CLI tool** for managing commands across multiple projects
 
 ## Installation
 
@@ -45,6 +46,26 @@ claude code headless \
 ```
 
 ## Quick Start
+
+### 0. CLI Tool (Recommended)
+
+The easiest way to use this system is with the `claude-commands` CLI tool:
+
+```bash
+# Install the CLI
+pip install -e .
+
+# Add commands to a project
+claude-commands addproject ~/my-project
+
+# Update all projects with latest commands
+claude-commands update
+
+# List tracked projects
+claude-commands list
+```
+
+See [CLI.md](CLI.md) for complete CLI documentation.
 
 ### 1. Basic Usage
 
@@ -76,10 +97,10 @@ cat claude-output.json | jq '.status, .session_summary'
 
 | Command | Purpose | Output |
 |---------|---------|--------|
-| `create-prd` | Generate Product Requirements Documents | PRD in `orchestrator/PRD/` |
+| `create-prd` | Generate Product Requirements Documents | PRD in `agent-io/prds/<prd-name>/` |
 | `generate-tasks` | Break PRDs into implementation tasks | Tasks in JSON |
-| `doc-code-for-dev` | Document internal architecture | Docs in `orchestrator/docs/` |
-| `doc-code-usage` | Document public APIs and usage | Docs in `orchestrator/docs/` |
+| `doc-code-for-dev` | Document internal architecture | Docs in `agent-io/docs/` |
+| `doc-code-usage` | Document public APIs and usage | Docs in `agent-io/docs/` |
 | `free-agent` | Execute simple tasks from natural language | Varies |
 
 ### 3. Unified Output Format
@@ -115,14 +136,22 @@ Every command produces a `claude-output.json` with:
 ```
 .
 ├── README.md                      # This file
+├── CLI.md                         # CLI tool documentation
 ├── SYSTEM-PROMPT.md               # Universal instructions (CRITICAL)
 ├── unified-output-schema.json     # JSON schema for outputs
+├── claude_commands.py             # CLI tool for managing commands
+├── setup.py                       # CLI installation script
 ├── commands/                      # Command definitions
 │   ├── create-prd.md
 │   ├── generate-tasks.md
 │   ├── doc-code-for-dev.md
 │   ├── doc-code-usage.md
-│   └── free-agent.md
+│   ├── free-agent.md
+│   └── run_headless.md
+├── data/                          # CLI runtime data (gitignored)
+│   ├── README.md                  # Data directory documentation
+│   ├── projects-schema.json       # Schema for projects.json
+│   └── projects.json              # Tracked projects (auto-generated)
 ├── docs/                          # Documentation
 │   ├── HANDOFF.md                 # Project context
 │   ├── SUMMARY.md                 # System overview
