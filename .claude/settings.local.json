@@ -15,7 +15,8 @@
       "Bash(tree:*)",
       "Bash(awk:*)",
       "Bash(gh:*)",
-      "Bash(python3:*)"
+      "Bash(python3:*)",
+      "Bash(~/bin/claude-commands list:*)"
     ],
     "deny": [],
     "ask": []
