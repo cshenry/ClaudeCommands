@@ -75,9 +75,15 @@ class ClaudeCommandsCLI:
             shutil.rmtree(target_commands)
         shutil.copytree(self.commands_dir, target_commands)
 
-        # Count the number of commands copied
-        command_files = list(target_commands.glob("*.md"))
-        print(f"  ✓ Copied {len(command_files)} commands to {target_commands.relative_to(project_path)}")
+        # Count all command files (including in subdirectories)
+        all_command_files = list(target_commands.rglob("*.md"))
+        top_level_commands = [f for f in all_command_files if f.parent == target_commands]
+        nested_commands = [f for f in all_command_files if f.parent != target_commands]
+
+        if nested_commands:
+            print(f"  ✓ Copied {len(top_level_commands)} commands + {len(nested_commands)} context files to {target_commands.relative_to(project_path)}")
+        else:
+            print(f"  ✓ Copied {len(top_level_commands)} commands to {target_commands.relative_to(project_path)}")
 
     def addproject(self, directory: str) -> None:
         """Add a project directory to the tracking list.
@@ -235,8 +241,8 @@ class ClaudeCommandsCLI:
         target_commands = claude_dir / "commands"
 
         if target_commands.exists():
-            existing_count = len(list(target_commands.glob("*.md")))
-            print(f"\n⚠ Warning: {target_commands} already contains {existing_count} command file(s)")
+            existing_count = len(list(target_commands.rglob("*.md")))
+            print(f"\n⚠ Warning: {target_commands} already contains {existing_count} file(s)")
             response = input("Overwrite existing commands? (y/N): ")
             if response.lower() != 'y':
                 print("  Skipping command files installation")
@@ -251,9 +257,15 @@ class ClaudeCommandsCLI:
                 shutil.rmtree(target_commands)
             shutil.copytree(self.commands_dir, target_commands)
 
-            # Count the number of commands copied
-            command_files = list(target_commands.glob("*.md"))
-            print(f"  ✓ Copied {len(command_files)} command file(s) to {target_commands}")
+            # Count all command files (including in subdirectories)
+            all_command_files = list(target_commands.rglob("*.md"))
+            top_level_commands = [f for f in all_command_files if f.parent == target_commands]
+            nested_commands = [f for f in all_command_files if f.parent != target_commands]
+
+            if nested_commands:
+                print(f"  ✓ Copied {len(top_level_commands)} commands + {len(nested_commands)} context files to {target_commands}")
+            else:
+                print(f"  ✓ Copied {len(top_level_commands)} command file(s) to {target_commands}")
 
         # Show summary
         print("\n" + "="*60)
@@ -264,8 +276,15 @@ class ClaudeCommandsCLI:
         print(f"  Commands:      {target_commands}")
 
         print(f"\nAvailable commands:")
+        # List top-level commands
         for cmd_file in sorted(target_commands.glob("*.md")):
-            print(f"  - {cmd_file.stem}")
+            # Check if there's a matching subdirectory with context
+            context_dir = target_commands / cmd_file.stem
+            if context_dir.is_dir():
+                context_count = len(list(context_dir.rglob("*.md")))
+                print(f"  - {cmd_file.stem} (+{context_count} context files)")
+            else:
+                print(f"  - {cmd_file.stem}")
 
         print(f"\nUsage:")
         print(f"  claude code headless \\")

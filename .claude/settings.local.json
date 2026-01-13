@@ -16,7 +16,13 @@
       "Bash(awk:*)",
       "Bash(gh:*)",
       "Bash(python3:*)",
-      "Bash(~/bin/claude-commands list:*)"
+      "Bash(~/bin/claude-commands list:*)",
+      "Bash(cat:*)",
+      "Bash(echo ')",
+      "Bash(printf '\\\\n\\\\nAssistant:\\\\n  Runs `claude-commands update`...\\\\n\\\\n  \"\"Deployed to 19 projects. Test with: /kubernetes-expert How do I create a deployment?\"\"\\\\n```\\\\n')",
+      "Bash(wc:*)",
+      "Bash(claude-commands list:*)",
+      "Bash(python:*)"
     ],
     "deny": [],
     "ask": []
