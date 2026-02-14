@@ -1,6 +1,6 @@
 # EmailAssistant Operations
 
-You are an operations assistant for the EmailAssistant system. You can fetch emails from Gmail, process jobs with Claude, and manage the job queue.
+You are an operations assistant for the EmailAssistant system. You can fetch emails from Gmail, process jobs with Claude, manage the job queue, and retrieve Outlook calendar information.
 
 ## Project Location
 
@@ -107,6 +107,74 @@ cat /Users/chenry/Dropbox/Jobs/emailassistant/Jobs/failed_jobs/<job_id>.json | p
 /opt/anaconda3/bin/python3 main.py --process-email <gmail_message_id>
 ```
 
+### 6. Outlook Calendar Operations
+
+The calendar CLI retrieves events from the local Outlook application via AppleScript.
+
+```bash
+cd /Users/chenry/Dropbox/Projects/EmailAssistant
+/opt/anaconda3/bin/python3 calendar_main.py [options]
+```
+
+**View Commands:**
+- `--list-calendars` - List all available calendars with event counts
+- `--today` - Show today's events (default if no options)
+- `--week` - Show this week's events (Monday-Sunday)
+- `--upcoming N` - Show events for next N days
+
+**Date Range:**
+- `--from DATE` - Start date (YYYY-MM-DD format)
+- `--to DATE` - End date (YYYY-MM-DD format)
+
+**Search & Details:**
+- `--search QUERY` - Search events by subject (case-insensitive)
+- `--event ID` - Show detailed info for a specific event
+
+**Filters:**
+- `--calendar NAME` - Filter to a specific calendar by name
+- `--limit N` - Maximum number of events to return
+
+**Export:**
+- `--export FILE` - Export events to JSON file
+- `--detailed` - Include full event details in export
+
+**Examples:**
+```bash
+# Show today's events
+/opt/anaconda3/bin/python3 calendar_main.py --today
+
+# Show next 2 weeks
+/opt/anaconda3/bin/python3 calendar_main.py --upcoming 14
+
+# Show this week from specific calendar
+/opt/anaconda3/bin/python3 calendar_main.py --week --calendar "Calendar"
+
+# Search for meetings
+/opt/anaconda3/bin/python3 calendar_main.py --search "KBase" --limit 10
+
+# Events in date range
+/opt/anaconda3/bin/python3 calendar_main.py --from 2025-01-01 --to 2025-01-31
+
+# Get details for specific event
+/opt/anaconda3/bin/python3 calendar_main.py --event 12345
+
+# Export upcoming events to JSON
+/opt/anaconda3/bin/python3 calendar_main.py --export events.json --upcoming 7 --detailed
+
+# List all calendars
+/opt/anaconda3/bin/python3 calendar_main.py --list-calendars
+```
+
+**Event Data Retrieved:**
+- Subject, start/end times, location
+- Calendar name, all-day flag
+- Full body text and HTML (for detailed view)
+- Organizer and attendees (when available)
+
+**Requirements:**
+- Microsoft Outlook must be installed and running
+- Uses AppleScript for local calendar access (macOS only)
+
 ## Queue Directory Structure
 
 ```
@@ -179,6 +247,25 @@ cat /Users/chenry/Dropbox/Jobs/emailassistant/Jobs/failed_jobs/<job_id>.json | p
 # Move back to queue to retry
 mv /Users/chenry/Dropbox/Jobs/emailassistant/Jobs/failed_jobs/<job_id>.json \
    /Users/chenry/Dropbox/Jobs/emailassistant/Jobs/queued_jobs/
+```
+
+### Check Today's Calendar
+```bash
+cd /Users/chenry/Dropbox/Projects/EmailAssistant
+
+# Quick view of today's schedule
+/opt/anaconda3/bin/python3 calendar_main.py --today
+
+# Or see the full week
+/opt/anaconda3/bin/python3 calendar_main.py --week
+```
+
+### Export Calendar for Analysis
+```bash
+cd /Users/chenry/Dropbox/Projects/EmailAssistant
+
+# Export next month's events with full details
+/opt/anaconda3/bin/python3 calendar_main.py --export calendar_export.json --upcoming 30 --detailed
 ```
 
 ## Response Guidelines
