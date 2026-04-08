@@ -210,17 +210,41 @@ If `repo_path` does not exist on disk, same: failure envelope with `error: "repo
 
 ### B.6 Build the subagent prompt
 
-The subagent gets one combined prompt that wraps the system prompt + the user prompt + a working-directory directive + an allowed-tools constraint. Construct it like this (substituting the fields from the envelope):
+The subagent gets one combined prompt that wraps the system prompt + the user prompt + a **mandatory working-directory check** + an allowed-tools constraint. Construct it like this (substituting the fields from the envelope):
 
 ```
 You are a Claude subagent dispatched by AgentForge worker ${WORKER_ID}.
 
-Working directory constraint:
-- Before doing ANY work, cd to ${repo_path}. All file paths in the task below are relative to that directory unless otherwise stated. Do not work in any other directory. Do not create a worktree — work directly in the main checkout. The worker's coordinator has already ensured no other task is in flight against this repo.
+═══════════════════════════════════════════════════════════════════════
+MANDATORY FIRST ACTION — DO NOT SKIP, DO NOT REORDER
+═══════════════════════════════════════════════════════════════════════
+
+Before doing ANYTHING else, your FIRST tool call MUST be exactly:
+
+  Bash(cd ${repo_path} && pwd)
+
+Then verify the output of `pwd` is exactly `${repo_path}`. If it is not,
+STOP IMMEDIATELY. Do not retry. Do not attempt the task. End your
+response with:
+
+  SUMMARY: ABORTED — working directory mismatch. Expected ${repo_path}, got <actual pwd>.
+
+This is a hard constraint enforced by the AgentForge worker coordinator.
+Tasks that work in the wrong directory have caused real damage in the
+past — git branches created in the wrong repo, files written into the
+wrong project. The pwd verification is non-negotiable.
+
+For the rest of the task, EVERY Bash command you run that touches files
+must either be issued from this directory or use absolute paths under
+${repo_path}. Do not `cd` anywhere else. Do not create a worktree —
+work directly in the main checkout. The worker's coordinator has
+already ensured no other task is in flight against this repo.
+
+═══════════════════════════════════════════════════════════════════════
 
 Tool constraint:
 - You may only use these tools: ${allowed_tools_list}
-  (If this list is empty, all tools are permitted.)
+  (If this list is "all", all tools are permitted.)
 
 System context:
 ${system_prompt}
@@ -228,10 +252,18 @@ ${system_prompt}
 Your task:
 ${prompt}
 
-When you are finished, end your response with a 1-2 sentence summary line prefixed with "SUMMARY:" so the worker can extract it for the result envelope.
+When you are finished (successfully or not), end your response with a
+1-2 sentence summary line prefixed with "SUMMARY:" so the worker can
+extract it for the result envelope. Examples:
+
+  SUMMARY: Implemented feature X in src/foo.py and added 4 passing tests.
+  SUMMARY: ABORTED — working directory mismatch.
+  SUMMARY: FAILED — pytest fixture conflict in tests/conftest.py, see output above.
 ```
 
 Where `${allowed_tools_list}` is a comma-separated rendering of the `allowed_tools` array (or "all" if null/missing).
+
+**Note on the Bash tool requirement:** because the mandatory first action is `Bash(cd ... && pwd)`, the `Bash` tool MUST be in the effective allowed-tools list even if the task envelope's `allowed_tools` field omits it. When constructing the subagent prompt, if `allowed_tools` is non-null and does not contain `"Bash"`, prepend `"Bash"` to the list before rendering it. If you have to do this, also note in the worker's `log.jsonl` that you augmented the allowed tools (`{"event": "allowed_tools_augmented", ...}`) so it's auditable.
 
 ### B.7 Spawn subagent
 
@@ -292,7 +324,9 @@ Per `protocol.md` "Result envelope" schema:
 }
 ```
 
-For failures, set `success: false`, `error` to a short identifier (`subagent_error`, `timeout_aborted`, `continuation_timeout_no_response`, `aborted_by_continuation_decision`, `invalid_task_envelope`, `repo_not_found`), and put any partial output in `output`.
+For failures, set `success: false`, `error` to a short identifier (`subagent_error`, `timeout_aborted`, `continuation_timeout_no_response`, `aborted_by_continuation_decision`, `invalid_task_envelope`, `repo_not_found`, `working_directory_mismatch`), and put any partial output in `output`.
+
+**Working directory verification:** Even when the subagent reports `completed`, check the final output for the substring `ABORTED — working directory mismatch`. If found, override the result envelope with `success: false` and `error: "working_directory_mismatch"`. This catches cases where the subagent followed the abort instruction in B.6's mandatory first action. Do NOT mark this as a success even though the subagent technically completed normally — the task did not run.
 
 `tokens_used` should come from `TaskOutput` if it exposes that; otherwise leave it `0`. Do not synthesize a fake number.
 
