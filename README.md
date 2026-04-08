@@ -105,6 +105,7 @@ cat claude-output.json | jq '.status, .session_summary'
 | `doc-code-for-dev` | Document internal architecture | Docs in `agent-io/docs/` |
 | `doc-code-usage` | Document public APIs and usage | Docs in `agent-io/docs/` |
 | `free-agent` | Execute simple tasks from natural language | Varies |
+| `worker N` | Run an AgentForge worker-shell pool member (N=1,2,3) polling the file-handoff queue | Result envelopes in AgentForge `state/workers/queue/outbox/` |
 
 ### 3. Unified Output Format
 
