@@ -115,6 +115,37 @@ The hook keeps the worker's heartbeat key fresh after every tool call, including
 
 If the merge is non-trivial (existing PostToolUse hooks with complex matchers, schema you don't recognize, etc.), DO NOT guess — print the JSON snippet above and ask the user to add it manually, then wait for them to confirm before continuing. Phase B's defensive heartbeat refresh in the loop body is enough to keep the worker alive even without the hook, so this is acceptable.
 
+### A.4b Configure permission bypass for the session
+
+Workers spawn subagents that run unattended Bash, Edit, Write, and other tool calls. Without permission bypass, every tool call triggers an interactive permission prompt — which a polling worker can't answer, so the whole pool deadlocks on the first task. Workers and their subagents MUST run in `bypassPermissions` mode.
+
+**Procedure:**
+
+1. Determine the path to the session's `.claude/settings.local.json` (sibling of the `settings.json` you wrote in A.4 — use `.local.json` because it is gitignored, so this never accidentally gets committed). Same directory: the **session working directory**, not the AgentForge tree.
+2. Read it with the `Read` tool. If the file does not exist, treat existing settings as `{}`.
+3. Parse the JSON. Ensure `permissions.defaultMode` is set to `"bypassPermissions"`:
+
+   ```json
+   {
+     "permissions": {
+       "defaultMode": "bypassPermissions"
+     }
+   }
+   ```
+
+   **Important merge rules:**
+   - DO NOT clobber existing `permissions.allow`, `permissions.deny`, or other `permissions` subkeys. Only set `defaultMode`.
+   - DO NOT touch other top-level keys in `settings.local.json`.
+   - If `defaultMode` is already set to something other than `bypassPermissions` (e.g., `"acceptEdits"`, `"default"`), STOP and ask the user before overwriting. The user may have intentionally configured a stricter mode.
+
+4. Write the merged JSON back with the `Write` tool.
+5. **CRITICAL caveat:** This setting only takes effect for sessions started AFTER the file is written. The current session is already running with whatever mode it booted with. If permission prompts appear while running tasks, instruct the user to:
+   - Stop the worker (Ctrl-C or close the window)
+   - Reopen the Cursor window in the same directory
+   - Run `/worker N` again
+   The next session boots in `bypassPermissions` mode and will not prompt.
+6. Inform the user one time about both the setting and the restart caveat.
+
 ### A.5 Defensive heartbeat (always on)
 
 Even with the hook installed, the main loop will refresh the heartbeat at the top of every iteration as a safety net. See Phase B step 1.
@@ -458,7 +489,7 @@ If the user closes the Cursor window or sends SIGINT, the session terminates wit
 - **Do NOT** call `TaskStop` on a `running` agent unless the abort path in Phase D explicitly tells you to. The whole continuation mechanism exists so we don't kill long-running but healthy work.
 - **Do NOT** add error-handling for cases that can't happen. Validate at the edges (envelope read, redis ping, repo_path exists) and let everything else propagate.
 - **Do NOT** add backwards-compat shims. This skill is brand new.
-- **Do NOT** modify files outside the AgentForge state tree, the working directory's `.claude/settings.json`, and the queue directories listed above.
+- **Do NOT** modify files outside the AgentForge state tree, the working directory's `.claude/settings.json` and `.claude/settings.local.json`, and the queue directories listed above.
 - **Do NOT** assume only one worker is running. The atomic-claim protocol in B.3 is what keeps multiple workers honest. Trust it.
 
 ---
