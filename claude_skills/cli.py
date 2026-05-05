@@ -237,14 +237,93 @@ def cmd_status(args):
 
 def cmd_sync(args):
     """Sync skills to a target system."""
-    print(f"sync {args.system}: not yet implemented")
-    return 0
+    from claude_skills.sync import sync
+
+    try:
+        plan = sync(
+            args.system,
+            apply=bool(getattr(args, "apply", False)),
+            init_claude_md=bool(getattr(args, "init_claude_md", False)),
+        )
+    except ValueError as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return 1
+    except PermissionError as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return 2
+
+    return _print_plan(plan, show_diff=False)
 
 
 def cmd_diff(args):
     """Show diff between local and deployed skills for a system."""
-    print(f"diff {args.system}: not yet implemented")
-    return 0
+    from claude_skills.sync import sync
+
+    try:
+        plan = sync(args.system, apply=False)
+    except ValueError as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return 1
+    except PermissionError as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return 2
+
+    return _print_plan(plan, show_diff=True)
+
+
+def _print_plan(plan: dict, show_diff: bool) -> int:
+    """Render a sync/diff plan dict to stdout. Returns exit code."""
+    sys_name = plan["system"]
+    mode = plan["mode"]
+    claude_md = plan["claude_md"]
+    skills = plan["skills"]
+    errors = plan.get("errors") or []
+
+    print(f"=== sync plan: {sys_name} (mode={mode}) ===\n")
+
+    # CLAUDE.md section
+    print(f"  CLAUDE.md: action={claude_md['action']}")
+    print(f"    tier1_hash={claude_md['tier1_hash']}")
+    print(f"    tier2_hash={claude_md['tier2_hash']}")
+    print(f"    {claude_md['diff_summary']}")
+    if show_diff and claude_md.get("diff"):
+        print("\n  --- CLAUDE.md diff ---")
+        for line in claude_md["diff"].splitlines():
+            print(f"    {line}")
+        print("  --- end diff ---\n")
+
+    # Skills counts + lists
+    print(
+        f"\n  Skills: add={len(skills['add'])}  "
+        f"update={len(skills['update'])}  "
+        f"unchanged={len(skills['unchanged'])}  "
+        f"remove={len(skills['remove'])}"
+    )
+    if skills["add"]:
+        print("    + add:")
+        for k in skills["add"]:
+            print(f"        {k}")
+    if skills["update"]:
+        print("    ~ update:")
+        for k in skills["update"]:
+            print(f"        {k}")
+    if skills["remove"]:
+        print("    - remove:")
+        for k in skills["remove"]:
+            print(f"        {k}")
+
+    if errors:
+        print("\n  Errors:")
+        for e in errors:
+            print(f"    ! {e}")
+
+    if plan.get("applied"):
+        print("\n  Applied: yes")
+    else:
+        print("\n  Dry run — no changes written. Use --apply to write.")
+
+    # Non-zero exit if there were errors.
+    return 0 if not errors else 3
 
 
 def cmd_register(args):
@@ -278,11 +357,30 @@ def cmd_system_list(args):
 
 def cmd_system_render(args):
     """Render the CLAUDE.md for a system."""
+    from claude_skills.claude_md import get_tier1, get_tier2, render_managed
+
     systems = load_systems()
     if args.name not in systems:
         print(f"error: unknown system '{args.name}'", file=sys.stderr)
         return 1
-    print(f"system render {args.name}: not yet implemented")
+
+    sys_info = systems[args.name]
+    tier2_source = sys_info.get("tier2_source")
+
+    try:
+        tier1 = get_tier1()
+        tier2 = get_tier2(args.name, tier2_source=tier2_source)
+    except FileNotFoundError as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return 1
+
+    # Use a placeholder for user_additions so callers can see where
+    # hand-edits will live.
+    user_placeholder = (
+        "\n# (user additions appear here, preserved verbatim across syncs)\n"
+    )
+    rendered = render_managed(tier1, tier2, user_additions=user_placeholder)
+    sys.stdout.write(rendered)
     return 0
 
 
@@ -319,6 +417,11 @@ def build_parser():
     p_sync.add_argument("system", help="Target system name")
     p_sync.add_argument("--apply", action="store_true", help="Apply changes (default: dry run)")
     p_sync.add_argument("--dry-run", action="store_true", help="Show what would change")
+    p_sync.add_argument(
+        "--init-claude-md",
+        action="store_true",
+        help="Required if target ~/.claude/CLAUDE.md lacks managed sentinels.",
+    )
 
     # diff
     p_diff = sub.add_parser("diff", help="Diff local vs deployed skills")
