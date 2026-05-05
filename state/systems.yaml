@@ -1,25 +1,73 @@
 # Systems known to claude-skills.
 # Each entry defines a deployment target for CLAUDE.md tiers and skills.
-# Hardware facts are joined from AIAssistant/state/machines.json at runtime.
+# Hardware facts (os, hostname, tools, services, roles) are joined from
+# AIAssistant/state/machines.json at runtime via systems.load_systems().
+#
+# Fields:
+#   machine_alias        AgentForge machine name (may differ from key, e.g.
+#                        email-mac → emailmac since AgentForge has no dash).
+#   mode                 owned | guest. Guest mode (Phase 3) refuses any
+#                        deploy target outside ~/.claude/.
+#   platform             darwin | linux. Informational.
+#   description          One-line role summary.
+#   claude_md_target     Where ~/.claude/CLAUDE.md is written by sync.
+#   commands_target      Where ~/.claude/commands/ contents are deployed.
+#   tier2_source         Path (relative to repo root) of this machine's
+#                        Tier 2 CLAUDE.md content.
+#   subscriptions:
+#     scopes             Skill scopes this machine subscribes to.
+#                        Values: universal | platform | domain
+#     domains            Domain subscriptions. ["*"] means all domains.
+#                        Per-domain entries filter by skill.domain field.
+#     requires_role      Optional. If set, only deploy skills that declare
+#                        this role in their requires_role frontmatter.
 
 systems:
   primary-laptop:
     machine_alias: primary-laptop
-    mode: interactive
-    tier2_path: systems/primary-laptop/CLAUDE.md
+    mode: owned
     platform: darwin
-    description: Primary interactive development laptop
+    description: Primary interactive development — orchestrator
+    claude_md_target: ~/.claude/CLAUDE.md
+    commands_target: ~/.claude/commands/
+    tier2_source: systems/primary-laptop/CLAUDE.md
+    subscriptions:
+      scopes: [universal, platform]
+      domains: ["*"]
 
   email-mac:
     machine_alias: emailmac
-    mode: headless
-    tier2_path: systems/email-mac/CLAUDE.md
+    mode: owned
     platform: darwin
-    description: ANL email capture, DocDB host, worker pool
+    description: ANL email capture, DocDB host, AgentForge worker pool (3 workers)
+    claude_md_target: ~/.claude/CLAUDE.md
+    commands_target: ~/.claude/commands/
+    tier2_source: systems/email-mac/CLAUDE.md
+    subscriptions:
+      scopes: [universal, platform]
+      domains: [emailassistant, projectdocumentdatabase, agentforge]
 
   h100:
     machine_alias: h100
-    mode: headless
-    tier2_path: systems/h100/CLAUDE.md
+    mode: owned
     platform: linux
-    description: GPU compute server (poplar.cels.anl.gov)
+    description: GPU compute server (poplar.cels.anl.gov), AgentForge worker
+    claude_md_target: ~/.claude/CLAUDE.md
+    commands_target: ~/.claude/commands/
+    tier2_source: systems/h100/CLAUDE.md
+    subscriptions:
+      scopes: [universal]
+      domains: [agentforge]
+      requires_role: agentforge-worker
+
+  # kberdl-dev:                          # Phase 3 — guest mode
+  #   machine_alias: kberdl-dev
+  #   mode: guest                        # Refuses repo-target writes
+  #   platform: linux
+  #   description: KBERDL guest environment
+  #   claude_md_target: ~/.claude/CLAUDE.md
+  #   commands_target: ~/.claude/commands/
+  #   tier2_source: systems/kberdl-dev/CLAUDE.md
+  #   subscriptions:
+  #     scopes: [universal]
+  #     domains: []

@@ -5,7 +5,7 @@ Dedicated ANL email capture (Outlook AppleScript — only machine with ANL email
 
 ## Services & Tools
 - AgentForge: 3 workers
-- DocDB: PostgreSQL+pgvector running locally; queryable directly via local API (fill in URL/port)
+- DocDB: PostgreSQL+pgvector running locally; queryable directly via local API at http://localhost:8000
 - EmailAssistant capture daemon (active, do not interfere)
 - Redis 8.6.2 (port 6379)
 - Docker 29.3.1 via Colima (no Docker Desktop due to licensing)
