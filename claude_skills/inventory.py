@@ -8,6 +8,7 @@ from pathlib import Path
 
 import yaml
 
+from claude_skills.frontmatter import extract_first_heading, parse_frontmatter
 from claude_skills.manifest import compute_manifest_hash, list_skill_units
 from claude_skills.registry import load_registry, save_registry
 
@@ -18,52 +19,6 @@ _PROJECT_REGISTRY = Path.home() / "Dropbox" / "Projects" / "AIAssistant" / "stat
 _AIASSISTANT_COMMANDS = Path.home() / "Dropbox" / "Projects" / "AIAssistant" / ".claude" / "commands"
 _CLAUDECOMMANDS_DIR = _REPO_ROOT / "commands"
 _USER_COMMANDS = Path.home() / ".claude" / "commands"
-
-
-def _parse_frontmatter(filepath: Path) -> tuple[dict, str]:
-    """Parse YAML frontmatter from a skill .md file.
-
-    Returns (frontmatter_dict, markdown_body).
-    If no frontmatter found, returns ({}, full_content).
-    """
-    try:
-        content = filepath.read_text(encoding="utf-8")
-    except (OSError, UnicodeDecodeError):
-        return {}, ""
-
-    lines = content.split("\n")
-    if not lines or lines[0].strip() != "---":
-        return {}, content
-
-    # Find closing ---
-    end_idx = None
-    for i in range(1, len(lines)):
-        if lines[i].strip() == "---":
-            end_idx = i
-            break
-
-    if end_idx is None:
-        return {}, content
-
-    yaml_block = "\n".join(lines[1:end_idx])
-    body = "\n".join(lines[end_idx + 1:])
-
-    try:
-        fm = yaml.safe_load(yaml_block) or {}
-    except yaml.YAMLError:
-        fm = {}
-
-    return fm, body
-
-
-def _extract_first_heading(body: str) -> str | None:
-    """Extract the first markdown heading from body text."""
-    for line in body.split("\n"):
-        stripped = line.strip()
-        if stripped.startswith("#"):
-            # Remove leading # characters and whitespace
-            return stripped.lstrip("#").strip()
-    return None
 
 
 def _infer_scope_from_home(home_repo: str) -> str:
@@ -151,7 +106,7 @@ def inventory(apply: bool = False, machine: str | None = None) -> dict:
     for repo_name, commands_dir, default_scope in homes:
         anchors = list_skill_units(commands_dir)
         for anchor in anchors:
-            fm, body = _parse_frontmatter(anchor)
+            fm, body = parse_frontmatter(anchor)
 
             # Determine skill name
             skill_name = fm.get("name", anchor.stem)
@@ -192,7 +147,7 @@ def inventory(apply: bool = False, machine: str | None = None) -> dict:
                 fm_scope = default_scope
 
             # Description
-            description = fm.get("description", "") or _extract_first_heading(body) or ""
+            description = fm.get("description", "") or extract_first_heading(body) or ""
 
             # Compute hash
             manifest_hash = compute_manifest_hash(anchor)
