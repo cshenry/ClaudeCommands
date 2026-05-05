@@ -291,9 +291,17 @@
       "manifest_hash": "4c6b40e17b6fbcda6b531bffb0dd4a943370fecffbc2161f5dd4df3ad79e1908",
       "retired": false,
       "conflict": false,
-      "deploys_to_machines": [],
+      "deploys_to_machines": [
+        "primary-laptop"
+      ],
       "deploys_to_repos": [],
-      "last_deploy": {}
+      "last_deploy": {
+        "primary-laptop": {
+          "hash": "4c6b40e17b6fbcda6b531bffb0dd4a943370fecffbc2161f5dd4df3ad79e1908",
+          "ts": "2026-05-05T04:48:29Z",
+          "action": "add"
+        }
+      }
     },
     "ai-cowork": {
       "name": "AI Cowork Session",
@@ -305,9 +313,17 @@
       "manifest_hash": "a75d647d1ff600f8da854b9f1f55ad74bb144ee7fde2f23773e966becb123b91",
       "retired": false,
       "conflict": false,
-      "deploys_to_machines": [],
+      "deploys_to_machines": [
+        "primary-laptop"
+      ],
       "deploys_to_repos": [],
-      "last_deploy": {}
+      "last_deploy": {
+        "primary-laptop": {
+          "hash": "a75d647d1ff600f8da854b9f1f55ad74bb144ee7fde2f23773e966becb123b91",
+          "ts": "2026-05-05T04:48:29Z",
+          "action": "add"
+        }
+      }
     },
     "ai-design": {
       "name": "AI Design Session",
@@ -319,9 +335,17 @@
       "manifest_hash": "581c1b814efc400448a76fdab36eb6dc54b41080749c6ff42f5099baa373afac",
       "retired": false,
       "conflict": false,
-      "deploys_to_machines": [],
+      "deploys_to_machines": [
+        "primary-laptop"
+      ],
       "deploys_to_repos": [],
-      "last_deploy": {}
+      "last_deploy": {
+        "primary-laptop": {
+          "hash": "581c1b814efc400448a76fdab36eb6dc54b41080749c6ff42f5099baa373afac",
+          "ts": "2026-05-05T04:48:29Z",
+          "action": "add"
+        }
+      }
     },
     "ai-forge": {
       "name": "ai-forge",
@@ -354,9 +378,17 @@
       "manifest_hash": "c9710782f1a273f4e2cc3e8d791705fed4f8e763e370057264b486a5ed4476bf",
       "retired": false,
       "conflict": false,
-      "deploys_to_machines": [],
+      "deploys_to_machines": [
+        "primary-laptop"
+      ],
       "deploys_to_repos": [],
-      "last_deploy": {}
+      "last_deploy": {
+        "primary-laptop": {
+          "hash": "c9710782f1a273f4e2cc3e8d791705fed4f8e763e370057264b486a5ed4476bf",
+          "ts": "2026-05-05T04:48:29Z",
+          "action": "add"
+        }
+      }
     },
     "ai-tasks": {
       "name": "AI Task & Priority Manager",
@@ -368,9 +400,17 @@
       "manifest_hash": "a6a6308fe3b565fdf11127480e17a329c012045992ac870e6cf3de65d40dc06e",
       "retired": false,
       "conflict": false,
-      "deploys_to_machines": [],
+      "deploys_to_machines": [
+        "primary-laptop"
+      ],
       "deploys_to_repos": [],
-      "last_deploy": {}
+      "last_deploy": {
+        "primary-laptop": {
+          "hash": "a6a6308fe3b565fdf11127480e17a329c012045992ac870e6cf3de65d40dc06e",
+          "ts": "2026-05-05T04:48:29Z",
+          "action": "add"
+        }
+      }
     },
     "budget-justification": {
       "name": "Budget Justification Generator",
@@ -382,9 +422,17 @@
       "manifest_hash": "b9064dc6c21166356b47d0074fa51ccc50bad1e11efbe44b5dd5475231092669",
       "retired": false,
       "conflict": false,
-      "deploys_to_machines": [],
+      "deploys_to_machines": [
+        "primary-laptop"
+      ],
       "deploys_to_repos": [],
-      "last_deploy": {}
+      "last_deploy": {
+        "primary-laptop": {
+          "hash": "b9064dc6c21166356b47d0074fa51ccc50bad1e11efbe44b5dd5475231092669",
+          "ts": "2026-05-05T04:48:29Z",
+          "action": "add"
+        }
+      }
     },
     "doc-code-for-dev": {
       "name": "doc-code-for-dev",
@@ -508,9 +556,17 @@
       "manifest_hash": "61ed795a5c02f53d93b4dcd364e4461ec4b7124fc41d92e14ab9bee87750bd84",
       "retired": false,
       "conflict": false,
-      "deploys_to_machines": [],
+      "deploys_to_machines": [
+        "primary-laptop"
+      ],
       "deploys_to_repos": [],
-      "last_deploy": {}
+      "last_deploy": {
+        "primary-laptop": {
+          "hash": "61ed795a5c02f53d93b4dcd364e4461ec4b7124fc41d92e14ab9bee87750bd84",
+          "ts": "2026-05-05T04:48:29Z",
+          "action": "add"
+        }
+      }
     },
     "analyze-email": {
       "name": "analyze-email",
