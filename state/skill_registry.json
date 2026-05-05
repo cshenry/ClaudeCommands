@@ -10,276 +10,66 @@
       "domain": null,
       "manifest_hash": "f14eb133d9ab0062874176e44d2eb41460d6fb343102d457962290d653a45449",
       "retired": false,
-      "conflict": true,
+      "conflict": false,
       "deploys_to_machines": [],
       "deploys_to_repos": [],
-      "last_deploy": {},
-      "conflict_alternates": [
-        {
-          "home_repo": "ADP1Notebooks",
-          "home_path": "/Users/chenry/Dropbox/Projects/ADP1Notebooks/.claude/commands/claude-commands-expert.md",
-          "manifest_hash": "32f5d4d2a97ac697a198d3792dea01b5350a6764d98240f3411e031c346f454e"
-        },
-        {
-          "home_repo": "AIOrchestrator",
-          "home_path": "/Users/chenry/Dropbox/Projects/AIOrchestrator/.claude/commands/claude-commands-expert.md",
-          "manifest_hash": "32f5d4d2a97ac697a198d3792dea01b5350a6764d98240f3411e031c346f454e"
-        },
-        {
-          "home_repo": "AISynbioPipeline",
-          "home_path": "/Users/chenry/Dropbox/Projects/AISynbioPipeline/.claude/commands/claude-commands-expert.md",
-          "manifest_hash": "32f5d4d2a97ac697a198d3792dea01b5350a6764d98240f3411e031c346f454e"
-        },
-        {
-          "home_repo": "ANMENotebooks",
-          "home_path": "/Users/chenry/Dropbox/Projects/ANMENotebooks/.claude/commands/claude-commands-expert.md",
-          "manifest_hash": "32f5d4d2a97ac697a198d3792dea01b5350a6764d98240f3411e031c346f454e"
-        },
-        {
-          "home_repo": "BERDLTablesPrototype",
-          "home_path": "/Users/chenry/Dropbox/Projects/BERDLTablesPrototype/.claude/commands/claude-commands-expert.md",
-          "manifest_hash": "32f5d4d2a97ac697a198d3792dea01b5350a6764d98240f3411e031c346f454e"
-        },
-        {
-          "home_repo": "BVBRCHackathon",
-          "home_path": "/Users/chenry/Dropbox/Projects/BVBRCHackathon/.claude/commands/claude-commands-expert.md",
-          "manifest_hash": "32f5d4d2a97ac697a198d3792dea01b5350a6764d98240f3411e031c346f454e"
-        },
-        {
-          "home_repo": "FitnessDatabaseAnalysis",
-          "home_path": "/Users/chenry/Dropbox/Projects/FitnessDatabaseAnalysis/.claude/commands/claude-commands-expert.md",
-          "manifest_hash": "32f5d4d2a97ac697a198d3792dea01b5350a6764d98240f3411e031c346f454e"
-        },
-        {
-          "home_repo": "PangenomeAnalysis",
-          "home_path": "/Users/chenry/Dropbox/Projects/PangenomeAnalysis/.claude/commands/claude-commands-expert.md",
-          "manifest_hash": "32f5d4d2a97ac697a198d3792dea01b5350a6764d98240f3411e031c346f454e"
-        }
-      ]
+      "last_deploy": {}
     },
     "create-new-project": {
-      "name": "create-new-project",
-      "description": "Command: create-new-project",
-      "home_repo": "ADP1Notebooks",
-      "home_path": "/Users/chenry/Dropbox/Projects/ADP1Notebooks/.claude/commands/create-new-project.md",
+      "name": "Create New Project",
+      "description": "Bootstrap a new project with directory structure, git, and Claude configuration",
+      "home_repo": "ClaudeCommands",
+      "home_path": "/Users/chenry/Dropbox/Projects/ClaudeCommands/commands/create-new-project.md",
       "scope": "domain",
-      "domain": "adp1notebooks",
-      "manifest_hash": "03b2cd2640606a9a483fda971d7b16ce3386fbabda7d639393a7d6160e9eeac6",
+      "domain": null,
+      "manifest_hash": "2b5cd1d5bb24da99e6108f3c2235fdf2661cff9d812ceb7368af7cc02d146f26",
       "retired": false,
-      "conflict": true,
+      "conflict": false,
       "deploys_to_machines": [],
       "deploys_to_repos": [],
-      "last_deploy": {},
-      "conflict_alternates": [
-        {
-          "home_repo": "AIOrchestrator",
-          "home_path": "/Users/chenry/Dropbox/Projects/AIOrchestrator/.claude/commands/create-new-project.md",
-          "manifest_hash": "03b2cd2640606a9a483fda971d7b16ce3386fbabda7d639393a7d6160e9eeac6"
-        },
-        {
-          "home_repo": "AISynbioPipeline",
-          "home_path": "/Users/chenry/Dropbox/Projects/AISynbioPipeline/.claude/commands/create-new-project.md",
-          "manifest_hash": "03b2cd2640606a9a483fda971d7b16ce3386fbabda7d639393a7d6160e9eeac6"
-        },
-        {
-          "home_repo": "ANMENotebooks",
-          "home_path": "/Users/chenry/Dropbox/Projects/ANMENotebooks/.claude/commands/create-new-project.md",
-          "manifest_hash": "03b2cd2640606a9a483fda971d7b16ce3386fbabda7d639393a7d6160e9eeac6"
-        },
-        {
-          "home_repo": "BERDLTablesPrototype",
-          "home_path": "/Users/chenry/Dropbox/Projects/BERDLTablesPrototype/.claude/commands/create-new-project.md",
-          "manifest_hash": "03b2cd2640606a9a483fda971d7b16ce3386fbabda7d639393a7d6160e9eeac6"
-        },
-        {
-          "home_repo": "BVBRCHackathon",
-          "home_path": "/Users/chenry/Dropbox/Projects/BVBRCHackathon/.claude/commands/create-new-project.md",
-          "manifest_hash": "03b2cd2640606a9a483fda971d7b16ce3386fbabda7d639393a7d6160e9eeac6"
-        },
-        {
-          "home_repo": "FitnessDatabaseAnalysis",
-          "home_path": "/Users/chenry/Dropbox/Projects/FitnessDatabaseAnalysis/.claude/commands/create-new-project.md",
-          "manifest_hash": "03b2cd2640606a9a483fda971d7b16ce3386fbabda7d639393a7d6160e9eeac6"
-        },
-        {
-          "home_repo": "PangenomeAnalysis",
-          "home_path": "/Users/chenry/Dropbox/Projects/PangenomeAnalysis/.claude/commands/create-new-project.md",
-          "manifest_hash": "03b2cd2640606a9a483fda971d7b16ce3386fbabda7d639393a7d6160e9eeac6"
-        },
-        {
-          "home_repo": "ClaudeCommands",
-          "home_path": "/Users/chenry/Dropbox/Projects/ClaudeCommands/commands/create-new-project.md",
-          "manifest_hash": "2b5cd1d5bb24da99e6108f3c2235fdf2661cff9d812ceb7368af7cc02d146f26"
-        }
-      ]
+      "last_deploy": {}
     },
     "cursor-setup": {
-      "name": "cursor-setup",
-      "description": "Command: cursor-setup",
-      "home_repo": "ADP1Notebooks",
-      "home_path": "/Users/chenry/Dropbox/Projects/ADP1Notebooks/.claude/commands/cursor-setup.md",
+      "name": "Cursor Setup",
+      "description": "Configure Cursor IDE with Claude Code integration and project settings",
+      "home_repo": "ClaudeCommands",
+      "home_path": "/Users/chenry/Dropbox/Projects/ClaudeCommands/commands/cursor-setup.md",
       "scope": "domain",
-      "domain": "adp1notebooks",
-      "manifest_hash": "a7488e188f00825882ff9e4f9b12808e701a35b6ac0d8348bccb1b436d78450e",
+      "domain": null,
+      "manifest_hash": "60ee04a946bb5176dc5c79c14203ec1348a87c3068f89449412050de44226b6f",
       "retired": false,
-      "conflict": true,
+      "conflict": false,
       "deploys_to_machines": [],
       "deploys_to_repos": [],
-      "last_deploy": {},
-      "conflict_alternates": [
-        {
-          "home_repo": "AIOrchestrator",
-          "home_path": "/Users/chenry/Dropbox/Projects/AIOrchestrator/.claude/commands/cursor-setup.md",
-          "manifest_hash": "a7488e188f00825882ff9e4f9b12808e701a35b6ac0d8348bccb1b436d78450e"
-        },
-        {
-          "home_repo": "AISynbioPipeline",
-          "home_path": "/Users/chenry/Dropbox/Projects/AISynbioPipeline/.claude/commands/cursor-setup.md",
-          "manifest_hash": "a7488e188f00825882ff9e4f9b12808e701a35b6ac0d8348bccb1b436d78450e"
-        },
-        {
-          "home_repo": "ANMENotebooks",
-          "home_path": "/Users/chenry/Dropbox/Projects/ANMENotebooks/.claude/commands/cursor-setup.md",
-          "manifest_hash": "a7488e188f00825882ff9e4f9b12808e701a35b6ac0d8348bccb1b436d78450e"
-        },
-        {
-          "home_repo": "BERDLTablesPrototype",
-          "home_path": "/Users/chenry/Dropbox/Projects/BERDLTablesPrototype/.claude/commands/cursor-setup.md",
-          "manifest_hash": "a7488e188f00825882ff9e4f9b12808e701a35b6ac0d8348bccb1b436d78450e"
-        },
-        {
-          "home_repo": "BVBRCHackathon",
-          "home_path": "/Users/chenry/Dropbox/Projects/BVBRCHackathon/.claude/commands/cursor-setup.md",
-          "manifest_hash": "a7488e188f00825882ff9e4f9b12808e701a35b6ac0d8348bccb1b436d78450e"
-        },
-        {
-          "home_repo": "FitnessDatabaseAnalysis",
-          "home_path": "/Users/chenry/Dropbox/Projects/FitnessDatabaseAnalysis/.claude/commands/cursor-setup.md",
-          "manifest_hash": "a7488e188f00825882ff9e4f9b12808e701a35b6ac0d8348bccb1b436d78450e"
-        },
-        {
-          "home_repo": "PangenomeAnalysis",
-          "home_path": "/Users/chenry/Dropbox/Projects/PangenomeAnalysis/.claude/commands/cursor-setup.md",
-          "manifest_hash": "a7488e188f00825882ff9e4f9b12808e701a35b6ac0d8348bccb1b436d78450e"
-        },
-        {
-          "home_repo": "ClaudeCommands",
-          "home_path": "/Users/chenry/Dropbox/Projects/ClaudeCommands/commands/cursor-setup.md",
-          "manifest_hash": "60ee04a946bb5176dc5c79c14203ec1348a87c3068f89449412050de44226b6f"
-        }
-      ]
+      "last_deploy": {}
     },
     "envman-expert": {
-      "name": "envman-expert",
-      "description": "EnvironmentManager Expert",
-      "home_repo": "ADP1Notebooks",
-      "home_path": "/Users/chenry/Dropbox/Projects/ADP1Notebooks/.claude/commands/envman-expert.md",
+      "name": "EnvironmentManager Expert",
+      "description": "Expert on venvman CLI for managing Python virtual environments",
+      "home_repo": "ClaudeCommands",
+      "home_path": "/Users/chenry/Dropbox/Projects/ClaudeCommands/commands/envman-expert.md",
       "scope": "domain",
-      "domain": "adp1notebooks",
-      "manifest_hash": "40ee3654ca1b4e1f292f584179365550205c33836fe85ee47992df4615925f8d",
+      "domain": null,
+      "manifest_hash": "381554b601ed150637088c8b4c41aa8b02a9494cffba14c39a06e3017ca5e53a",
       "retired": false,
-      "conflict": true,
+      "conflict": false,
       "deploys_to_machines": [],
       "deploys_to_repos": [],
-      "last_deploy": {},
-      "conflict_alternates": [
-        {
-          "home_repo": "AIOrchestrator",
-          "home_path": "/Users/chenry/Dropbox/Projects/AIOrchestrator/.claude/commands/envman-expert.md",
-          "manifest_hash": "40ee3654ca1b4e1f292f584179365550205c33836fe85ee47992df4615925f8d"
-        },
-        {
-          "home_repo": "AISynbioPipeline",
-          "home_path": "/Users/chenry/Dropbox/Projects/AISynbioPipeline/.claude/commands/envman-expert.md",
-          "manifest_hash": "40ee3654ca1b4e1f292f584179365550205c33836fe85ee47992df4615925f8d"
-        },
-        {
-          "home_repo": "ANMENotebooks",
-          "home_path": "/Users/chenry/Dropbox/Projects/ANMENotebooks/.claude/commands/envman-expert.md",
-          "manifest_hash": "40ee3654ca1b4e1f292f584179365550205c33836fe85ee47992df4615925f8d"
-        },
-        {
-          "home_repo": "BERDLTablesPrototype",
-          "home_path": "/Users/chenry/Dropbox/Projects/BERDLTablesPrototype/.claude/commands/envman-expert.md",
-          "manifest_hash": "40ee3654ca1b4e1f292f584179365550205c33836fe85ee47992df4615925f8d"
-        },
-        {
-          "home_repo": "BVBRCHackathon",
-          "home_path": "/Users/chenry/Dropbox/Projects/BVBRCHackathon/.claude/commands/envman-expert.md",
-          "manifest_hash": "40ee3654ca1b4e1f292f584179365550205c33836fe85ee47992df4615925f8d"
-        },
-        {
-          "home_repo": "FitnessDatabaseAnalysis",
-          "home_path": "/Users/chenry/Dropbox/Projects/FitnessDatabaseAnalysis/.claude/commands/envman-expert.md",
-          "manifest_hash": "40ee3654ca1b4e1f292f584179365550205c33836fe85ee47992df4615925f8d"
-        },
-        {
-          "home_repo": "PangenomeAnalysis",
-          "home_path": "/Users/chenry/Dropbox/Projects/PangenomeAnalysis/.claude/commands/envman-expert.md",
-          "manifest_hash": "40ee3654ca1b4e1f292f584179365550205c33836fe85ee47992df4615925f8d"
-        },
-        {
-          "home_repo": "ClaudeCommands",
-          "home_path": "/Users/chenry/Dropbox/Projects/ClaudeCommands/commands/envman-expert.md",
-          "manifest_hash": "381554b601ed150637088c8b4c41aa8b02a9494cffba14c39a06e3017ca5e53a"
-        }
-      ]
+      "last_deploy": {}
     },
     "jupyter-dev": {
-      "name": "jupyter-dev",
-      "description": "Command: jupyter-dev",
-      "home_repo": "ADP1Notebooks",
-      "home_path": "/Users/chenry/Dropbox/Projects/ADP1Notebooks/.claude/commands/jupyter-dev.md",
+      "name": "Jupyter Development",
+      "description": "Create and manage Jupyter notebooks for data analysis and development",
+      "home_repo": "ClaudeCommands",
+      "home_path": "/Users/chenry/Dropbox/Projects/ClaudeCommands/commands/jupyter-dev.md",
       "scope": "domain",
-      "domain": "adp1notebooks",
-      "manifest_hash": "9bc74e4609e03aaf76f62b08f57c5a8674ba03dfe9855c544daf9b817d7214bd",
+      "domain": null,
+      "manifest_hash": "fa364bb0905114bdd457c6cbdfd5e40aa31a092f20fab40c0885c4f7321f9b3d",
       "retired": false,
-      "conflict": true,
+      "conflict": false,
       "deploys_to_machines": [],
       "deploys_to_repos": [],
-      "last_deploy": {},
-      "conflict_alternates": [
-        {
-          "home_repo": "AIOrchestrator",
-          "home_path": "/Users/chenry/Dropbox/Projects/AIOrchestrator/.claude/commands/jupyter-dev.md",
-          "manifest_hash": "9bc74e4609e03aaf76f62b08f57c5a8674ba03dfe9855c544daf9b817d7214bd"
-        },
-        {
-          "home_repo": "AISynbioPipeline",
-          "home_path": "/Users/chenry/Dropbox/Projects/AISynbioPipeline/.claude/commands/jupyter-dev.md",
-          "manifest_hash": "9bc74e4609e03aaf76f62b08f57c5a8674ba03dfe9855c544daf9b817d7214bd"
-        },
-        {
-          "home_repo": "ANMENotebooks",
-          "home_path": "/Users/chenry/Dropbox/Projects/ANMENotebooks/.claude/commands/jupyter-dev.md",
-          "manifest_hash": "9bc74e4609e03aaf76f62b08f57c5a8674ba03dfe9855c544daf9b817d7214bd"
-        },
-        {
-          "home_repo": "BERDLTablesPrototype",
-          "home_path": "/Users/chenry/Dropbox/Projects/BERDLTablesPrototype/.claude/commands/jupyter-dev.md",
-          "manifest_hash": "9bc74e4609e03aaf76f62b08f57c5a8674ba03dfe9855c544daf9b817d7214bd"
-        },
-        {
-          "home_repo": "BVBRCHackathon",
-          "home_path": "/Users/chenry/Dropbox/Projects/BVBRCHackathon/.claude/commands/jupyter-dev.md",
-          "manifest_hash": "9bc74e4609e03aaf76f62b08f57c5a8674ba03dfe9855c544daf9b817d7214bd"
-        },
-        {
-          "home_repo": "FitnessDatabaseAnalysis",
-          "home_path": "/Users/chenry/Dropbox/Projects/FitnessDatabaseAnalysis/.claude/commands/jupyter-dev.md",
-          "manifest_hash": "9bc74e4609e03aaf76f62b08f57c5a8674ba03dfe9855c544daf9b817d7214bd"
-        },
-        {
-          "home_repo": "PangenomeAnalysis",
-          "home_path": "/Users/chenry/Dropbox/Projects/PangenomeAnalysis/.claude/commands/jupyter-dev.md",
-          "manifest_hash": "9bc74e4609e03aaf76f62b08f57c5a8674ba03dfe9855c544daf9b817d7214bd"
-        },
-        {
-          "home_repo": "ClaudeCommands",
-          "home_path": "/Users/chenry/Dropbox/Projects/ClaudeCommands/commands/jupyter-dev.md",
-          "manifest_hash": "fa364bb0905114bdd457c6cbdfd5e40aa31a092f20fab40c0885c4f7321f9b3d"
-        }
-      ]
+      "last_deploy": {}
     },
     "ai-audit": {
       "name": "AI Platform Auditor",
@@ -365,26 +155,19 @@
         }
       }
     },
-    "ai-forge": {
-      "name": "ai-forge",
-      "description": "Command: ai-forge",
-      "home_repo": "AgentForge",
-      "home_path": "/Users/chenry/Dropbox/Projects/AgentForge/.claude/commands/ai-forge.md",
-      "scope": "domain",
-      "domain": "agentforge",
-      "manifest_hash": "942fb96040f770466991a744cfd442fdbd93de9f6bb7cc4b93994834a89b9a1c",
+    "ai-forge-ops": {
+      "name": "AI Forge",
+      "description": "Submit, monitor, manage, and debug AgentForge tasks from AIAssistant",
+      "home_repo": "AIAssistant",
+      "home_path": "/Users/chenry/Dropbox/Projects/AIAssistant/.claude/commands/ai-forge-ops.md",
+      "scope": "platform",
+      "domain": null,
+      "manifest_hash": "7ee8b786c437eb13bae22e997cf79e845e541b25a1d1ac86d72c2c50c6936131",
       "retired": false,
-      "conflict": true,
+      "conflict": false,
       "deploys_to_machines": [],
       "deploys_to_repos": [],
-      "last_deploy": {},
-      "conflict_alternates": [
-        {
-          "home_repo": "AIAssistant",
-          "home_path": "/Users/chenry/Dropbox/Projects/AIAssistant/.claude/commands/ai-forge.md",
-          "manifest_hash": "150e858094eb7a1f72a2ed69fec27f559e3662d1ad273c81f08be739f7baa53f"
-        }
-      ]
+      "last_deploy": {}
     },
     "ai-registry": {
       "name": "AI Project Registry Manager",
@@ -498,118 +281,6 @@
         }
       }
     },
-    "doc-code-for-dev": {
-      "name": "doc-code-for-dev",
-      "description": "Command: doc-code-for-dev",
-      "home_repo": "ADP1Notebooks",
-      "home_path": "/Users/chenry/Dropbox/Projects/ADP1Notebooks/.claude/commands/doc-code-for-dev.md",
-      "scope": "domain",
-      "domain": "adp1notebooks",
-      "manifest_hash": "aa33b63ecb2cf5cf3fc4b21acba45607425643f62d16b56e6323818c3dce3bd0",
-      "retired": false,
-      "conflict": true,
-      "deploys_to_machines": [],
-      "deploys_to_repos": [],
-      "last_deploy": {},
-      "conflict_alternates": [
-        {
-          "home_repo": "AIOrchestrator",
-          "home_path": "/Users/chenry/Dropbox/Projects/AIOrchestrator/.claude/commands/doc-code-for-dev.md",
-          "manifest_hash": "aa33b63ecb2cf5cf3fc4b21acba45607425643f62d16b56e6323818c3dce3bd0"
-        },
-        {
-          "home_repo": "AISynbioPipeline",
-          "home_path": "/Users/chenry/Dropbox/Projects/AISynbioPipeline/.claude/commands/doc-code-for-dev.md",
-          "manifest_hash": "aa33b63ecb2cf5cf3fc4b21acba45607425643f62d16b56e6323818c3dce3bd0"
-        },
-        {
-          "home_repo": "ANMENotebooks",
-          "home_path": "/Users/chenry/Dropbox/Projects/ANMENotebooks/.claude/commands/doc-code-for-dev.md",
-          "manifest_hash": "aa33b63ecb2cf5cf3fc4b21acba45607425643f62d16b56e6323818c3dce3bd0"
-        },
-        {
-          "home_repo": "BERDLTablesPrototype",
-          "home_path": "/Users/chenry/Dropbox/Projects/BERDLTablesPrototype/.claude/commands/doc-code-for-dev.md",
-          "manifest_hash": "aa33b63ecb2cf5cf3fc4b21acba45607425643f62d16b56e6323818c3dce3bd0"
-        },
-        {
-          "home_repo": "BVBRCHackathon",
-          "home_path": "/Users/chenry/Dropbox/Projects/BVBRCHackathon/.claude/commands/doc-code-for-dev.md",
-          "manifest_hash": "aa33b63ecb2cf5cf3fc4b21acba45607425643f62d16b56e6323818c3dce3bd0"
-        },
-        {
-          "home_repo": "FitnessDatabaseAnalysis",
-          "home_path": "/Users/chenry/Dropbox/Projects/FitnessDatabaseAnalysis/.claude/commands/doc-code-for-dev.md",
-          "manifest_hash": "aa33b63ecb2cf5cf3fc4b21acba45607425643f62d16b56e6323818c3dce3bd0"
-        },
-        {
-          "home_repo": "PangenomeAnalysis",
-          "home_path": "/Users/chenry/Dropbox/Projects/PangenomeAnalysis/.claude/commands/doc-code-for-dev.md",
-          "manifest_hash": "aa33b63ecb2cf5cf3fc4b21acba45607425643f62d16b56e6323818c3dce3bd0"
-        },
-        {
-          "home_repo": "AIAssistant",
-          "home_path": "/Users/chenry/Dropbox/Projects/AIAssistant/.claude/commands/doc-code-for-dev.md",
-          "manifest_hash": "29e6d0dca38d145a51ce6a9f77934049241fc6931105a74fb1727972a88497e0"
-        }
-      ]
-    },
-    "doc-code-usage": {
-      "name": "doc-code-usage",
-      "description": "Command: doc-code-usage",
-      "home_repo": "ADP1Notebooks",
-      "home_path": "/Users/chenry/Dropbox/Projects/ADP1Notebooks/.claude/commands/doc-code-usage.md",
-      "scope": "domain",
-      "domain": "adp1notebooks",
-      "manifest_hash": "3742969d0362db52f4be7226731a7b3d9f7dc571da53c07157d9426f1290582b",
-      "retired": false,
-      "conflict": true,
-      "deploys_to_machines": [],
-      "deploys_to_repos": [],
-      "last_deploy": {},
-      "conflict_alternates": [
-        {
-          "home_repo": "AIOrchestrator",
-          "home_path": "/Users/chenry/Dropbox/Projects/AIOrchestrator/.claude/commands/doc-code-usage.md",
-          "manifest_hash": "3742969d0362db52f4be7226731a7b3d9f7dc571da53c07157d9426f1290582b"
-        },
-        {
-          "home_repo": "AISynbioPipeline",
-          "home_path": "/Users/chenry/Dropbox/Projects/AISynbioPipeline/.claude/commands/doc-code-usage.md",
-          "manifest_hash": "3742969d0362db52f4be7226731a7b3d9f7dc571da53c07157d9426f1290582b"
-        },
-        {
-          "home_repo": "ANMENotebooks",
-          "home_path": "/Users/chenry/Dropbox/Projects/ANMENotebooks/.claude/commands/doc-code-usage.md",
-          "manifest_hash": "3742969d0362db52f4be7226731a7b3d9f7dc571da53c07157d9426f1290582b"
-        },
-        {
-          "home_repo": "BERDLTablesPrototype",
-          "home_path": "/Users/chenry/Dropbox/Projects/BERDLTablesPrototype/.claude/commands/doc-code-usage.md",
-          "manifest_hash": "3742969d0362db52f4be7226731a7b3d9f7dc571da53c07157d9426f1290582b"
-        },
-        {
-          "home_repo": "BVBRCHackathon",
-          "home_path": "/Users/chenry/Dropbox/Projects/BVBRCHackathon/.claude/commands/doc-code-usage.md",
-          "manifest_hash": "3742969d0362db52f4be7226731a7b3d9f7dc571da53c07157d9426f1290582b"
-        },
-        {
-          "home_repo": "FitnessDatabaseAnalysis",
-          "home_path": "/Users/chenry/Dropbox/Projects/FitnessDatabaseAnalysis/.claude/commands/doc-code-usage.md",
-          "manifest_hash": "3742969d0362db52f4be7226731a7b3d9f7dc571da53c07157d9426f1290582b"
-        },
-        {
-          "home_repo": "PangenomeAnalysis",
-          "home_path": "/Users/chenry/Dropbox/Projects/PangenomeAnalysis/.claude/commands/doc-code-usage.md",
-          "manifest_hash": "3742969d0362db52f4be7226731a7b3d9f7dc571da53c07157d9426f1290582b"
-        },
-        {
-          "home_repo": "AIAssistant",
-          "home_path": "/Users/chenry/Dropbox/Projects/AIAssistant/.claude/commands/doc-code-usage.md",
-          "manifest_hash": "9d6766f4820092baa6afa7789dd241431a693c88ebcbc854556a32c7927f25dd"
-        }
-      ]
-    },
     "project-status": {
       "name": "Quick Project Status",
       "description": "Fast status check on a specific project or full portfolio",
@@ -638,700 +309,14 @@
         }
       }
     },
-    "analyze-email": {
-      "name": "analyze-email",
-      "description": "Command: analyze-email",
-      "home_repo": "ADP1Notebooks",
-      "home_path": "/Users/chenry/Dropbox/Projects/ADP1Notebooks/.claude/commands/analyze-email.md",
+    "ai-forge": {
+      "name": "ai-forge",
+      "description": "Command: ai-forge",
+      "home_repo": "AgentForge",
+      "home_path": "/Users/chenry/Dropbox/Projects/AgentForge/.claude/commands/ai-forge.md",
       "scope": "domain",
-      "domain": "adp1notebooks",
-      "manifest_hash": "7a8b45551419060c163a36c16abd1409635d51e3a0024e472f5a50fefa4bf2c4",
-      "retired": false,
-      "conflict": false,
-      "deploys_to_machines": [],
-      "deploys_to_repos": [],
-      "last_deploy": {}
-    },
-    "create-prd": {
-      "name": "create-prd",
-      "description": "Command: create-prd",
-      "home_repo": "ADP1Notebooks",
-      "home_path": "/Users/chenry/Dropbox/Projects/ADP1Notebooks/.claude/commands/create-prd.md",
-      "scope": "domain",
-      "domain": "adp1notebooks",
-      "manifest_hash": "b5ce41e5ab2ad52ee923eae45687d8a9ab3e9dbd0112082343107fd687054834",
-      "retired": false,
-      "conflict": false,
-      "deploys_to_machines": [],
-      "deploys_to_repos": [],
-      "last_deploy": {}
-    },
-    "create-skill": {
-      "name": "create-skill",
-      "description": "Command: create-skill",
-      "home_repo": "ADP1Notebooks",
-      "home_path": "/Users/chenry/Dropbox/Projects/ADP1Notebooks/.claude/commands/create-skill.md",
-      "scope": "domain",
-      "domain": "adp1notebooks",
-      "manifest_hash": "2d46a7b9ac1f54a6033bacd7cdbab47a51a1ff1ef8814ab9c24cfde45e6857e4",
-      "retired": false,
-      "conflict": false,
-      "deploys_to_machines": [],
-      "deploys_to_repos": [],
-      "last_deploy": {}
-    },
-    "emailassistant-expert": {
-      "name": "EmailAssistant Expert",
-      "description": "Expert on the EmailAssistant email processing and intelligence system",
-      "home_repo": "EmailAssistant",
-      "home_path": "/Users/chenry/Dropbox/Projects/EmailAssistant/.claude/commands/emailassistant-expert.md",
-      "scope": "domain",
-      "domain": "emailassistant",
-      "manifest_hash": "310f453d944bf4c2904989baec26bca9a691a9b99b34649ca2a3dbb9aaf2fc85",
-      "retired": false,
-      "conflict": true,
-      "deploys_to_machines": [],
-      "deploys_to_repos": [],
-      "last_deploy": {},
-      "conflict_alternates": [
-        {
-          "home_repo": "ADP1Notebooks",
-          "home_path": "/Users/chenry/Dropbox/Projects/ADP1Notebooks/.claude/commands/emailassistant-expert.md",
-          "manifest_hash": "d04fff2670172e5c541d05867e06695b405c976c4de79a3be5d7cfae7cfcaa7b"
-        },
-        {
-          "home_repo": "AIOrchestrator",
-          "home_path": "/Users/chenry/Dropbox/Projects/AIOrchestrator/.claude/commands/emailassistant-expert.md",
-          "manifest_hash": "d04fff2670172e5c541d05867e06695b405c976c4de79a3be5d7cfae7cfcaa7b"
-        },
-        {
-          "home_repo": "AISynbioPipeline",
-          "home_path": "/Users/chenry/Dropbox/Projects/AISynbioPipeline/.claude/commands/emailassistant-expert.md",
-          "manifest_hash": "d04fff2670172e5c541d05867e06695b405c976c4de79a3be5d7cfae7cfcaa7b"
-        },
-        {
-          "home_repo": "ANMENotebooks",
-          "home_path": "/Users/chenry/Dropbox/Projects/ANMENotebooks/.claude/commands/emailassistant-expert.md",
-          "manifest_hash": "d04fff2670172e5c541d05867e06695b405c976c4de79a3be5d7cfae7cfcaa7b"
-        },
-        {
-          "home_repo": "BERDLTablesPrototype",
-          "home_path": "/Users/chenry/Dropbox/Projects/BERDLTablesPrototype/.claude/commands/emailassistant-expert.md",
-          "manifest_hash": "d04fff2670172e5c541d05867e06695b405c976c4de79a3be5d7cfae7cfcaa7b"
-        },
-        {
-          "home_repo": "BVBRCHackathon",
-          "home_path": "/Users/chenry/Dropbox/Projects/BVBRCHackathon/.claude/commands/emailassistant-expert.md",
-          "manifest_hash": "d04fff2670172e5c541d05867e06695b405c976c4de79a3be5d7cfae7cfcaa7b"
-        },
-        {
-          "home_repo": "FitnessDatabaseAnalysis",
-          "home_path": "/Users/chenry/Dropbox/Projects/FitnessDatabaseAnalysis/.claude/commands/emailassistant-expert.md",
-          "manifest_hash": "d04fff2670172e5c541d05867e06695b405c976c4de79a3be5d7cfae7cfcaa7b"
-        },
-        {
-          "home_repo": "PangenomeAnalysis",
-          "home_path": "/Users/chenry/Dropbox/Projects/PangenomeAnalysis/.claude/commands/emailassistant-expert.md",
-          "manifest_hash": "d04fff2670172e5c541d05867e06695b405c976c4de79a3be5d7cfae7cfcaa7b"
-        }
-      ]
-    },
-    "emailassistant-ops": {
-      "name": "EmailAssistant Operations",
-      "description": "Run and manage EmailAssistant batch processing and maintenance",
-      "home_repo": "EmailAssistant",
-      "home_path": "/Users/chenry/Dropbox/Projects/EmailAssistant/.claude/commands/emailassistant-ops.md",
-      "scope": "domain",
-      "domain": "emailassistant",
-      "manifest_hash": "af95ed12fdf9578789588240d8b2e2ec20e637177b82b04a81eb72ecb5950a41",
-      "retired": false,
-      "conflict": true,
-      "deploys_to_machines": [],
-      "deploys_to_repos": [],
-      "last_deploy": {},
-      "conflict_alternates": [
-        {
-          "home_repo": "ADP1Notebooks",
-          "home_path": "/Users/chenry/Dropbox/Projects/ADP1Notebooks/.claude/commands/emailassistant-ops.md",
-          "manifest_hash": "fbc84704da0b56a793a0bb829e0837aeb2f3c41712a1b2015594b4759c2e04c2"
-        },
-        {
-          "home_repo": "AIOrchestrator",
-          "home_path": "/Users/chenry/Dropbox/Projects/AIOrchestrator/.claude/commands/emailassistant-ops.md",
-          "manifest_hash": "fbc84704da0b56a793a0bb829e0837aeb2f3c41712a1b2015594b4759c2e04c2"
-        },
-        {
-          "home_repo": "AISynbioPipeline",
-          "home_path": "/Users/chenry/Dropbox/Projects/AISynbioPipeline/.claude/commands/emailassistant-ops.md",
-          "manifest_hash": "fbc84704da0b56a793a0bb829e0837aeb2f3c41712a1b2015594b4759c2e04c2"
-        },
-        {
-          "home_repo": "ANMENotebooks",
-          "home_path": "/Users/chenry/Dropbox/Projects/ANMENotebooks/.claude/commands/emailassistant-ops.md",
-          "manifest_hash": "fbc84704da0b56a793a0bb829e0837aeb2f3c41712a1b2015594b4759c2e04c2"
-        },
-        {
-          "home_repo": "BERDLTablesPrototype",
-          "home_path": "/Users/chenry/Dropbox/Projects/BERDLTablesPrototype/.claude/commands/emailassistant-ops.md",
-          "manifest_hash": "fbc84704da0b56a793a0bb829e0837aeb2f3c41712a1b2015594b4759c2e04c2"
-        },
-        {
-          "home_repo": "BVBRCHackathon",
-          "home_path": "/Users/chenry/Dropbox/Projects/BVBRCHackathon/.claude/commands/emailassistant-ops.md",
-          "manifest_hash": "fbc84704da0b56a793a0bb829e0837aeb2f3c41712a1b2015594b4759c2e04c2"
-        },
-        {
-          "home_repo": "FitnessDatabaseAnalysis",
-          "home_path": "/Users/chenry/Dropbox/Projects/FitnessDatabaseAnalysis/.claude/commands/emailassistant-ops.md",
-          "manifest_hash": "fbc84704da0b56a793a0bb829e0837aeb2f3c41712a1b2015594b4759c2e04c2"
-        },
-        {
-          "home_repo": "PangenomeAnalysis",
-          "home_path": "/Users/chenry/Dropbox/Projects/PangenomeAnalysis/.claude/commands/emailassistant-ops.md",
-          "manifest_hash": "fbc84704da0b56a793a0bb829e0837aeb2f3c41712a1b2015594b4759c2e04c2"
-        }
-      ]
-    },
-    "fbapkg-expert": {
-      "name": "fbapkg-expert",
-      "description": "FBA Packages Expert",
-      "home_repo": "ADP1Notebooks",
-      "home_path": "/Users/chenry/Dropbox/Projects/ADP1Notebooks/.claude/commands/fbapkg-expert.md",
-      "scope": "domain",
-      "domain": "adp1notebooks",
-      "manifest_hash": "96711f842f356896454cfe0032381a5bc829798c941b67705f10253570bf5888",
-      "retired": false,
-      "conflict": true,
-      "deploys_to_machines": [],
-      "deploys_to_repos": [],
-      "last_deploy": {},
-      "conflict_alternates": [
-        {
-          "home_repo": "AIOrchestrator",
-          "home_path": "/Users/chenry/Dropbox/Projects/AIOrchestrator/.claude/commands/fbapkg-expert.md",
-          "manifest_hash": "96711f842f356896454cfe0032381a5bc829798c941b67705f10253570bf5888"
-        },
-        {
-          "home_repo": "AISynbioPipeline",
-          "home_path": "/Users/chenry/Dropbox/Projects/AISynbioPipeline/.claude/commands/fbapkg-expert.md",
-          "manifest_hash": "96711f842f356896454cfe0032381a5bc829798c941b67705f10253570bf5888"
-        },
-        {
-          "home_repo": "ANMENotebooks",
-          "home_path": "/Users/chenry/Dropbox/Projects/ANMENotebooks/.claude/commands/fbapkg-expert.md",
-          "manifest_hash": "96711f842f356896454cfe0032381a5bc829798c941b67705f10253570bf5888"
-        },
-        {
-          "home_repo": "BERDLTablesPrototype",
-          "home_path": "/Users/chenry/Dropbox/Projects/BERDLTablesPrototype/.claude/commands/fbapkg-expert.md",
-          "manifest_hash": "96711f842f356896454cfe0032381a5bc829798c941b67705f10253570bf5888"
-        },
-        {
-          "home_repo": "BVBRCHackathon",
-          "home_path": "/Users/chenry/Dropbox/Projects/BVBRCHackathon/.claude/commands/fbapkg-expert.md",
-          "manifest_hash": "96711f842f356896454cfe0032381a5bc829798c941b67705f10253570bf5888"
-        },
-        {
-          "home_repo": "FitnessDatabaseAnalysis",
-          "home_path": "/Users/chenry/Dropbox/Projects/FitnessDatabaseAnalysis/.claude/commands/fbapkg-expert.md",
-          "manifest_hash": "96711f842f356896454cfe0032381a5bc829798c941b67705f10253570bf5888"
-        },
-        {
-          "home_repo": "ModelSEEDpy",
-          "home_path": "/Users/chenry/Dropbox/Projects/ModelSEEDpy/.claude/commands/fbapkg-expert.md",
-          "manifest_hash": "b78ac2669654b5ce954c27bfa05661f96681e00659c4ceda76c5a29143906934"
-        },
-        {
-          "home_repo": "PangenomeAnalysis",
-          "home_path": "/Users/chenry/Dropbox/Projects/PangenomeAnalysis/.claude/commands/fbapkg-expert.md",
-          "manifest_hash": "96711f842f356896454cfe0032381a5bc829798c941b67705f10253570bf5888"
-        }
-      ]
-    },
-    "free-agent": {
-      "name": "free-agent",
-      "description": "Command: free-agent",
-      "home_repo": "ADP1Notebooks",
-      "home_path": "/Users/chenry/Dropbox/Projects/ADP1Notebooks/.claude/commands/free-agent.md",
-      "scope": "domain",
-      "domain": "adp1notebooks",
-      "manifest_hash": "2b887ada33c45b0e78863476853cd1f7496ca61e8da4e5269863e7268332e876",
-      "retired": false,
-      "conflict": false,
-      "deploys_to_machines": [],
-      "deploys_to_repos": [],
-      "last_deploy": {}
-    },
-    "generate-tasks": {
-      "name": "generate-tasks",
-      "description": "Command: generate-tasks",
-      "home_repo": "ADP1Notebooks",
-      "home_path": "/Users/chenry/Dropbox/Projects/ADP1Notebooks/.claude/commands/generate-tasks.md",
-      "scope": "domain",
-      "domain": "adp1notebooks",
-      "manifest_hash": "d4e6aab269d59f7b99a9a713bd6d5075f4483b715530867bda5f8c08a51d4acd",
-      "retired": false,
-      "conflict": false,
-      "deploys_to_machines": [],
-      "deploys_to_repos": [],
-      "last_deploy": {}
-    },
-    "kb-sdk-dev": {
-      "name": "kb-sdk-dev",
-      "description": "KBase SDK Development Expert",
-      "home_repo": "ADP1Notebooks",
-      "home_path": "/Users/chenry/Dropbox/Projects/ADP1Notebooks/.claude/commands/kb-sdk-dev.md",
-      "scope": "domain",
-      "domain": "adp1notebooks",
-      "manifest_hash": "c3e37d1fa84fe04fac3b456ab4419f38c366959154b1d316dee41bfb55a2f03e",
-      "retired": false,
-      "conflict": true,
-      "deploys_to_machines": [],
-      "deploys_to_repos": [],
-      "last_deploy": {},
-      "conflict_alternates": [
-        {
-          "home_repo": "AIOrchestrator",
-          "home_path": "/Users/chenry/Dropbox/Projects/AIOrchestrator/.claude/commands/kb-sdk-dev.md",
-          "manifest_hash": "c3e37d1fa84fe04fac3b456ab4419f38c366959154b1d316dee41bfb55a2f03e"
-        },
-        {
-          "home_repo": "AISynbioPipeline",
-          "home_path": "/Users/chenry/Dropbox/Projects/AISynbioPipeline/.claude/commands/kb-sdk-dev.md",
-          "manifest_hash": "c3e37d1fa84fe04fac3b456ab4419f38c366959154b1d316dee41bfb55a2f03e"
-        },
-        {
-          "home_repo": "ANMENotebooks",
-          "home_path": "/Users/chenry/Dropbox/Projects/ANMENotebooks/.claude/commands/kb-sdk-dev.md",
-          "manifest_hash": "c3e37d1fa84fe04fac3b456ab4419f38c366959154b1d316dee41bfb55a2f03e"
-        },
-        {
-          "home_repo": "BERDLTablesPrototype",
-          "home_path": "/Users/chenry/Dropbox/Projects/BERDLTablesPrototype/.claude/commands/kb-sdk-dev.md",
-          "manifest_hash": "c3e37d1fa84fe04fac3b456ab4419f38c366959154b1d316dee41bfb55a2f03e"
-        },
-        {
-          "home_repo": "BVBRCHackathon",
-          "home_path": "/Users/chenry/Dropbox/Projects/BVBRCHackathon/.claude/commands/kb-sdk-dev.md",
-          "manifest_hash": "c3e37d1fa84fe04fac3b456ab4419f38c366959154b1d316dee41bfb55a2f03e"
-        },
-        {
-          "home_repo": "FitnessDatabaseAnalysis",
-          "home_path": "/Users/chenry/Dropbox/Projects/FitnessDatabaseAnalysis/.claude/commands/kb-sdk-dev.md",
-          "manifest_hash": "c3e37d1fa84fe04fac3b456ab4419f38c366959154b1d316dee41bfb55a2f03e"
-        },
-        {
-          "home_repo": "KBUtilLib",
-          "home_path": "/Users/chenry/Dropbox/Projects/KBUtilLib/.claude/commands/kb-sdk-dev.md",
-          "manifest_hash": "683fcdd4074ff5f159456f88690854a001cee64f99277c7c36dab26e7340d2c2"
-        },
-        {
-          "home_repo": "PangenomeAnalysis",
-          "home_path": "/Users/chenry/Dropbox/Projects/PangenomeAnalysis/.claude/commands/kb-sdk-dev.md",
-          "manifest_hash": "c3e37d1fa84fe04fac3b456ab4419f38c366959154b1d316dee41bfb55a2f03e"
-        }
-      ]
-    },
-    "kbdatalake-dashboard-dev": {
-      "name": "KBDatalakeDashboard Development",
-      "description": "Development guide for the KBase DataTables Viewer dashboard",
-      "home_repo": "KBDatalakeDashboard",
-      "home_path": "/Users/chenry/Dropbox/Projects/KBDatalakeDashboard/.claude/commands/kbdatalake-dashboard-dev.md",
-      "scope": "domain",
-      "domain": "kbdatalakedashboard",
-      "manifest_hash": "b2dc4c6adc141f5e28a9a03da71dbfbff6b81c2dfb43f3bf84f28d7755f041e2",
-      "retired": false,
-      "conflict": true,
-      "deploys_to_machines": [],
-      "deploys_to_repos": [],
-      "last_deploy": {},
-      "conflict_alternates": [
-        {
-          "home_repo": "ADP1Notebooks",
-          "home_path": "/Users/chenry/Dropbox/Projects/ADP1Notebooks/.claude/commands/kbdatalake-dashboard-dev.md",
-          "manifest_hash": "ac7a0fc177ce043d0a0c9b51560b818627097f8f69efa3d09188edb038d49193"
-        },
-        {
-          "home_repo": "AIOrchestrator",
-          "home_path": "/Users/chenry/Dropbox/Projects/AIOrchestrator/.claude/commands/kbdatalake-dashboard-dev.md",
-          "manifest_hash": "ac7a0fc177ce043d0a0c9b51560b818627097f8f69efa3d09188edb038d49193"
-        },
-        {
-          "home_repo": "AISynbioPipeline",
-          "home_path": "/Users/chenry/Dropbox/Projects/AISynbioPipeline/.claude/commands/kbdatalake-dashboard-dev.md",
-          "manifest_hash": "ac7a0fc177ce043d0a0c9b51560b818627097f8f69efa3d09188edb038d49193"
-        },
-        {
-          "home_repo": "ANMENotebooks",
-          "home_path": "/Users/chenry/Dropbox/Projects/ANMENotebooks/.claude/commands/kbdatalake-dashboard-dev.md",
-          "manifest_hash": "ac7a0fc177ce043d0a0c9b51560b818627097f8f69efa3d09188edb038d49193"
-        },
-        {
-          "home_repo": "BERDLTablesPrototype",
-          "home_path": "/Users/chenry/Dropbox/Projects/BERDLTablesPrototype/.claude/commands/kbdatalake-dashboard-dev.md",
-          "manifest_hash": "ac7a0fc177ce043d0a0c9b51560b818627097f8f69efa3d09188edb038d49193"
-        },
-        {
-          "home_repo": "BVBRCHackathon",
-          "home_path": "/Users/chenry/Dropbox/Projects/BVBRCHackathon/.claude/commands/kbdatalake-dashboard-dev.md",
-          "manifest_hash": "ac7a0fc177ce043d0a0c9b51560b818627097f8f69efa3d09188edb038d49193"
-        },
-        {
-          "home_repo": "FitnessDatabaseAnalysis",
-          "home_path": "/Users/chenry/Dropbox/Projects/FitnessDatabaseAnalysis/.claude/commands/kbdatalake-dashboard-dev.md",
-          "manifest_hash": "ac7a0fc177ce043d0a0c9b51560b818627097f8f69efa3d09188edb038d49193"
-        },
-        {
-          "home_repo": "PangenomeAnalysis",
-          "home_path": "/Users/chenry/Dropbox/Projects/PangenomeAnalysis/.claude/commands/kbdatalake-dashboard-dev.md",
-          "manifest_hash": "ac7a0fc177ce043d0a0c9b51560b818627097f8f69efa3d09188edb038d49193"
-        }
-      ]
-    },
-    "kbdatalakeapps-dev": {
-      "name": "KBDatalakeApps Development",
-      "description": "Development guide for KBase data lake pipeline applications",
-      "home_repo": "KBDatalakeApps",
-      "home_path": "/Users/chenry/Dropbox/Projects/KBDatalakeApps/.claude/commands/kbdatalakeapps-dev.md",
-      "scope": "domain",
-      "domain": "kbdatalakeapps",
-      "manifest_hash": "d90cd1ebb42d7a317207c28c15224a707f55257ace4b27d6846d3cff2e0447ff",
-      "retired": false,
-      "conflict": true,
-      "deploys_to_machines": [],
-      "deploys_to_repos": [],
-      "last_deploy": {},
-      "conflict_alternates": [
-        {
-          "home_repo": "ADP1Notebooks",
-          "home_path": "/Users/chenry/Dropbox/Projects/ADP1Notebooks/.claude/commands/kbdatalakeapps-dev.md",
-          "manifest_hash": "6e26c72f824006d1a7adc3520fc55af9c889ed3ada1718678ac96180049f3a73"
-        },
-        {
-          "home_repo": "AIOrchestrator",
-          "home_path": "/Users/chenry/Dropbox/Projects/AIOrchestrator/.claude/commands/kbdatalakeapps-dev.md",
-          "manifest_hash": "6e26c72f824006d1a7adc3520fc55af9c889ed3ada1718678ac96180049f3a73"
-        },
-        {
-          "home_repo": "AISynbioPipeline",
-          "home_path": "/Users/chenry/Dropbox/Projects/AISynbioPipeline/.claude/commands/kbdatalakeapps-dev.md",
-          "manifest_hash": "6e26c72f824006d1a7adc3520fc55af9c889ed3ada1718678ac96180049f3a73"
-        },
-        {
-          "home_repo": "ANMENotebooks",
-          "home_path": "/Users/chenry/Dropbox/Projects/ANMENotebooks/.claude/commands/kbdatalakeapps-dev.md",
-          "manifest_hash": "6e26c72f824006d1a7adc3520fc55af9c889ed3ada1718678ac96180049f3a73"
-        },
-        {
-          "home_repo": "BERDLTablesPrototype",
-          "home_path": "/Users/chenry/Dropbox/Projects/BERDLTablesPrototype/.claude/commands/kbdatalakeapps-dev.md",
-          "manifest_hash": "6e26c72f824006d1a7adc3520fc55af9c889ed3ada1718678ac96180049f3a73"
-        },
-        {
-          "home_repo": "BVBRCHackathon",
-          "home_path": "/Users/chenry/Dropbox/Projects/BVBRCHackathon/.claude/commands/kbdatalakeapps-dev.md",
-          "manifest_hash": "6e26c72f824006d1a7adc3520fc55af9c889ed3ada1718678ac96180049f3a73"
-        },
-        {
-          "home_repo": "FitnessDatabaseAnalysis",
-          "home_path": "/Users/chenry/Dropbox/Projects/FitnessDatabaseAnalysis/.claude/commands/kbdatalakeapps-dev.md",
-          "manifest_hash": "6e26c72f824006d1a7adc3520fc55af9c889ed3ada1718678ac96180049f3a73"
-        },
-        {
-          "home_repo": "PangenomeAnalysis",
-          "home_path": "/Users/chenry/Dropbox/Projects/PangenomeAnalysis/.claude/commands/kbdatalakeapps-dev.md",
-          "manifest_hash": "6e26c72f824006d1a7adc3520fc55af9c889ed3ada1718678ac96180049f3a73"
-        }
-      ]
-    },
-    "kbutillib-dev": {
-      "name": "KBUtilLib Development",
-      "description": "Development guide for KBUtilLib utility classes and modules",
-      "home_repo": "KBUtilLib",
-      "home_path": "/Users/chenry/Dropbox/Projects/KBUtilLib/.claude/commands/kbutillib-dev.md",
-      "scope": "domain",
-      "domain": "kbutillib",
-      "manifest_hash": "0896656af80d0ae0c8bffb690c1266835713a43d218564eeab9234dfd4a68799",
-      "retired": false,
-      "conflict": true,
-      "deploys_to_machines": [],
-      "deploys_to_repos": [],
-      "last_deploy": {},
-      "conflict_alternates": [
-        {
-          "home_repo": "ADP1Notebooks",
-          "home_path": "/Users/chenry/Dropbox/Projects/ADP1Notebooks/.claude/commands/kbutillib-dev.md",
-          "manifest_hash": "233bc16d2aa520406c900fb3a105eb2f38d4a52642a3b3c240c44968f4d7050f"
-        },
-        {
-          "home_repo": "AIOrchestrator",
-          "home_path": "/Users/chenry/Dropbox/Projects/AIOrchestrator/.claude/commands/kbutillib-dev.md",
-          "manifest_hash": "233bc16d2aa520406c900fb3a105eb2f38d4a52642a3b3c240c44968f4d7050f"
-        },
-        {
-          "home_repo": "AISynbioPipeline",
-          "home_path": "/Users/chenry/Dropbox/Projects/AISynbioPipeline/.claude/commands/kbutillib-dev.md",
-          "manifest_hash": "233bc16d2aa520406c900fb3a105eb2f38d4a52642a3b3c240c44968f4d7050f"
-        },
-        {
-          "home_repo": "ANMENotebooks",
-          "home_path": "/Users/chenry/Dropbox/Projects/ANMENotebooks/.claude/commands/kbutillib-dev.md",
-          "manifest_hash": "233bc16d2aa520406c900fb3a105eb2f38d4a52642a3b3c240c44968f4d7050f"
-        },
-        {
-          "home_repo": "BERDLTablesPrototype",
-          "home_path": "/Users/chenry/Dropbox/Projects/BERDLTablesPrototype/.claude/commands/kbutillib-dev.md",
-          "manifest_hash": "233bc16d2aa520406c900fb3a105eb2f38d4a52642a3b3c240c44968f4d7050f"
-        },
-        {
-          "home_repo": "BVBRCHackathon",
-          "home_path": "/Users/chenry/Dropbox/Projects/BVBRCHackathon/.claude/commands/kbutillib-dev.md",
-          "manifest_hash": "233bc16d2aa520406c900fb3a105eb2f38d4a52642a3b3c240c44968f4d7050f"
-        },
-        {
-          "home_repo": "FitnessDatabaseAnalysis",
-          "home_path": "/Users/chenry/Dropbox/Projects/FitnessDatabaseAnalysis/.claude/commands/kbutillib-dev.md",
-          "manifest_hash": "233bc16d2aa520406c900fb3a105eb2f38d4a52642a3b3c240c44968f4d7050f"
-        },
-        {
-          "home_repo": "PangenomeAnalysis",
-          "home_path": "/Users/chenry/Dropbox/Projects/PangenomeAnalysis/.claude/commands/kbutillib-dev.md",
-          "manifest_hash": "233bc16d2aa520406c900fb3a105eb2f38d4a52642a3b3c240c44968f4d7050f"
-        }
-      ]
-    },
-    "kbutillib-expert": {
-      "name": "KBUtilLib Expert",
-      "description": "Expert on KBUtilLib composable utility framework for KBase/ModelSEED",
-      "home_repo": "KBUtilLib",
-      "home_path": "/Users/chenry/Dropbox/Projects/KBUtilLib/.claude/commands/kbutillib-expert.md",
-      "scope": "domain",
-      "domain": "kbutillib",
-      "manifest_hash": "96dd4cce71f9e697cbcf2008d5481bf95e224826b0cad8159a760d0abc0f849b",
-      "retired": false,
-      "conflict": true,
-      "deploys_to_machines": [],
-      "deploys_to_repos": [],
-      "last_deploy": {},
-      "conflict_alternates": [
-        {
-          "home_repo": "ADP1Notebooks",
-          "home_path": "/Users/chenry/Dropbox/Projects/ADP1Notebooks/.claude/commands/kbutillib-expert.md",
-          "manifest_hash": "aba213b97dc99060a20b1228d8471b4720301bfa7c2bed770082b6955efbcd4e"
-        },
-        {
-          "home_repo": "AIOrchestrator",
-          "home_path": "/Users/chenry/Dropbox/Projects/AIOrchestrator/.claude/commands/kbutillib-expert.md",
-          "manifest_hash": "aba213b97dc99060a20b1228d8471b4720301bfa7c2bed770082b6955efbcd4e"
-        },
-        {
-          "home_repo": "AISynbioPipeline",
-          "home_path": "/Users/chenry/Dropbox/Projects/AISynbioPipeline/.claude/commands/kbutillib-expert.md",
-          "manifest_hash": "aba213b97dc99060a20b1228d8471b4720301bfa7c2bed770082b6955efbcd4e"
-        },
-        {
-          "home_repo": "ANMENotebooks",
-          "home_path": "/Users/chenry/Dropbox/Projects/ANMENotebooks/.claude/commands/kbutillib-expert.md",
-          "manifest_hash": "aba213b97dc99060a20b1228d8471b4720301bfa7c2bed770082b6955efbcd4e"
-        },
-        {
-          "home_repo": "BERDLTablesPrototype",
-          "home_path": "/Users/chenry/Dropbox/Projects/BERDLTablesPrototype/.claude/commands/kbutillib-expert.md",
-          "manifest_hash": "aba213b97dc99060a20b1228d8471b4720301bfa7c2bed770082b6955efbcd4e"
-        },
-        {
-          "home_repo": "BVBRCHackathon",
-          "home_path": "/Users/chenry/Dropbox/Projects/BVBRCHackathon/.claude/commands/kbutillib-expert.md",
-          "manifest_hash": "aba213b97dc99060a20b1228d8471b4720301bfa7c2bed770082b6955efbcd4e"
-        },
-        {
-          "home_repo": "FitnessDatabaseAnalysis",
-          "home_path": "/Users/chenry/Dropbox/Projects/FitnessDatabaseAnalysis/.claude/commands/kbutillib-expert.md",
-          "manifest_hash": "aba213b97dc99060a20b1228d8471b4720301bfa7c2bed770082b6955efbcd4e"
-        },
-        {
-          "home_repo": "PangenomeAnalysis",
-          "home_path": "/Users/chenry/Dropbox/Projects/PangenomeAnalysis/.claude/commands/kbutillib-expert.md",
-          "manifest_hash": "aba213b97dc99060a20b1228d8471b4720301bfa7c2bed770082b6955efbcd4e"
-        }
-      ]
-    },
-    "modelseeddb-expert": {
-      "name": "modelseeddb-expert",
-      "description": "ModelSEED Database Expert",
-      "home_repo": "ADP1Notebooks",
-      "home_path": "/Users/chenry/Dropbox/Projects/ADP1Notebooks/.claude/commands/modelseeddb-expert.md",
-      "scope": "domain",
-      "domain": "adp1notebooks",
-      "manifest_hash": "9c383529168d88af4c69a4d127949e69abf8b6afc986d08b9730fa91679706f8",
-      "retired": false,
-      "conflict": true,
-      "deploys_to_machines": [],
-      "deploys_to_repos": [],
-      "last_deploy": {},
-      "conflict_alternates": [
-        {
-          "home_repo": "AIOrchestrator",
-          "home_path": "/Users/chenry/Dropbox/Projects/AIOrchestrator/.claude/commands/modelseeddb-expert.md",
-          "manifest_hash": "9c383529168d88af4c69a4d127949e69abf8b6afc986d08b9730fa91679706f8"
-        },
-        {
-          "home_repo": "AISynbioPipeline",
-          "home_path": "/Users/chenry/Dropbox/Projects/AISynbioPipeline/.claude/commands/modelseeddb-expert.md",
-          "manifest_hash": "9c383529168d88af4c69a4d127949e69abf8b6afc986d08b9730fa91679706f8"
-        },
-        {
-          "home_repo": "ANMENotebooks",
-          "home_path": "/Users/chenry/Dropbox/Projects/ANMENotebooks/.claude/commands/modelseeddb-expert.md",
-          "manifest_hash": "9c383529168d88af4c69a4d127949e69abf8b6afc986d08b9730fa91679706f8"
-        },
-        {
-          "home_repo": "BERDLTablesPrototype",
-          "home_path": "/Users/chenry/Dropbox/Projects/BERDLTablesPrototype/.claude/commands/modelseeddb-expert.md",
-          "manifest_hash": "9c383529168d88af4c69a4d127949e69abf8b6afc986d08b9730fa91679706f8"
-        },
-        {
-          "home_repo": "BVBRCHackathon",
-          "home_path": "/Users/chenry/Dropbox/Projects/BVBRCHackathon/.claude/commands/modelseeddb-expert.md",
-          "manifest_hash": "9c383529168d88af4c69a4d127949e69abf8b6afc986d08b9730fa91679706f8"
-        },
-        {
-          "home_repo": "FitnessDatabaseAnalysis",
-          "home_path": "/Users/chenry/Dropbox/Projects/FitnessDatabaseAnalysis/.claude/commands/modelseeddb-expert.md",
-          "manifest_hash": "9c383529168d88af4c69a4d127949e69abf8b6afc986d08b9730fa91679706f8"
-        },
-        {
-          "home_repo": "ModelSEEDDatabase",
-          "home_path": "/Users/chenry/Dropbox/Projects/ModelSEEDDatabase/.claude/commands/modelseeddb-expert.md",
-          "manifest_hash": "db68181d9fefaaad39722854a67695e3e7891799ecb28dd5442b22dbfa175302"
-        },
-        {
-          "home_repo": "PangenomeAnalysis",
-          "home_path": "/Users/chenry/Dropbox/Projects/PangenomeAnalysis/.claude/commands/modelseeddb-expert.md",
-          "manifest_hash": "9c383529168d88af4c69a4d127949e69abf8b6afc986d08b9730fa91679706f8"
-        }
-      ]
-    },
-    "modelseedpy-expert": {
-      "name": "ModelSEEDpy Expert",
-      "description": "Expert on ModelSEEDpy for metabolic modeling and flux balance analysis",
-      "home_repo": "ModelSEEDpy",
-      "home_path": "/Users/chenry/Dropbox/Projects/ModelSEEDpy/.claude/commands/modelseedpy-expert.md",
-      "scope": "domain",
-      "domain": "modelseedpy",
-      "manifest_hash": "ffc037b2c0a6443bb7640c21948d0f36a24f7e73eda0c1258f50ced2e09362bb",
-      "retired": false,
-      "conflict": true,
-      "deploys_to_machines": [],
-      "deploys_to_repos": [],
-      "last_deploy": {},
-      "conflict_alternates": [
-        {
-          "home_repo": "ADP1Notebooks",
-          "home_path": "/Users/chenry/Dropbox/Projects/ADP1Notebooks/.claude/commands/modelseedpy-expert.md",
-          "manifest_hash": "c89e5117984b4ac214f7413cfa0c2bca1e430110b6786d9f70291aabd0bbb798"
-        },
-        {
-          "home_repo": "AIOrchestrator",
-          "home_path": "/Users/chenry/Dropbox/Projects/AIOrchestrator/.claude/commands/modelseedpy-expert.md",
-          "manifest_hash": "c89e5117984b4ac214f7413cfa0c2bca1e430110b6786d9f70291aabd0bbb798"
-        },
-        {
-          "home_repo": "AISynbioPipeline",
-          "home_path": "/Users/chenry/Dropbox/Projects/AISynbioPipeline/.claude/commands/modelseedpy-expert.md",
-          "manifest_hash": "c89e5117984b4ac214f7413cfa0c2bca1e430110b6786d9f70291aabd0bbb798"
-        },
-        {
-          "home_repo": "ANMENotebooks",
-          "home_path": "/Users/chenry/Dropbox/Projects/ANMENotebooks/.claude/commands/modelseedpy-expert.md",
-          "manifest_hash": "c89e5117984b4ac214f7413cfa0c2bca1e430110b6786d9f70291aabd0bbb798"
-        },
-        {
-          "home_repo": "BERDLTablesPrototype",
-          "home_path": "/Users/chenry/Dropbox/Projects/BERDLTablesPrototype/.claude/commands/modelseedpy-expert.md",
-          "manifest_hash": "c89e5117984b4ac214f7413cfa0c2bca1e430110b6786d9f70291aabd0bbb798"
-        },
-        {
-          "home_repo": "BVBRCHackathon",
-          "home_path": "/Users/chenry/Dropbox/Projects/BVBRCHackathon/.claude/commands/modelseedpy-expert.md",
-          "manifest_hash": "c89e5117984b4ac214f7413cfa0c2bca1e430110b6786d9f70291aabd0bbb798"
-        },
-        {
-          "home_repo": "FitnessDatabaseAnalysis",
-          "home_path": "/Users/chenry/Dropbox/Projects/FitnessDatabaseAnalysis/.claude/commands/modelseedpy-expert.md",
-          "manifest_hash": "c89e5117984b4ac214f7413cfa0c2bca1e430110b6786d9f70291aabd0bbb798"
-        },
-        {
-          "home_repo": "PangenomeAnalysis",
-          "home_path": "/Users/chenry/Dropbox/Projects/PangenomeAnalysis/.claude/commands/modelseedpy-expert.md",
-          "manifest_hash": "c89e5117984b4ac214f7413cfa0c2bca1e430110b6786d9f70291aabd0bbb798"
-        }
-      ]
-    },
-    "msmodelutl-expert": {
-      "name": "msmodelutl-expert",
-      "description": "MSModelUtil Expert",
-      "home_repo": "ADP1Notebooks",
-      "home_path": "/Users/chenry/Dropbox/Projects/ADP1Notebooks/.claude/commands/msmodelutl-expert.md",
-      "scope": "domain",
-      "domain": "adp1notebooks",
-      "manifest_hash": "6d37b612216c1b679903e797c7388be03a1d78e808bfd90f936c3291d001b4d9",
-      "retired": false,
-      "conflict": true,
-      "deploys_to_machines": [],
-      "deploys_to_repos": [],
-      "last_deploy": {},
-      "conflict_alternates": [
-        {
-          "home_repo": "AIOrchestrator",
-          "home_path": "/Users/chenry/Dropbox/Projects/AIOrchestrator/.claude/commands/msmodelutl-expert.md",
-          "manifest_hash": "6d37b612216c1b679903e797c7388be03a1d78e808bfd90f936c3291d001b4d9"
-        },
-        {
-          "home_repo": "AISynbioPipeline",
-          "home_path": "/Users/chenry/Dropbox/Projects/AISynbioPipeline/.claude/commands/msmodelutl-expert.md",
-          "manifest_hash": "6d37b612216c1b679903e797c7388be03a1d78e808bfd90f936c3291d001b4d9"
-        },
-        {
-          "home_repo": "ANMENotebooks",
-          "home_path": "/Users/chenry/Dropbox/Projects/ANMENotebooks/.claude/commands/msmodelutl-expert.md",
-          "manifest_hash": "6d37b612216c1b679903e797c7388be03a1d78e808bfd90f936c3291d001b4d9"
-        },
-        {
-          "home_repo": "BERDLTablesPrototype",
-          "home_path": "/Users/chenry/Dropbox/Projects/BERDLTablesPrototype/.claude/commands/msmodelutl-expert.md",
-          "manifest_hash": "6d37b612216c1b679903e797c7388be03a1d78e808bfd90f936c3291d001b4d9"
-        },
-        {
-          "home_repo": "BVBRCHackathon",
-          "home_path": "/Users/chenry/Dropbox/Projects/BVBRCHackathon/.claude/commands/msmodelutl-expert.md",
-          "manifest_hash": "6d37b612216c1b679903e797c7388be03a1d78e808bfd90f936c3291d001b4d9"
-        },
-        {
-          "home_repo": "FitnessDatabaseAnalysis",
-          "home_path": "/Users/chenry/Dropbox/Projects/FitnessDatabaseAnalysis/.claude/commands/msmodelutl-expert.md",
-          "manifest_hash": "6d37b612216c1b679903e797c7388be03a1d78e808bfd90f936c3291d001b4d9"
-        },
-        {
-          "home_repo": "KBUtilLib",
-          "home_path": "/Users/chenry/Dropbox/Projects/KBUtilLib/.claude/commands/msmodelutl-expert.md",
-          "manifest_hash": "8b83cc08973ec2ccf0861c729fdf83ecbb570f019abdab3d93490c9d664e8117"
-        },
-        {
-          "home_repo": "PangenomeAnalysis",
-          "home_path": "/Users/chenry/Dropbox/Projects/PangenomeAnalysis/.claude/commands/msmodelutl-expert.md",
-          "manifest_hash": "6d37b612216c1b679903e797c7388be03a1d78e808bfd90f936c3291d001b4d9"
-        }
-      ]
-    },
-    "run_headless": {
-      "name": "run_headless",
-      "description": "Command: run_headless",
-      "home_repo": "ADP1Notebooks",
-      "home_path": "/Users/chenry/Dropbox/Projects/ADP1Notebooks/.claude/commands/run_headless.md",
-      "scope": "domain",
-      "domain": "adp1notebooks",
-      "manifest_hash": "2930fc176be90c034c3969e45be1a9231ae171dcfcc82da06d253c49ae57cdb4",
+      "domain": "agentforge",
+      "manifest_hash": "d8da1bcdf2c175db5729b1ad85244cebfaed2d7b43e04385ef3456ee6abe7962",
       "retired": false,
       "conflict": false,
       "deploys_to_machines": [],
@@ -1347,47 +332,136 @@
       "domain": "agentforge",
       "manifest_hash": "fdf9fddbfe5ec620f55a8eacbf453b3fbbee00ab91e09474eecaaec1f1d4e2d1",
       "retired": false,
-      "conflict": true,
+      "conflict": false,
       "deploys_to_machines": [],
       "deploys_to_repos": [],
-      "last_deploy": {},
-      "conflict_alternates": [
-        {
-          "home_repo": "AIOrchestrator",
-          "home_path": "/Users/chenry/Dropbox/Projects/AIOrchestrator/.claude/commands/worker.md",
-          "manifest_hash": "64d4450ac75a9bb4d18d650a59f2f0608fe9c314122c6d8011c5da0eceb9a551"
-        },
-        {
-          "home_repo": "AISynbioPipeline",
-          "home_path": "/Users/chenry/Dropbox/Projects/AISynbioPipeline/.claude/commands/worker.md",
-          "manifest_hash": "64d4450ac75a9bb4d18d650a59f2f0608fe9c314122c6d8011c5da0eceb9a551"
-        },
-        {
-          "home_repo": "ANMENotebooks",
-          "home_path": "/Users/chenry/Dropbox/Projects/ANMENotebooks/.claude/commands/worker.md",
-          "manifest_hash": "64d4450ac75a9bb4d18d650a59f2f0608fe9c314122c6d8011c5da0eceb9a551"
-        },
-        {
-          "home_repo": "BERDLTablesPrototype",
-          "home_path": "/Users/chenry/Dropbox/Projects/BERDLTablesPrototype/.claude/commands/worker.md",
-          "manifest_hash": "64d4450ac75a9bb4d18d650a59f2f0608fe9c314122c6d8011c5da0eceb9a551"
-        },
-        {
-          "home_repo": "BVBRCHackathon",
-          "home_path": "/Users/chenry/Dropbox/Projects/BVBRCHackathon/.claude/commands/worker.md",
-          "manifest_hash": "64d4450ac75a9bb4d18d650a59f2f0608fe9c314122c6d8011c5da0eceb9a551"
-        },
-        {
-          "home_repo": "FitnessDatabaseAnalysis",
-          "home_path": "/Users/chenry/Dropbox/Projects/FitnessDatabaseAnalysis/.claude/commands/worker.md",
-          "manifest_hash": "64d4450ac75a9bb4d18d650a59f2f0608fe9c314122c6d8011c5da0eceb9a551"
-        },
-        {
-          "home_repo": "PangenomeAnalysis",
-          "home_path": "/Users/chenry/Dropbox/Projects/PangenomeAnalysis/.claude/commands/worker.md",
-          "manifest_hash": "64d4450ac75a9bb4d18d650a59f2f0608fe9c314122c6d8011c5da0eceb9a551"
-        }
-      ]
+      "last_deploy": {}
+    },
+    "kbdatalakeapps-dev": {
+      "name": "KBDatalakeApps Development",
+      "description": "Development guide for KBase data lake pipeline applications",
+      "home_repo": "KBDatalakeApps",
+      "home_path": "/Users/chenry/Dropbox/Projects/KBDatalakeApps/.claude/commands/kbdatalakeapps-dev.md",
+      "scope": "domain",
+      "domain": "kbdatalakeapps",
+      "manifest_hash": "d90cd1ebb42d7a317207c28c15224a707f55257ace4b27d6846d3cff2e0447ff",
+      "retired": false,
+      "conflict": false,
+      "deploys_to_machines": [],
+      "deploys_to_repos": [],
+      "last_deploy": {}
+    },
+    "kbdatalake-dashboard-dev": {
+      "name": "KBDatalakeDashboard Development",
+      "description": "Development guide for the KBase DataTables Viewer dashboard",
+      "home_repo": "KBDatalakeDashboard",
+      "home_path": "/Users/chenry/Dropbox/Projects/KBDatalakeDashboard/.claude/commands/kbdatalake-dashboard-dev.md",
+      "scope": "domain",
+      "domain": "kbdatalakedashboard",
+      "manifest_hash": "b2dc4c6adc141f5e28a9a03da71dbfbff6b81c2dfb43f3bf84f28d7755f041e2",
+      "retired": false,
+      "conflict": false,
+      "deploys_to_machines": [],
+      "deploys_to_repos": [],
+      "last_deploy": {}
+    },
+    "kb-sdk-dev": {
+      "name": "KBase SDK Development",
+      "description": "Guide for building KBase SDK apps with KIDL specs and workspace types",
+      "home_repo": "KBUtilLib",
+      "home_path": "/Users/chenry/Dropbox/Projects/KBUtilLib/.claude/commands/kb-sdk-dev.md",
+      "scope": "domain",
+      "domain": "kbutillib",
+      "manifest_hash": "683fcdd4074ff5f159456f88690854a001cee64f99277c7c36dab26e7340d2c2",
+      "retired": false,
+      "conflict": false,
+      "deploys_to_machines": [],
+      "deploys_to_repos": [],
+      "last_deploy": {}
+    },
+    "kbutillib-dev": {
+      "name": "KBUtilLib Development",
+      "description": "Development guide for KBUtilLib utility classes and modules",
+      "home_repo": "KBUtilLib",
+      "home_path": "/Users/chenry/Dropbox/Projects/KBUtilLib/.claude/commands/kbutillib-dev.md",
+      "scope": "domain",
+      "domain": "kbutillib",
+      "manifest_hash": "0896656af80d0ae0c8bffb690c1266835713a43d218564eeab9234dfd4a68799",
+      "retired": false,
+      "conflict": false,
+      "deploys_to_machines": [],
+      "deploys_to_repos": [],
+      "last_deploy": {}
+    },
+    "kbutillib-expert": {
+      "name": "KBUtilLib Expert",
+      "description": "Expert on KBUtilLib composable utility framework for KBase/ModelSEED",
+      "home_repo": "KBUtilLib",
+      "home_path": "/Users/chenry/Dropbox/Projects/KBUtilLib/.claude/commands/kbutillib-expert.md",
+      "scope": "domain",
+      "domain": "kbutillib",
+      "manifest_hash": "96dd4cce71f9e697cbcf2008d5481bf95e224826b0cad8159a760d0abc0f849b",
+      "retired": false,
+      "conflict": false,
+      "deploys_to_machines": [],
+      "deploys_to_repos": [],
+      "last_deploy": {}
+    },
+    "msmodelutl-expert": {
+      "name": "MSModelUtil Expert",
+      "description": "Expert on MSModelUtil for metabolic model construction and analysis",
+      "home_repo": "KBUtilLib",
+      "home_path": "/Users/chenry/Dropbox/Projects/KBUtilLib/.claude/commands/msmodelutl-expert.md",
+      "scope": "domain",
+      "domain": "kbutillib",
+      "manifest_hash": "8b83cc08973ec2ccf0861c729fdf83ecbb570f019abdab3d93490c9d664e8117",
+      "retired": false,
+      "conflict": false,
+      "deploys_to_machines": [],
+      "deploys_to_repos": [],
+      "last_deploy": {}
+    },
+    "modelseeddb-expert": {
+      "name": "ModelSEED Database Expert",
+      "description": "Expert on ModelSEED biochemistry database and BiochemPy library",
+      "home_repo": "ModelSEEDDatabase",
+      "home_path": "/Users/chenry/Dropbox/Projects/ModelSEEDDatabase/.claude/commands/modelseeddb-expert.md",
+      "scope": "domain",
+      "domain": "modelseeddatabase",
+      "manifest_hash": "db68181d9fefaaad39722854a67695e3e7891799ecb28dd5442b22dbfa175302",
+      "retired": false,
+      "conflict": false,
+      "deploys_to_machines": [],
+      "deploys_to_repos": [],
+      "last_deploy": {}
+    },
+    "fbapkg-expert": {
+      "name": "FBA Packages Expert",
+      "description": "Expert on custom FBA packages for ModelSEEDpy flux balance analysis",
+      "home_repo": "ModelSEEDpy",
+      "home_path": "/Users/chenry/Dropbox/Projects/ModelSEEDpy/.claude/commands/fbapkg-expert.md",
+      "scope": "domain",
+      "domain": "modelseedpy",
+      "manifest_hash": "b78ac2669654b5ce954c27bfa05661f96681e00659c4ceda76c5a29143906934",
+      "retired": false,
+      "conflict": false,
+      "deploys_to_machines": [],
+      "deploys_to_repos": [],
+      "last_deploy": {}
+    },
+    "modelseedpy-expert": {
+      "name": "ModelSEEDpy Expert",
+      "description": "Expert on ModelSEEDpy for metabolic modeling and flux balance analysis",
+      "home_repo": "ModelSEEDpy",
+      "home_path": "/Users/chenry/Dropbox/Projects/ModelSEEDpy/.claude/commands/modelseedpy-expert.md",
+      "scope": "domain",
+      "domain": "modelseedpy",
+      "manifest_hash": "ffc037b2c0a6443bb7640c21948d0f36a24f7e73eda0c1258f50ced2e09362bb",
+      "retired": false,
+      "conflict": false,
+      "deploys_to_machines": [],
+      "deploys_to_repos": [],
+      "last_deploy": {}
     },
     "kbmodelagent": {
       "name": "kbmodelagent",
@@ -1402,8 +476,36 @@
       "deploys_to_machines": [],
       "deploys_to_repos": [],
       "last_deploy": {}
+    },
+    "emailassistant-expert": {
+      "name": "EmailAssistant Expert",
+      "description": "Expert on the EmailAssistant email processing and intelligence system",
+      "home_repo": "EmailAssistant",
+      "home_path": "/Users/chenry/Dropbox/Projects/EmailAssistant/.claude/commands/emailassistant-expert.md",
+      "scope": "domain",
+      "domain": "emailassistant",
+      "manifest_hash": "310f453d944bf4c2904989baec26bca9a691a9b99b34649ca2a3dbb9aaf2fc85",
+      "retired": false,
+      "conflict": false,
+      "deploys_to_machines": [],
+      "deploys_to_repos": [],
+      "last_deploy": {}
+    },
+    "emailassistant-ops": {
+      "name": "EmailAssistant Operations",
+      "description": "Run and manage EmailAssistant batch processing and maintenance",
+      "home_repo": "EmailAssistant",
+      "home_path": "/Users/chenry/Dropbox/Projects/EmailAssistant/.claude/commands/emailassistant-ops.md",
+      "scope": "domain",
+      "domain": "emailassistant",
+      "manifest_hash": "af95ed12fdf9578789588240d8b2e2ec20e637177b82b04a81eb72ecb5950a41",
+      "retired": false,
+      "conflict": false,
+      "deploys_to_machines": [],
+      "deploys_to_repos": [],
+      "last_deploy": {}
     }
   },
   "written_by_machine": "primary-laptop",
-  "written_at": "2026-05-05T04:56:45.781940+00:00"
+  "written_at": "2026-05-05T23:25:36.540773+00:00"
 }
