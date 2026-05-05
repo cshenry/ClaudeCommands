@@ -13,6 +13,7 @@ setup(
     python_requires='>=3.11',
     install_requires=[
         'PyYAML>=6.0',
+        'ruamel.yaml>=0.17',
     ],
     entry_points={
         'console_scripts': [
