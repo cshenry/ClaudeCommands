@@ -11,9 +11,17 @@
       "manifest_hash": "f14eb133d9ab0062874176e44d2eb41460d6fb343102d457962290d653a45449",
       "retired": false,
       "conflict": false,
-      "deploys_to_machines": [],
+      "deploys_to_machines": [
+        "primary-laptop"
+      ],
       "deploys_to_repos": [],
-      "last_deploy": {}
+      "last_deploy": {
+        "primary-laptop": {
+          "hash": "f14eb133d9ab0062874176e44d2eb41460d6fb343102d457962290d653a45449",
+          "ts": "2026-05-05T23:26:34Z",
+          "action": "update"
+        }
+      }
     },
     "create-new-project": {
       "name": "Create New Project",
@@ -165,9 +173,17 @@
       "manifest_hash": "7ee8b786c437eb13bae22e997cf79e845e541b25a1d1ac86d72c2c50c6936131",
       "retired": false,
       "conflict": false,
-      "deploys_to_machines": [],
+      "deploys_to_machines": [
+        "primary-laptop"
+      ],
       "deploys_to_repos": [],
-      "last_deploy": {}
+      "last_deploy": {
+        "primary-laptop": {
+          "hash": "7ee8b786c437eb13bae22e997cf79e845e541b25a1d1ac86d72c2c50c6936131",
+          "ts": "2026-05-05T23:26:34Z",
+          "action": "add"
+        }
+      }
     },
     "ai-registry": {
       "name": "AI Project Registry Manager",
