@@ -1,0 +1,25 @@
+# Systems known to claude-skills.
+# Each entry defines a deployment target for CLAUDE.md tiers and skills.
+# Hardware facts are joined from AIAssistant/state/machines.json at runtime.
+
+systems:
+  primary-laptop:
+    machine_alias: primary-laptop
+    mode: interactive
+    tier2_path: systems/primary-laptop/CLAUDE.md
+    platform: darwin
+    description: Primary interactive development laptop
+
+  email-mac:
+    machine_alias: emailmac
+    mode: headless
+    tier2_path: systems/email-mac/CLAUDE.md
+    platform: darwin
+    description: ANL email capture, DocDB host, worker pool
+
+  h100:
+    machine_alias: h100
+    mode: headless
+    tier2_path: systems/h100/CLAUDE.md
+    platform: linux
+    description: GPU compute server (poplar.cels.anl.gov)

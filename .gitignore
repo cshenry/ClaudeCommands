@@ -34,6 +34,9 @@ yarn-debug.log*
 yarn-error.log*
 # Jupyter
 .ipynb_checkpoints/
+# Skill registry lock
+state/skill_registry.lock
+
 # Temporary files
 *.tmp
 *.bak
