@@ -390,6 +390,28 @@
         }
       }
     },
+    "ai-skills": {
+      "name": "AI Skills Dashboard",
+      "description": "View skill registry, machine sync status, drift, and conflicts; trigger inventory and sync from one place",
+      "home_repo": "AIAssistant",
+      "home_path": "/Users/chenry/Dropbox/Projects/AIAssistant/.claude/commands/ai-skills.md",
+      "scope": "platform",
+      "domain": null,
+      "manifest_hash": "3a5d74bb369aedb75ea4beb77a577c62558bff476fda0ab01d60680544ef89f1",
+      "retired": false,
+      "conflict": false,
+      "deploys_to_machines": [
+        "primary-laptop"
+      ],
+      "deploys_to_repos": [],
+      "last_deploy": {
+        "primary-laptop": {
+          "hash": "3a5d74bb369aedb75ea4beb77a577c62558bff476fda0ab01d60680544ef89f1",
+          "ts": "2026-05-05T04:56:54Z",
+          "action": "add"
+        }
+      }
+    },
     "ai-tasks": {
       "name": "AI Task & Priority Manager",
       "description": "Review, prioritize, and manage action items and tasks",
@@ -1335,5 +1357,5 @@
     }
   },
   "written_by_machine": "primary-laptop",
-  "written_at": "2026-05-05T04:29:04.077673+00:00"
+  "written_at": "2026-05-05T04:56:45.781940+00:00"
 }
