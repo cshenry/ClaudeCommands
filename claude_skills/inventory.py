@@ -161,12 +161,20 @@ def inventory(apply: bool = False, machine: str | None = None) -> dict:
             # Determine scope from frontmatter
             fm_scope_raw = fm.get("scope", "")
             if fm_scope_raw:
-                # Handle "repo:X" scope format -> platform
+                # Handle legacy "repo:X" frontmatter scope format. Migration map:
+                #   repo:AIAssistant     → platform
+                #   repo:ClaudeCommands  → universal
+                #   repo:<other>         → domain
                 if fm_scope_raw.startswith("repo:"):
-                    fm_scope = "platform"
+                    declared_repo = fm_scope_raw.split(":", 1)[1]
+                    if declared_repo == "AIAssistant":
+                        fm_scope = "platform"
+                    elif declared_repo == "ClaudeCommands":
+                        fm_scope = "universal"
+                    else:
+                        fm_scope = "domain"
                     # If found in a repo but declares repo:X for a DIFFERENT repo,
                     # it's a deployed copy — skip it
-                    declared_repo = fm_scope_raw.split(":", 1)[1]
                     if declared_repo != repo_name:
                         continue
                 else:
@@ -213,20 +221,75 @@ def inventory(apply: bool = False, machine: str | None = None) -> dict:
                 discovered[skill_key] = []
             discovered[skill_key].append(entry)
 
-    # Resolve conflicts and build proposed_skills
+    # Resolve conflicts and build proposed_skills.
+    #
+    # When the same skill name appears in multiple homes:
+    #   - If all entries have IDENTICAL manifest_hash, they are deployment
+    #     duplicates from earlier mass-copy. Pick the most-specific home
+    #     (domain > platform > universal). Not a conflict.
+    #   - If hashes differ, the skills have forked — that is a real conflict.
+    #     Mark all entries with conflict=True and keep the first.
+    #
+    # Specificity ordering reflects ownership: a skill that exists in a
+    # specific repo's .claude/commands/ is most likely owned by that repo;
+    # the same name in AIAssistant or ClaudeCommands is a deployed copy.
+    _scope_specificity = {"domain": 0, "platform": 1, "universal": 2}
+
+    def _name_match_score(skill_name: str, home_repo: str) -> int:
+        """Heuristic: 0 if home_repo name appears as a prefix of skill name,
+        1 otherwise. Used as a soft tiebreaker for conflict resolution.
+        Example: kbutillib-expert ↔ KBUtilLib → 0; modelseeddb-expert ↔
+        ModelSEEDDatabase → 0; claude-commands-expert ↔ ClaudeCommands → 0.
+        """
+        sn = skill_name.lower().replace("-", "").replace("_", "")
+        hr = home_repo.lower().replace("-", "").replace("_", "")
+        if hr and (hr in sn or sn.startswith(hr)):
+            return 0
+        return 1
+
     proposed_skills: dict[str, dict] = {}
     conflicts: list[str] = []
+    deploy_dups: list[str] = []  # informational — same-hash duplicates collapsed
 
     for skill_key, entries in discovered.items():
-        if len(entries) > 1:
-            # Conflict: multiple homes claim the same skill name
-            conflicts.append(skill_key)
-            for e in entries:
-                e["conflict"] = True
-            # Use the first entry but mark it as conflicted
+        if len(entries) == 1:
             proposed_skills[skill_key] = entries[0]
+            continue
+
+        hashes = {e["manifest_hash"] for e in entries}
+        if len(hashes) == 1:
+            # Pure deployment duplication — pick by name match, then specificity.
+            entries_sorted = sorted(
+                entries,
+                key=lambda e: (
+                    _name_match_score(skill_key, e["home_repo"]),
+                    _scope_specificity.get(e["scope"], 99),
+                    e["home_repo"].lower(),
+                ),
+            )
+            proposed_skills[skill_key] = entries_sorted[0]
+            deploy_dups.append(skill_key)
         else:
-            proposed_skills[skill_key] = entries[0]
+            # Real conflict: same name, different content in different homes.
+            # Stash the alternate homes on the kept entry so the user can
+            # investigate without re-running discovery.
+            conflicts.append(skill_key)
+            # Prefer name-match first, then most-specific scope, then alpha.
+            entries_sorted = sorted(
+                entries,
+                key=lambda e: (
+                    _name_match_score(skill_key, e["home_repo"]),
+                    _scope_specificity.get(e["scope"], 99),
+                    e["home_repo"].lower(),
+                ),
+            )
+            kept = entries_sorted[0]
+            kept["conflict"] = True
+            kept["conflict_alternates"] = [
+                {"home_repo": e["home_repo"], "home_path": e["home_path"], "manifest_hash": e["manifest_hash"]}
+                for e in entries_sorted[1:]
+            ]
+            proposed_skills[skill_key] = kept
 
     # Preserve deployment state from existing registry
     for skill_key, entry in proposed_skills.items():
@@ -284,6 +347,7 @@ def inventory(apply: bool = False, machine: str | None = None) -> dict:
     return {
         "proposed_skills": proposed_skills,
         "conflicts": conflicts,
+        "deploy_dups": deploy_dups,
         "scope_drifts": scope_drifts,
         "new_skills": new_skills,
         "removed_skills": removed_skills,

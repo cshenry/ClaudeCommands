@@ -75,6 +75,7 @@ def cmd_inventory(args):
 
     proposed = result["proposed_skills"]
     conflicts = result["conflicts"]
+    deploy_dups = result.get("deploy_dups", [])
     scope_drifts = result["scope_drifts"]
     new_skills = result["new_skills"]
     removed = result["removed_skills"]
@@ -88,7 +89,8 @@ def cmd_inventory(args):
     print(f"  Unchanged:        {len(unchanged)}")
     print(f"  Hash changed:     {len(hash_changed)}")
     print(f"  Removed:          {len(removed)}")
-    print(f"  Conflicts:        {len(conflicts)}")
+    print(f"  Conflicts:        {len(conflicts)}  (real forks — different content in different homes)")
+    print(f"  Deployment dups:  {len(deploy_dups)}  (same content in multiple homes — collapsed to most-specific)")
     print(f"  Scope drifts:     {len(scope_drifts)}")
 
     # Detailed listings
@@ -110,9 +112,20 @@ def cmd_inventory(args):
             print(f"    - {name}")
 
     if conflicts:
-        print(f"\n  Conflicts (multiple homes):")
+        print(f"\n  Conflicts (different content in different homes — needs investigation):")
         for name in sorted(conflicts):
-            print(f"    ! {name}")
+            entry = proposed[name]
+            kept_home = entry["home_repo"]
+            alts = entry.get("conflict_alternates", [])
+            alt_homes = ", ".join(a["home_repo"] for a in alts) or "(none)"
+            print(f"    ! {name}  kept={kept_home}  also_in={alt_homes}")
+
+    if deploy_dups and not apply:
+        # Only show deploy_dups in dry-run; with --apply they're collapsed silently.
+        print(f"\n  Deployment duplicates (same content, collapsed to most-specific home):")
+        for name in sorted(deploy_dups):
+            entry = proposed[name]
+            print(f"    = {name} → kept in {entry['home_repo']} ({entry['scope']})")
 
     if scope_drifts:
         print(f"\n  Scope drifts:")
