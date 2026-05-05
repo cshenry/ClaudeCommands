@@ -120,7 +120,7 @@ Dedicated ANL email capture (Outlook AppleScript — only machine with ANL email
 
 ## Services & Tools
 - AgentForge: 3 workers
-- DocDB: PostgreSQL+pgvector running locally; queryable directly via local API (fill in URL/port)
+- DocDB: PostgreSQL+pgvector running locally; queryable directly via local API at http://localhost:8000
 - EmailAssistant capture daemon (active, do not interfere)
 - Redis 8.6.2 (port 6379)
 - Docker 29.3.1 via Colima (no Docker Desktop due to licensing)
@@ -192,7 +192,6 @@ Before Phase 1 sync writes these to `~/.claude/CLAUDE.md` on each machine:
 - No facts contradicted by `state/machines.json`
 - No paths referenced that don't exist on the target machine
 - Privacy posture wording matches your actual operational policy
-- DocDB local API URL/port filled in on email-mac
 - User reviews and signs off on each Tier 2 before sync writes it
 
 ## Notes for Phase 1 implementation
