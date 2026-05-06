@@ -44,3 +44,7 @@ state/skill_registry.lock
 *.backup
 # Cursor workspace files
 *.code-workspace
+
+# claude-skills runtime artifacts (populated by `claude-skills sync`)
+.claude/commands/
+.claude/skills/
