@@ -1,6 +1,25 @@
-"""Skill inventory operations — walk known skill homes and reconcile with registry."""
+"""Skill inventory operations — walk known skill homes and reconcile with registry.
+
+Skill source-of-truth location (canonical, post-Step-1 pivot):
+
+    <repo>/agent-io/skills/<skill>.md
+    <repo>/agent-io/skills/<skill>/    (optional sibling context dir)
+
+Legacy locations still discovered for backwards compatibility (with a
+one-line deprecation warning written to stderr per skill):
+
+    <repo>/.claude/commands/<skill>.md   (any home repo)
+    <repo>/commands/<skill>.md           (ClaudeCommands universals only)
+
+Discovery order per home repo: ``agent-io/skills/`` wins; if a skill is
+found there AND in a legacy location, the legacy copy is ignored (no
+warning, since the source-of-truth is already correct). The legacy paths
+disappear once ``claude-skills migrate-domain-skills --apply`` runs in
+Step 2 of the convention pivot.
+"""
 
 import json
+import os
 import sys
 import warnings
 from datetime import datetime, timezone
@@ -15,10 +34,39 @@ from claude_skills.registry import load_registry, save_registry
 
 # Paths to key data files
 _REPO_ROOT = Path(__file__).resolve().parent.parent
-_PROJECT_REGISTRY = Path.home() / "Dropbox" / "Projects" / "AIAssistant" / "state" / "project_registry.yaml"
-_AIASSISTANT_COMMANDS = Path.home() / "Dropbox" / "Projects" / "AIAssistant" / ".claude" / "commands"
-_CLAUDECOMMANDS_DIR = _REPO_ROOT / "commands"
+_DEFAULT_PROJECT_REGISTRY = (
+    Path.home() / "Dropbox" / "Projects" / "AIAssistant" / "state" / "project_registry.yaml"
+)
+_PROJECT_REGISTRY_ENV = "CLAUDE_SKILLS_PROJECT_REGISTRY_PATH"
+_AIASSISTANT_ROOT = Path.home() / "Dropbox" / "Projects" / "AIAssistant"
 _USER_COMMANDS = Path.home() / ".claude" / "commands"
+
+
+def _project_registry_path() -> Path:
+    """Resolve project_registry.yaml path, honoring the env override."""
+    override = os.environ.get(_PROJECT_REGISTRY_ENV)
+    if override:
+        return Path(override)
+    return _DEFAULT_PROJECT_REGISTRY
+
+
+# Track which (repo, source_kind) pairs we've already warned about so the
+# deprecation banner is one-line-per-repo-per-source instead of per-skill.
+_DEPRECATION_REPORTED: set[tuple[str, str]] = set()
+
+
+def _warn_legacy_source(repo_name: str, source_kind: str, source_path: Path) -> None:
+    """Emit a one-line deprecation warning to stderr (deduped per repo+kind)."""
+    key = (repo_name, source_kind)
+    if key in _DEPRECATION_REPORTED:
+        return
+    _DEPRECATION_REPORTED.add(key)
+    print(
+        f"  WARNING: {repo_name}: legacy skill source {source_kind} at "
+        f"{source_path} — run `claude-skills migrate-domain-skills --apply` "
+        f"to relocate to agent-io/skills/.",
+        file=sys.stderr,
+    )
 
 
 def _infer_scope_from_home(home_repo: str) -> str:
@@ -31,50 +79,95 @@ def _infer_scope_from_home(home_repo: str) -> str:
 
 
 def _load_project_registry() -> dict:
-    """Load AIAssistant project registry."""
-    if not _PROJECT_REGISTRY.exists():
+    """Load AIAssistant project registry (honors env override for tests)."""
+    path = _project_registry_path()
+    if not path.exists():
         return {}
-    with open(_PROJECT_REGISTRY) as f:
+    with open(path) as f:
         data = yaml.safe_load(f) or {}
     return data.get("projects", {})
+
+
+def _resolve_repo_path_with_ancestors(project_id: str, projects: dict) -> str | None:
+    """Walk parent chain to find inherited ``repo_path``."""
+    visited: set[str] = set()
+    pid = project_id
+    while pid and pid not in visited:
+        visited.add(pid)
+        entry = projects.get(pid, {}) or {}
+        rp = entry.get("repo_path")
+        if rp:
+            return rp
+        pid = entry.get("parent")
+    return None
+
+
+def _candidate_skill_dirs(repo_root: Path, repo_name: str) -> list[tuple[Path, str]]:
+    """Return the ordered list of (skills_dir, source_kind) for a home repo.
+
+    ``source_kind`` values:
+      - "agent-io/skills"     canonical
+      - ".claude/commands"    legacy (any repo)
+      - "commands"            legacy (ClaudeCommands universals only)
+
+    Order matters: callers walk these in order and skip a skill_key once
+    it's been claimed by an earlier (higher-priority) directory.
+    """
+    out: list[tuple[Path, str]] = []
+    primary = repo_root / "agent-io" / "skills"
+    if primary.is_dir():
+        out.append((primary, "agent-io/skills"))
+    legacy_claude = repo_root / ".claude" / "commands"
+    if legacy_claude.is_dir():
+        out.append((legacy_claude, ".claude/commands"))
+    if repo_name == "ClaudeCommands":
+        legacy_top = repo_root / "commands"
+        if legacy_top.is_dir():
+            out.append((legacy_top, "commands"))
+    return out
 
 
 def _get_home_repos() -> list[tuple[str, Path, str]]:
     """Get all home repos to scan.
 
-    Returns list of (repo_name, commands_dir_path, scope).
+    Returns list of (repo_name, repo_root, scope). The actual skill dirs
+    are computed per-repo via ``_candidate_skill_dirs``.
     """
-    homes = []
+    homes: list[tuple[str, Path, str]] = []
 
-    # 1. ClaudeCommands/commands/ -> universal
-    if _CLAUDECOMMANDS_DIR.is_dir():
-        homes.append(("ClaudeCommands", _CLAUDECOMMANDS_DIR, "universal"))
+    # 1. ClaudeCommands -> universal (the repo this CLI lives in)
+    homes.append(("ClaudeCommands", _REPO_ROOT, "universal"))
 
-    # 2. AIAssistant/.claude/commands/ -> platform
-    if _AIASSISTANT_COMMANDS.is_dir():
-        homes.append(("AIAssistant", _AIASSISTANT_COMMANDS, "platform"))
+    # 2. AIAssistant -> platform
+    if _AIASSISTANT_ROOT.is_dir():
+        homes.append(("AIAssistant", _AIASSISTANT_ROOT, "platform"))
 
-    # 3. Every project in registry with repo_path -> domain
+    # 3. Every project in the registry that has a repo_path -> domain.
     projects = _load_project_registry()
-    for project_id, info in projects.items():
-        repo_path = info.get("repo_path")
-        if not repo_path:
+    seen_repo_names = {"ClaudeCommands", "AIAssistant"}
+    for pid, info in projects.items():
+        name = info.get("name") or pid
+        if name in seen_repo_names:
             continue
-        # Skip ClaudeCommands and AIAssistant (already handled above)
-        name = info.get("name", "")
-        if name in ("ClaudeCommands", "AIAssistant"):
+        rp = _resolve_repo_path_with_ancestors(pid, projects)
+        if not rp:
             continue
-        # Expand ~ in path
-        rp = Path(repo_path).expanduser()
-        commands_dir = rp / ".claude" / "commands"
-        if commands_dir.is_dir():
-            homes.append((name, commands_dir, "domain"))
+        repo_root = Path(rp).expanduser()
+        if not repo_root.is_dir():
+            continue
+        homes.append((name, repo_root, "domain"))
+        seen_repo_names.add(name)
 
     return homes
 
 
 def inventory(apply: bool = False, machine: str | None = None) -> dict:
     """Walk known skill homes and reconcile with state/skill_registry.json.
+
+    Walks each home repo in priority order: ``agent-io/skills/`` first,
+    then ``.claude/commands/`` (deprecated), then ``commands/`` (deprecated,
+    ClaudeCommands only). A skill key claimed by a higher-priority dir is
+    not re-discovered from a lower-priority dir in the same repo.
 
     Returns a dict with keys:
         proposed_skills: dict[name, entry]
@@ -84,7 +177,13 @@ def inventory(apply: bool = False, machine: str | None = None) -> dict:
         removed_skills: list[name]
         unchanged: list[name]
         hash_changed: list[name]
+        repo_deploys_drifts: list[(name, registry_repos, frontmatter_repos)]
+        home_target_warnings: list[(name, home_repo)]
     """
+    # Reset deprecation dedupe for each top-level run so back-to-back
+    # CLI invocations both surface warnings.
+    _DEPRECATION_REPORTED.clear()
+
     current_registry = load_registry()
     existing_skills = current_registry.get("skills", {})
 
@@ -103,78 +202,108 @@ def inventory(apply: bool = False, machine: str | None = None) -> dict:
         if pname:
             _repo_name_to_pid[pname] = pid
 
-    for repo_name, commands_dir, default_scope in homes:
-        anchors = list_skill_units(commands_dir)
-        for anchor in anchors:
-            fm, body = parse_frontmatter(anchor)
+    for repo_name, repo_root, default_scope in homes:
+        # Track which skill keys we've already claimed from a higher-priority
+        # source within this repo so we don't double-register from a legacy
+        # mirror that hasn't been migrated yet.
+        claimed_in_repo: set[str] = set()
 
-            # Determine skill name
-            skill_name = fm.get("name", anchor.stem)
-            # Normalize to lowercase-kebab for registry key
-            skill_key = anchor.stem
+        for skills_dir, source_kind in _candidate_skill_dirs(repo_root, repo_name):
+            anchors = list_skill_units(skills_dir)
+            if anchors and source_kind != "agent-io/skills":
+                _warn_legacy_source(repo_name, source_kind, skills_dir)
 
-            # Determine scope from frontmatter
-            fm_scope_raw = fm.get("scope", "")
-            if fm_scope_raw:
-                # Handle legacy "repo:X" frontmatter scope format. Migration map:
-                #   repo:AIAssistant     → platform
-                #   repo:ClaudeCommands  → universal
-                #   repo:<other>         → domain
-                if fm_scope_raw.startswith("repo:"):
-                    declared_repo = fm_scope_raw.split(":", 1)[1]
-                    if declared_repo == "AIAssistant":
-                        fm_scope = "platform"
-                    elif declared_repo == "ClaudeCommands":
-                        fm_scope = "universal"
+            for anchor in anchors:
+                fm, body = parse_frontmatter(anchor)
+
+                # Determine skill name
+                skill_name = fm.get("name", anchor.stem)
+                # Normalize to lowercase-kebab for registry key
+                skill_key = anchor.stem
+
+                if skill_key in claimed_in_repo:
+                    # Already discovered in a higher-priority dir for this repo.
+                    continue
+
+                # Determine scope from frontmatter
+                fm_scope_raw = fm.get("scope", "")
+                if fm_scope_raw:
+                    # Handle legacy "repo:X" frontmatter scope format. Migration map:
+                    #   repo:AIAssistant     → platform
+                    #   repo:ClaudeCommands  → universal
+                    #   repo:<other>         → domain
+                    if fm_scope_raw.startswith("repo:"):
+                        declared_repo = fm_scope_raw.split(":", 1)[1]
+                        if declared_repo == "AIAssistant":
+                            fm_scope = "platform"
+                        elif declared_repo == "ClaudeCommands":
+                            fm_scope = "universal"
+                        else:
+                            fm_scope = "domain"
+                        # If found in a repo but declares repo:X for a DIFFERENT repo,
+                        # it's a deployed copy — skip it
+                        if declared_repo != repo_name:
+                            continue
                     else:
-                        fm_scope = "domain"
-                    # If found in a repo but declares repo:X for a DIFFERENT repo,
-                    # it's a deployed copy — skip it
-                    if declared_repo != repo_name:
-                        continue
+                        fm_scope = fm_scope_raw
+                        # If a skill declares a scope higher than its home's default,
+                        # it's a deployed copy — skip it.
+                        # E.g. universal skill in a platform/domain repo, or
+                        # platform skill in a domain repo.
+                        _scope_rank = {"universal": 0, "platform": 1, "domain": 2}
+                        declared_rank = _scope_rank.get(fm_scope, 2)
+                        home_rank = _scope_rank.get(default_scope, 2)
+                        if declared_rank < home_rank:
+                            continue
                 else:
-                    fm_scope = fm_scope_raw
-                    # If a skill declares a scope higher than its home's default,
-                    # it's a deployed copy — skip it.
-                    # E.g. universal skill in a platform/domain repo, or
-                    # platform skill in a domain repo.
-                    _scope_rank = {"universal": 0, "platform": 1, "domain": 2}
-                    declared_rank = _scope_rank.get(fm_scope, 2)
-                    home_rank = _scope_rank.get(default_scope, 2)
-                    if declared_rank < home_rank:
-                        continue
-            else:
-                fm_scope = default_scope
+                    fm_scope = default_scope
 
-            # Description
-            description = fm.get("description", "") or extract_first_heading(body) or ""
+                # Description
+                description = fm.get("description", "") or extract_first_heading(body) or ""
 
-            # Compute hash
-            manifest_hash = compute_manifest_hash(anchor)
+                # Compute hash
+                manifest_hash = compute_manifest_hash(anchor)
 
-            # Determine domain
-            domain = None
-            if fm_scope == "domain" or default_scope == "domain":
-                domain = _repo_name_to_pid.get(repo_name, repo_name.lower())
+                # Determine domain
+                domain = None
+                if fm_scope == "domain" or default_scope == "domain":
+                    domain = _repo_name_to_pid.get(repo_name, repo_name.lower())
 
-            entry = {
-                "name": skill_name,
-                "description": description,
-                "home_repo": repo_name,
-                "home_path": str(anchor),
-                "scope": fm_scope if fm_scope in ("universal", "platform", "domain") else default_scope,
-                "domain": domain,
-                "manifest_hash": manifest_hash,
-                "retired": False,
-                "conflict": False,
-                "deploys_to_machines": [],
-                "deploys_to_repos": [],
-                "last_deploy": {},
-            }
+                # Parse deploys_to_repos from frontmatter — optional list of
+                # repo names (or ["*"] wildcard). Wildcard is preserved
+                # verbatim at inventory time and expanded only at sync-repos
+                # time.
+                fm_drepos = fm.get("deploys_to_repos")
+                if fm_drepos is None:
+                    deploys_to_repos: list[str] = []
+                elif isinstance(fm_drepos, list):
+                    deploys_to_repos = [str(x) for x in fm_drepos]
+                elif isinstance(fm_drepos, str):
+                    # Tolerate scalar form: "AgentForge" or "*"
+                    deploys_to_repos = [fm_drepos]
+                else:
+                    deploys_to_repos = []
 
-            if skill_key not in discovered:
-                discovered[skill_key] = []
-            discovered[skill_key].append(entry)
+                entry = {
+                    "name": skill_name,
+                    "description": description,
+                    "home_repo": repo_name,
+                    "home_path": str(anchor),
+                    "scope": fm_scope if fm_scope in ("universal", "platform", "domain") else default_scope,
+                    "domain": domain,
+                    "manifest_hash": manifest_hash,
+                    "retired": False,
+                    "conflict": False,
+                    "deploys_to_machines": [],
+                    "deploys_to_repos": deploys_to_repos,
+                    "last_deploy": {},
+                    "last_repo_deploy": {},
+                }
+
+                if skill_key not in discovered:
+                    discovered[skill_key] = []
+                discovered[skill_key].append(entry)
+                claimed_in_repo.add(skill_key)
 
     # Resolve conflicts and build proposed_skills.
     #
@@ -246,16 +375,34 @@ def inventory(apply: bool = False, machine: str | None = None) -> dict:
             ]
             proposed_skills[skill_key] = kept
 
-    # Preserve deployment state from existing registry
+    # Preserve deployment state from existing registry. We DO let
+    # frontmatter override deploys_to_repos (it's the source of truth for
+    # which repos a universal skill travels into) but emit a drift line
+    # when registry and frontmatter disagree, so users notice.
+    repo_deploys_drifts: list[tuple[str, list[str], list[str]]] = []
+    home_target_warnings: list[tuple[str, str]] = []
     for skill_key, entry in proposed_skills.items():
         if skill_key in existing_skills:
             existing = existing_skills[skill_key]
             entry["deploys_to_machines"] = existing.get("deploys_to_machines", [])
-            entry["deploys_to_repos"] = existing.get("deploys_to_repos", [])
             entry["last_deploy"] = existing.get("last_deploy", {})
+            entry["last_repo_deploy"] = existing.get("last_repo_deploy", {})
+            # deploys_to_repos: frontmatter wins, but record drift if changed.
+            existing_drepos = sorted(existing.get("deploys_to_repos") or [])
+            new_drepos = sorted(entry.get("deploys_to_repos") or [])
+            if existing_drepos != new_drepos:
+                repo_deploys_drifts.append((skill_key, existing_drepos, new_drepos))
             # Preserve retired status only if not conflict
             if not entry["conflict"]:
                 entry["retired"] = existing.get("retired", False)
+
+        # home_repo == target drift — would clobber the skill's source.
+        # Detected here so the user sees the warning before the first sync.
+        # Wildcard "*" is fine; only literal home-repo entries are flagged.
+        drepos = entry.get("deploys_to_repos") or []
+        home = entry.get("home_repo") or ""
+        if home and home in drepos:
+            home_target_warnings.append((skill_key, home))
 
     # Detect scope drift
     scope_drifts: list[tuple[str, str, str]] = []
@@ -308,6 +455,8 @@ def inventory(apply: bool = False, machine: str | None = None) -> dict:
         "removed_skills": removed_skills,
         "unchanged": unchanged,
         "hash_changed": hash_changed,
+        "repo_deploys_drifts": repo_deploys_drifts,
+        "home_target_warnings": home_target_warnings,
     }
 
 

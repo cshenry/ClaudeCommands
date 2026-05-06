@@ -18,6 +18,58 @@ This system provides a standardized approach to running Claude Code in headless 
 - ✅ **Comprehensive documentation**
 - ✅ **CLI tool** for managing commands across multiple projects
 
+## Skill Source-of-Truth
+
+Skills are owned by a single **home repo** and travel from there to user
+machines and (optionally) into other repos. After the convention pivot
+of May 2026, the canonical layout is:
+
+| What                                  | Lives at                                 | Tracked in git? |
+| ------------------------------------- | ---------------------------------------- | --------------- |
+| **Source-of-truth (dev-time)**        | `<home_repo>/agent-io/skills/<skill>.md` | yes             |
+| Skill context bundle (optional)       | `<home_repo>/agent-io/skills/<skill>/`   | yes             |
+| User-global runtime (per-machine)     | `~/.claude/commands/<skill>.md`          | no (user dir)   |
+| Per-repo runtime (per-checkout)       | `<repo>/.claude/commands/<skill>.md`     | **gitignored**  |
+
+The two runtime locations are populated by `claude-skills sync <machine>`
+and are treated as caches: never edit them by hand, and never check them
+in. The `.gitignore` block added by `claude-skills migrate-domain-skills
+--apply` ensures the per-repo runtime stays out of every home repo's git
+history.
+
+**Why per-repo runtime?** When you `cd` into a repo and start Claude
+Code, project-scoped commands are loaded from `.claude/commands/`. The
+sync command mirrors each subscribed skill into:
+
+- the skill's home_repo (so the skill is always loadable when you're
+  working on the repo that owns it), and
+- every repo listed in the skill's `deploys_to_repos` frontmatter (rare
+  — escape-hatch for narrow cross-repo sharing such as guest-mode
+  utility libraries or claude-web branch snapshots).
+
+**Legacy locations** (still discovered with a deprecation warning until
+`migrate-domain-skills --apply` relocates them):
+
+- `<home_repo>/.claude/commands/<skill>.md`
+- `<home_repo>/commands/<skill>.md` *(ClaudeCommands universals only)*
+
+Run `claude-skills migrate-domain-skills` (dry-run first) to plan the
+relocation; `--apply` performs `git mv` per skill and writes one
+migration commit per home repo. Until you run the migration on a given
+home repo, both old and new locations work — the inventory walker
+prefers `agent-io/skills/` and falls back to the legacy paths.
+
+### Two related sync commands
+
+- `claude-skills sync <machine>` — primary loop: writes user-global +
+  per-repo runtime, no commits anywhere.
+- `claude-skills sync-repos [--commit]` — opt-in deploy of skills with
+  `deploys_to_repos` frontmatter into target repos' `.claude/commands/`.
+  Without `--commit`, just writes files (gitignored anyway). With
+  `--commit`, also creates one structured commit per target repo. Use
+  case: claude-web branch snapshots where the runtime *must* be checked
+  in.
+
 ## Installation
 
 To install the ClaudeCommands system files to your home directory:
@@ -144,8 +196,14 @@ Every command produces a `claude-output.json` with:
 ├── SYSTEM-PROMPT.md               # Universal instructions (CRITICAL)
 ├── unified-output-schema.json     # JSON schema for outputs
 ├── claude_commands.py             # CLI tool for managing commands
+├── claude_skills/                 # claude-skills CLI (registry, sync, etc)
 ├── setup.py                       # CLI installation script
-├── commands/                      # Command definitions
+├── agent-io/
+│   └── skills/                    # Canonical skill sources (post-pivot)
+│       ├── <skill>.md             # Anchor file (frontmatter + body)
+│       └── <skill>/               # Optional context bundle
+├── commands/                      # Legacy skill location (deprecated;
+│                                  # use `migrate-domain-skills --apply`)
 │   ├── create-prd.md
 │   ├── generate-tasks.md
 │   ├── doc-code-for-dev.md

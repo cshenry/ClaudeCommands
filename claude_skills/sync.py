@@ -12,12 +12,25 @@ The three passes are:
      subscribed; write CLAUDE.md via write_managed; update last_deploy
      and append to deployment_log.jsonl.
 
+Per-repo runtime mirroring (Step 1 of the convention pivot):
+
+After the main user-global commands_target deploy, ``sync()`` also
+mirrors each subscribed skill into its **home_repo's** ``.claude/commands/``
+runtime directory (so the skill is auto-loaded when the user ``cd``s
+into the repo). For skills carrying a ``deploys_to_repos`` list, the
+skill is additionally mirrored into each listed repo's runtime dir.
+
+The runtime dirs are gitignored after ``migrate-domain-skills --apply``
+(Step 2), so this never produces commits — it just keeps the runtime
+artifact in sync with the source-of-truth at ``agent-io/skills/``.
+
 Hard rules (do not relax):
   - Never rmtree a directory; always per-file unlink + rmdir empty leaves.
   - Never delete a file the registry doesn't show us having deployed.
   - Never deploy a conflict=True skill (skipped silently from add/update).
   - Never deploy a retired skill.
-  - Never write outside ~/.claude/ in guest mode.
+  - Never write outside ~/.claude/ in guest mode (per-repo runtime
+    mirroring is also disabled in guest mode, by definition).
 """
 
 from __future__ import annotations
@@ -42,7 +55,20 @@ from claude_skills.systems import load_systems
 
 
 _REPO_ROOT = Path(__file__).resolve().parent.parent
-_DEPLOYMENT_LOG = _REPO_ROOT / "state" / "deployment_log.jsonl"
+_DEFAULT_DEPLOYMENT_LOG = _REPO_ROOT / "state" / "deployment_log.jsonl"
+_DEPLOYMENT_LOG_ENV = "CLAUDE_SKILLS_DEPLOYMENT_LOG_PATH"
+
+
+def _deployment_log_path() -> Path:
+    """Resolve the deployment log path, honoring the env override (used by tests)."""
+    override = os.environ.get(_DEPLOYMENT_LOG_ENV)
+    if override:
+        return Path(override)
+    return _DEFAULT_DEPLOYMENT_LOG
+
+
+# Back-compat: keep the module-level name; tests can override via env var.
+_DEPLOYMENT_LOG = _DEFAULT_DEPLOYMENT_LOG
 
 
 def _expand(path_str: str) -> Path:
@@ -267,12 +293,290 @@ def _remove_skill_unit(commands_target: Path, skill_key: str) -> None:
             pass
 
 
-def _append_deployment_log(entry: dict, log_path: Path = _DEPLOYMENT_LOG) -> None:
-    """Append a single JSON object as one line to the deployment log."""
+def _append_deployment_log(entry: dict, log_path: Path | None = None) -> None:
+    """Append a single JSON object as one line to the deployment log.
+
+    Honors the ``CLAUDE_SKILLS_DEPLOYMENT_LOG_PATH`` env var when ``log_path``
+    is not given (used by tests so they don't pollute the real log).
+    """
+    if log_path is None:
+        log_path = _deployment_log_path()
     log_path.parent.mkdir(parents=True, exist_ok=True)
     line = json.dumps(entry, sort_keys=True) + "\n"
     with open(log_path, "a", encoding="utf-8") as f:
         f.write(line)
+
+
+# ---- per-repo runtime mirroring helpers ----------------------------------
+
+
+def _build_repo_root_index() -> dict[str, Path]:
+    """Return ``{repo_name: repo_root_path}`` for known home repos.
+
+    Mirrors the discovery in ``inventory.py``: ClaudeCommands (this repo)
+    and AIAssistant (special-cased) plus every project in
+    project_registry.yaml that resolves to a repo_path.
+    """
+    import yaml
+
+    out: dict[str, Path] = {}
+    out["ClaudeCommands"] = _REPO_ROOT
+    aia_root = Path.home() / "Dropbox" / "Projects" / "AIAssistant"
+    if aia_root.is_dir():
+        out["AIAssistant"] = aia_root
+
+    proj_path_env = os.environ.get("CLAUDE_SKILLS_PROJECT_REGISTRY_PATH")
+    proj_path = (
+        Path(proj_path_env)
+        if proj_path_env
+        else aia_root / "state" / "project_registry.yaml"
+    )
+    if not proj_path.is_file():
+        return out
+    try:
+        with open(proj_path) as f:
+            data = yaml.safe_load(f) or {}
+    except (OSError, yaml.YAMLError):
+        return out
+    projects = data.get("projects", {}) or {}
+
+    def _resolve(pid: str) -> str | None:
+        visited: set[str] = set()
+        cur = pid
+        while cur and cur not in visited:
+            visited.add(cur)
+            entry = projects.get(cur, {}) or {}
+            rp = entry.get("repo_path")
+            if rp:
+                return rp
+            cur = entry.get("parent")
+        return None
+
+    for pid, info in projects.items():
+        name = (info or {}).get("name") or pid
+        if name in out:
+            continue
+        rp = _resolve(pid)
+        if not rp:
+            continue
+        path = Path(rp).expanduser()
+        if path.is_dir():
+            out[name] = path
+    return out
+
+
+def _expand_deploys_targets(
+    deploys_to_repos: list[str], repo_index: dict[str, Path]
+) -> list[str]:
+    """Expand ``["*"]`` to every known repo; pass-through otherwise."""
+    if not deploys_to_repos:
+        return []
+    if "*" in deploys_to_repos:
+        return sorted(repo_index.keys())
+    seen: set[str] = set()
+    out: list[str] = []
+    for r in deploys_to_repos:
+        if r not in seen:
+            seen.add(r)
+            out.append(r)
+    return out
+
+
+def _runtime_targets_for_skill(
+    entry: dict, repo_index: dict[str, Path]
+) -> list[tuple[str, Path]]:
+    """Return list of (repo_name, runtime_dir) for a single skill entry.
+
+    Each subscribed skill mirrors into:
+      - its home_repo's ``.claude/commands/``
+      - every repo listed in ``deploys_to_repos`` (after wildcard expansion)
+    """
+    targets: list[tuple[str, Path]] = []
+    home_repo = entry.get("home_repo") or ""
+    if home_repo and home_repo in repo_index:
+        targets.append((home_repo, repo_index[home_repo] / ".claude" / "commands"))
+    drepos = _expand_deploys_targets(
+        entry.get("deploys_to_repos") or [], repo_index
+    )
+    for r in drepos:
+        if r == home_repo:
+            # Self-clobber — refuse silently in runtime mirroring.
+            continue
+        if r not in repo_index:
+            continue
+        targets.append((r, repo_index[r] / ".claude" / "commands"))
+    return targets
+
+
+def _mirror_to_runtime_dirs(
+    subscribed: dict,
+    registry_skills: dict,
+    repo_index: dict[str, Path],
+    plan: dict,
+) -> dict:
+    """Per-repo runtime mirror pass. Returns a dict {repo_name: stats}.
+
+    For each subscribed skill, ensures the home_repo's
+    ``.claude/commands/`` (and each declared deploys_to_repos target)
+    contains an up-to-date copy. Also removes anchors the registry
+    previously deployed to that repo if the skill is no longer subscribed
+    or no longer targets that repo.
+    """
+    runtime_stats: dict[str, dict] = {}
+
+    # Build {repo_name: {skill_key: entry}} for currently-subscribed skills.
+    by_repo: dict[str, dict[str, dict]] = {}
+    for key, entry in subscribed.items():
+        for repo_name, _runtime_dir in _runtime_targets_for_skill(entry, repo_index):
+            by_repo.setdefault(repo_name, {})[key] = entry
+
+    # Also track repos that may need REMOVALS (skill was previously
+    # deployed via runtime mirror but no longer subscribed/targeted).
+    for key, entry in registry_skills.items():
+        for repo_name in (entry.get("last_runtime_deploy") or {}).keys():
+            by_repo.setdefault(repo_name, {})
+
+    for repo_name in sorted(by_repo.keys()):
+        repo_root = repo_index.get(repo_name)
+        if repo_root is None:
+            continue
+        runtime_dir = repo_root / ".claude" / "commands"
+        skills_for_repo = by_repo[repo_name]
+
+        # Walk current state of runtime dir.
+        target_manifest = _build_target_manifest(runtime_dir)
+
+        add: list[str] = []
+        update: list[str] = []
+        unchanged: list[str] = []
+        remove: list[str] = []
+
+        for key in sorted(skills_for_repo.keys()):
+            new_hash = skills_for_repo[key].get("manifest_hash", "")
+            if key not in target_manifest:
+                add.append(key)
+            elif target_manifest[key] == new_hash:
+                unchanged.append(key)
+            else:
+                update.append(key)
+
+        # Removal: registry says we previously runtime-deployed it but
+        # this skill no longer targets this repo.
+        for key, entry in registry_skills.items():
+            last = (entry.get("last_runtime_deploy") or {}).get(repo_name)
+            if not last:
+                continue
+            if key in skills_for_repo:
+                continue
+            remove.append(key)
+
+        runtime_stats[repo_name] = {
+            "repo_path": str(repo_root),
+            "add": add,
+            "update": update,
+            "unchanged": unchanged,
+            "remove": sorted(set(remove)),
+            "errors": [],
+        }
+
+        # ---- APPLY ----
+        runtime_dir.mkdir(parents=True, exist_ok=True)
+        for key in add + update:
+            entry = skills_for_repo[key]
+            home_path = Path(entry["home_path"])
+            if not home_path.is_file():
+                runtime_stats[repo_name]["errors"].append(
+                    f"missing home_path for {key}: {home_path}"
+                )
+                continue
+            try:
+                _copy_skill_unit(home_path, runtime_dir)
+            except Exception as exc:
+                runtime_stats[repo_name]["errors"].append(
+                    f"copy failed for {key}: {exc}"
+                )
+
+        for key in runtime_stats[repo_name]["remove"]:
+            try:
+                _remove_skill_unit(runtime_dir, key)
+            except Exception as exc:
+                runtime_stats[repo_name]["errors"].append(
+                    f"remove failed for {key}: {exc}"
+                )
+
+        # Update last_runtime_deploy.
+        now = _now_iso()
+        for key in add + update:
+            entry = registry_skills.get(key)
+            if entry is None:
+                continue
+            lrd = entry.setdefault("last_runtime_deploy", {})
+            lrd[repo_name] = {
+                "hash": entry.get("manifest_hash", ""),
+                "ts": now,
+                "action": "add" if key in add else "update",
+            }
+        for key in runtime_stats[repo_name]["remove"]:
+            entry = registry_skills.get(key)
+            if entry is None:
+                continue
+            lrd = entry.setdefault("last_runtime_deploy", {})
+            lrd.pop(repo_name, None)
+
+    return runtime_stats
+
+
+def _plan_runtime_targets(
+    subscribed: dict, registry_skills: dict, repo_index: dict[str, Path]
+) -> dict:
+    """Dry-run version of ``_mirror_to_runtime_dirs`` (no disk writes)."""
+    by_repo: dict[str, dict[str, dict]] = {}
+    for key, entry in subscribed.items():
+        for repo_name, _ in _runtime_targets_for_skill(entry, repo_index):
+            by_repo.setdefault(repo_name, {})[key] = entry
+    for key, entry in registry_skills.items():
+        for repo_name in (entry.get("last_runtime_deploy") or {}).keys():
+            by_repo.setdefault(repo_name, {})
+
+    out: dict[str, dict] = {}
+    for repo_name, skills_for_repo in by_repo.items():
+        repo_root = repo_index.get(repo_name)
+        if repo_root is None:
+            continue
+        runtime_dir = repo_root / ".claude" / "commands"
+        target_manifest = _build_target_manifest(runtime_dir)
+
+        add: list[str] = []
+        update: list[str] = []
+        unchanged: list[str] = []
+        remove: list[str] = []
+
+        for key in sorted(skills_for_repo.keys()):
+            new_hash = skills_for_repo[key].get("manifest_hash", "")
+            if key not in target_manifest:
+                add.append(key)
+            elif target_manifest[key] == new_hash:
+                unchanged.append(key)
+            else:
+                update.append(key)
+
+        for key, entry in registry_skills.items():
+            last = (entry.get("last_runtime_deploy") or {}).get(repo_name)
+            if not last:
+                continue
+            if key in skills_for_repo:
+                continue
+            remove.append(key)
+
+        out[repo_name] = {
+            "repo_path": str(repo_root),
+            "add": add,
+            "update": update,
+            "unchanged": unchanged,
+            "remove": sorted(set(remove)),
+            "errors": [],
+        }
+    return out
 
 
 def sync(
@@ -326,6 +630,14 @@ def sync(
     tier2 = get_tier2(system_name, tier2_source=tier2_source)
     cmd_md = _render_claude_md_plan(claude_md_target, tier1, tier2)
 
+    # Per-repo runtime mirror plan (always computed; only applied in
+    # owned mode and when apply=True).
+    repo_index: dict[str, Path] = {}
+    runtime_plan: dict[str, dict] = {}
+    if mode != "guest":
+        repo_index = _build_repo_root_index()
+        runtime_plan = _plan_runtime_targets(subscribed, registry_skills, repo_index)
+
     plan: dict = {
         "system": system_name,
         "mode": mode,
@@ -337,6 +649,7 @@ def sync(
             "diff": cmd_md["diff"],
         },
         "skills": classification,
+        "runtime_repos": runtime_plan,
         "applied": False,
         "errors": [],
     }
@@ -423,6 +736,24 @@ def sync(
             machines.add(system_name)
         entry["deploys_to_machines"] = sorted(machines)
 
+    # ---- Per-repo runtime mirror (Step 1 of convention pivot) ----
+    # Mirrors each subscribed skill into its home_repo's runtime
+    # ``.claude/commands/`` dir (and into any ``deploys_to_repos``
+    # targets). Skipped in guest mode by design.
+    runtime_results: dict[str, dict] = {}
+    if mode != "guest":
+        runtime_results = _mirror_to_runtime_dirs(
+            subscribed, registry_skills, repo_index, plan
+        )
+        plan["runtime_repos"] = {
+            name: {k: v for k, v in stats.items() if k != "errors"} | {"errors": stats.get("errors", [])}
+            for name, stats in runtime_results.items()
+        }
+        # Surface runtime errors at the top level too.
+        for name, stats in runtime_results.items():
+            for err in stats.get("errors") or []:
+                plan["errors"].append(f"runtime[{name}]: {err}")
+
     # Append deployment log.
     log_entry = {
         "ts": now,
@@ -435,6 +766,14 @@ def sync(
         "hash_at_deploy": {
             key: registry_skills.get(key, {}).get("manifest_hash", "")
             for key in classification["add"] + classification["update"]
+        },
+        "runtime_repos": {
+            name: {
+                "add": stats.get("add") or [],
+                "update": stats.get("update") or [],
+                "remove": stats.get("remove") or [],
+            }
+            for name, stats in runtime_results.items()
         },
         "errors": plan["errors"],
     }

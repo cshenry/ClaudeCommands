@@ -90,6 +90,8 @@ def cmd_inventory(args):
     removed = result["removed_skills"]
     unchanged = result["unchanged"]
     hash_changed = result["hash_changed"]
+    repo_deploys_drifts = result.get("repo_deploys_drifts", [])
+    home_target_warnings = result.get("home_target_warnings", [])
 
     # Print summary
     print("=== Skill Inventory Report ===\n")
@@ -140,6 +142,23 @@ def cmd_inventory(args):
         print(f"\n  Scope drifts:")
         for name, reg_scope, fm_scope in scope_drifts:
             print(f"    ? {name}: registry={reg_scope}, frontmatter={fm_scope}")
+
+    if repo_deploys_drifts:
+        print(f"\n  deploys_to_repos drift (frontmatter wins on apply):")
+        for name, reg_repos, fm_repos in repo_deploys_drifts:
+            print(
+                f"    ? {name}: registry={reg_repos or '[]'}, "
+                f"frontmatter={fm_repos or '[]'}"
+            )
+
+    if home_target_warnings:
+        print(f"\n  home==target conflicts (sync-repos will refuse these):")
+        for name, home in home_target_warnings:
+            print(
+                f"    ! {name}: home_repo={home} also in deploys_to_repos — "
+                "skill would clobber its own source. Edit frontmatter or "
+                "use 'register --update' to fix."
+            )
 
     if apply:
         print(f"\n  Registry written with {len(proposed)} skills.")
@@ -359,6 +378,37 @@ def cmd_sync(args):
     return _print_plan(plan, show_diff=False)
 
 
+def cmd_sync_repos(args):
+    """Sync skills into target repos' .claude/commands/ (no commit by default)."""
+    from claude_skills.repo_sync import render_repo_plan, sync_repos
+
+    try:
+        plan = sync_repos(
+            apply=bool(getattr(args, "apply", False)),
+            repo=getattr(args, "repo", None),
+            skill=getattr(args, "skill", None),
+            force=bool(getattr(args, "force", False)),
+            commit=bool(getattr(args, "commit", False)),
+        )
+    except ValueError as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return 1
+
+    return render_repo_plan(plan)
+
+
+def cmd_migrate_domain_skills(args):
+    """Relocate legacy skill sources to <repo>/agent-io/skills/."""
+    from claude_skills.migrate import migrate_domain_skills, render_migrate_plan
+
+    plan = migrate_domain_skills(
+        apply=bool(getattr(args, "apply", False)),
+        repo=getattr(args, "repo", None),
+        skill=getattr(args, "skill", None),
+    )
+    return render_migrate_plan(plan)
+
+
 def cmd_diff(args):
     """Show diff between local and deployed skills for a system."""
     from claude_skills.sync import sync
@@ -542,6 +592,17 @@ def cmd_register(args):
     if scope == "domain":
         domain = project_id
 
+    # Parse deploys_to_repos from frontmatter (same shape as inventory).
+    fm_drepos = fm.get("deploys_to_repos")
+    if fm_drepos is None:
+        deploys_to_repos: list[str] = []
+    elif isinstance(fm_drepos, list):
+        deploys_to_repos = [str(x) for x in fm_drepos]
+    elif isinstance(fm_drepos, str):
+        deploys_to_repos = [fm_drepos]
+    else:
+        deploys_to_repos = []
+
     entry = {
         "name": skill_name_field,
         "description": description,
@@ -553,8 +614,9 @@ def cmd_register(args):
         "retired": False,
         "conflict": False,
         "deploys_to_machines": [],
-        "deploys_to_repos": [],
+        "deploys_to_repos": deploys_to_repos,
         "last_deploy": {},
+        "last_repo_deploy": {},
     }
 
     registry = load_registry()
@@ -569,10 +631,12 @@ def cmd_register(args):
 
     if skill_key in skills and args.update:
         existing = skills[skill_key]
-        # Preserve deployment state
+        # Preserve deployment state. deploys_to_repos is INTENTIONALLY
+        # overwritten from frontmatter so `register --update` lets users
+        # adjust the repo list by editing the .md file.
         entry["deploys_to_machines"] = existing.get("deploys_to_machines", [])
-        entry["deploys_to_repos"] = existing.get("deploys_to_repos", [])
         entry["last_deploy"] = existing.get("last_deploy", {})
+        entry["last_repo_deploy"] = existing.get("last_repo_deploy", {})
         entry["retired"] = existing.get("retired", False)
 
     print(f"  register: {skill_key}")
@@ -582,6 +646,7 @@ def cmd_register(args):
     print(f"    scope:         {scope}")
     print(f"    domain:        {domain}")
     print(f"    manifest_hash: {manifest_hash}")
+    print(f"    deploys_to_repos: {deploys_to_repos or '[]'}")
 
     if args.dry_run:
         print("  Dry run — no changes written.")
@@ -1045,6 +1110,58 @@ def build_parser():
              "(useful for debugging or when running on the same machine).",
     )
 
+    # sync-repos
+    p_sync_repos = sub.add_parser(
+        "sync-repos",
+        help="Deploy skills into target repos' .claude/commands/ "
+             "(no commit by default)",
+    )
+    p_sync_repos.add_argument(
+        "--apply",
+        action="store_true",
+        help="Apply changes (default: dry run).",
+    )
+    p_sync_repos.add_argument(
+        "--repo",
+        help="Restrict to a single target repo (matches the project's name field).",
+    )
+    p_sync_repos.add_argument(
+        "--skill",
+        help="Restrict to a single skill key.",
+    )
+    p_sync_repos.add_argument(
+        "--force",
+        action="store_true",
+        help="Override the dirty-tree guard (only use after inspecting the repo).",
+    )
+    p_sync_repos.add_argument(
+        "--commit",
+        action="store_true",
+        help="Stage + commit the deploy in the target repo (one commit per repo). "
+             "Default after the convention pivot is to leave files unstaged so "
+             "the gitignored runtime artifacts are not committed.",
+    )
+
+    # migrate-domain-skills
+    p_migrate = sub.add_parser(
+        "migrate-domain-skills",
+        help="Move legacy skill sources to <repo>/agent-io/skills/ "
+             "(canonical post-pivot location).",
+    )
+    p_migrate.add_argument(
+        "--apply",
+        action="store_true",
+        help="Perform the migration (default: dry run).",
+    )
+    p_migrate.add_argument(
+        "--repo",
+        help="Restrict migration to a single home repo (by name).",
+    )
+    p_migrate.add_argument(
+        "--skill",
+        help="Restrict migration to a single skill key.",
+    )
+
     # diff
     p_diff = sub.add_parser("diff", help="Diff local vs deployed skills")
     p_diff.add_argument("system", help="Target system name")
@@ -1128,6 +1245,8 @@ DISPATCH = {
     "inventory": cmd_inventory,
     "status": cmd_status,
     "sync": cmd_sync,
+    "sync-repos": cmd_sync_repos,
+    "migrate-domain-skills": cmd_migrate_domain_skills,
     "diff": cmd_diff,
     "register": cmd_register,
     "retire": cmd_retire,
