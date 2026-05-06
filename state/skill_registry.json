@@ -12,6 +12,7 @@
       "retired": false,
       "conflict": false,
       "deploys_to_machines": [
+        "email-mac",
         "primary-laptop"
       ],
       "deploys_to_repos": [],
@@ -20,6 +21,11 @@
           "hash": "f14eb133d9ab0062874176e44d2eb41460d6fb343102d457962290d653a45449",
           "ts": "2026-05-05T23:26:34Z",
           "action": "update"
+        },
+        "email-mac": {
+          "hash": "f14eb133d9ab0062874176e44d2eb41460d6fb343102d457962290d653a45449",
+          "ts": "2026-05-06T04:11:47Z",
+          "action": "add"
         }
       }
     },
@@ -34,6 +40,7 @@
       "retired": false,
       "conflict": false,
       "deploys_to_machines": [
+        "email-mac",
         "primary-laptop"
       ],
       "deploys_to_repos": [],
@@ -42,6 +49,11 @@
           "hash": "2b5cd1d5bb24da99e6108f3c2235fdf2661cff9d812ceb7368af7cc02d146f26",
           "ts": "2026-05-06T03:43:23Z",
           "action": "update"
+        },
+        "email-mac": {
+          "hash": "2b5cd1d5bb24da99e6108f3c2235fdf2661cff9d812ceb7368af7cc02d146f26",
+          "ts": "2026-05-06T04:11:47Z",
+          "action": "add"
         }
       }
     },
@@ -56,6 +68,7 @@
       "retired": false,
       "conflict": false,
       "deploys_to_machines": [
+        "email-mac",
         "primary-laptop"
       ],
       "deploys_to_repos": [],
@@ -64,6 +77,11 @@
           "hash": "60ee04a946bb5176dc5c79c14203ec1348a87c3068f89449412050de44226b6f",
           "ts": "2026-05-06T03:43:23Z",
           "action": "update"
+        },
+        "email-mac": {
+          "hash": "60ee04a946bb5176dc5c79c14203ec1348a87c3068f89449412050de44226b6f",
+          "ts": "2026-05-06T04:11:47Z",
+          "action": "add"
         }
       }
     },
@@ -78,6 +96,7 @@
       "retired": false,
       "conflict": false,
       "deploys_to_machines": [
+        "email-mac",
         "primary-laptop"
       ],
       "deploys_to_repos": [],
@@ -86,6 +105,11 @@
           "hash": "381554b601ed150637088c8b4c41aa8b02a9494cffba14c39a06e3017ca5e53a",
           "ts": "2026-05-06T03:43:23Z",
           "action": "update"
+        },
+        "email-mac": {
+          "hash": "381554b601ed150637088c8b4c41aa8b02a9494cffba14c39a06e3017ca5e53a",
+          "ts": "2026-05-06T04:11:47Z",
+          "action": "add"
         }
       }
     },
@@ -100,6 +124,7 @@
       "retired": false,
       "conflict": false,
       "deploys_to_machines": [
+        "email-mac",
         "primary-laptop"
       ],
       "deploys_to_repos": [],
@@ -108,6 +133,11 @@
           "hash": "fa364bb0905114bdd457c6cbdfd5e40aa31a092f20fab40c0885c4f7321f9b3d",
           "ts": "2026-05-06T03:43:23Z",
           "action": "update"
+        },
+        "email-mac": {
+          "hash": "fa364bb0905114bdd457c6cbdfd5e40aa31a092f20fab40c0885c4f7321f9b3d",
+          "ts": "2026-05-06T04:11:47Z",
+          "action": "add"
         }
       }
     },
@@ -133,9 +163,9 @@
           "action": "update"
         },
         "email-mac": {
-          "hash": "4c6b40e17b6fbcda6b531bffb0dd4a943370fecffbc2161f5dd4df3ad79e1908",
-          "ts": "2026-05-05T15:37:49Z",
-          "action": "add"
+          "hash": "0db2f8be5f2dee903010b81741ae9114009331641404283a68cd0b615f83bad5",
+          "ts": "2026-05-06T04:11:47Z",
+          "action": "update"
         }
       }
     },
@@ -161,9 +191,9 @@
           "action": "update"
         },
         "email-mac": {
-          "hash": "a75d647d1ff600f8da854b9f1f55ad74bb144ee7fde2f23773e966becb123b91",
-          "ts": "2026-05-05T15:37:49Z",
-          "action": "add"
+          "hash": "0155b22671bc5324065679954acdd6c97a2a9d7189c15ca2c058f05d7f49b287",
+          "ts": "2026-05-06T04:11:47Z",
+          "action": "update"
         }
       }
     },
@@ -189,9 +219,9 @@
           "action": "update"
         },
         "email-mac": {
-          "hash": "581c1b814efc400448a76fdab36eb6dc54b41080749c6ff42f5099baa373afac",
-          "ts": "2026-05-05T15:37:49Z",
-          "action": "add"
+          "hash": "2b14152d436bff3954dcdfb497b792f3ebf376d23405380f597b05f1e80111c8",
+          "ts": "2026-05-06T04:11:47Z",
+          "action": "update"
         }
       }
     },
@@ -206,6 +236,7 @@
       "retired": false,
       "conflict": false,
       "deploys_to_machines": [
+        "email-mac",
         "primary-laptop"
       ],
       "deploys_to_repos": [],
@@ -214,6 +245,11 @@
           "hash": "fd1c6457736130d9565fe35309aedc5ecd516fecf9be370771cec6dc5c87885d",
           "ts": "2026-05-06T04:07:49Z",
           "action": "update"
+        },
+        "email-mac": {
+          "hash": "fd1c6457736130d9565fe35309aedc5ecd516fecf9be370771cec6dc5c87885d",
+          "ts": "2026-05-06T04:11:47Z",
+          "action": "add"
         }
       }
     },
@@ -239,9 +275,9 @@
           "action": "update"
         },
         "email-mac": {
-          "hash": "c9710782f1a273f4e2cc3e8d791705fed4f8e763e370057264b486a5ed4476bf",
-          "ts": "2026-05-05T15:37:49Z",
-          "action": "add"
+          "hash": "76e628116c7de922064e904a2f8bcae7f71e696c89c6fc216bb6c9f848e90a39",
+          "ts": "2026-05-06T04:11:47Z",
+          "action": "update"
         }
       }
     },
@@ -267,9 +303,9 @@
           "action": "update"
         },
         "email-mac": {
-          "hash": "3a5d74bb369aedb75ea4beb77a577c62558bff476fda0ab01d60680544ef89f1",
-          "ts": "2026-05-05T15:37:49Z",
-          "action": "add"
+          "hash": "135fa9f63dcc52237b7a0fc30c581cd0ffe9b526fda90d3d6b75be4fae0bef93",
+          "ts": "2026-05-06T04:11:47Z",
+          "action": "update"
         }
       }
     },
@@ -295,9 +331,9 @@
           "action": "update"
         },
         "email-mac": {
-          "hash": "a6a6308fe3b565fdf11127480e17a329c012045992ac870e6cf3de65d40dc06e",
-          "ts": "2026-05-05T15:37:49Z",
-          "action": "add"
+          "hash": "99d60d60be3eb82a60b7724a297c8d827e025f2f2539779ba6d1fa2cacc6df6e",
+          "ts": "2026-05-06T04:11:47Z",
+          "action": "update"
         }
       }
     },
@@ -340,6 +376,7 @@
       "retired": false,
       "conflict": false,
       "deploys_to_machines": [
+        "email-mac",
         "primary-laptop"
       ],
       "deploys_to_repos": [],
@@ -347,6 +384,11 @@
         "primary-laptop": {
           "hash": "2d46a7b9ac1f54a6033bacd7cdbab47a51a1ff1ef8814ab9c24cfde45e6857e4",
           "ts": "2026-05-06T04:08:17Z",
+          "action": "add"
+        },
+        "email-mac": {
+          "hash": "2d46a7b9ac1f54a6033bacd7cdbab47a51a1ff1ef8814ab9c24cfde45e6857e4",
+          "ts": "2026-05-06T04:11:47Z",
           "action": "add"
         }
       }
@@ -417,9 +459,9 @@
           "action": "update"
         },
         "email-mac": {
-          "hash": "61ed795a5c02f53d93b4dcd364e4461ec4b7124fc41d92e14ab9bee87750bd84",
-          "ts": "2026-05-05T15:37:49Z",
-          "action": "add"
+          "hash": "8e4ca9ac49d95008068e47ba410ef4ccba4ec33fbd153bf7904fa8e915b7f170",
+          "ts": "2026-05-06T04:11:47Z",
+          "action": "update"
         }
       }
     },
