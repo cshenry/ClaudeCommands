@@ -118,7 +118,7 @@
       "home_path": "/Users/chenry/Dropbox/Projects/AIAssistant/.claude/commands/ai-audit.md",
       "scope": "platform",
       "domain": null,
-      "manifest_hash": "4c6b40e17b6fbcda6b531bffb0dd4a943370fecffbc2161f5dd4df3ad79e1908",
+      "manifest_hash": "0db2f8be5f2dee903010b81741ae9114009331641404283a68cd0b615f83bad5",
       "retired": false,
       "conflict": false,
       "deploys_to_machines": [
@@ -128,9 +128,9 @@
       "deploys_to_repos": [],
       "last_deploy": {
         "primary-laptop": {
-          "hash": "4c6b40e17b6fbcda6b531bffb0dd4a943370fecffbc2161f5dd4df3ad79e1908",
-          "ts": "2026-05-05T04:48:29Z",
-          "action": "add"
+          "hash": "0db2f8be5f2dee903010b81741ae9114009331641404283a68cd0b615f83bad5",
+          "ts": "2026-05-06T04:07:49Z",
+          "action": "update"
         },
         "email-mac": {
           "hash": "4c6b40e17b6fbcda6b531bffb0dd4a943370fecffbc2161f5dd4df3ad79e1908",
@@ -146,7 +146,7 @@
       "home_path": "/Users/chenry/Dropbox/Projects/AIAssistant/.claude/commands/ai-cowork.md",
       "scope": "platform",
       "domain": null,
-      "manifest_hash": "a75d647d1ff600f8da854b9f1f55ad74bb144ee7fde2f23773e966becb123b91",
+      "manifest_hash": "0155b22671bc5324065679954acdd6c97a2a9d7189c15ca2c058f05d7f49b287",
       "retired": false,
       "conflict": false,
       "deploys_to_machines": [
@@ -156,9 +156,9 @@
       "deploys_to_repos": [],
       "last_deploy": {
         "primary-laptop": {
-          "hash": "a75d647d1ff600f8da854b9f1f55ad74bb144ee7fde2f23773e966becb123b91",
-          "ts": "2026-05-05T04:48:29Z",
-          "action": "add"
+          "hash": "0155b22671bc5324065679954acdd6c97a2a9d7189c15ca2c058f05d7f49b287",
+          "ts": "2026-05-06T04:07:49Z",
+          "action": "update"
         },
         "email-mac": {
           "hash": "a75d647d1ff600f8da854b9f1f55ad74bb144ee7fde2f23773e966becb123b91",
@@ -174,7 +174,7 @@
       "home_path": "/Users/chenry/Dropbox/Projects/AIAssistant/.claude/commands/ai-design.md",
       "scope": "platform",
       "domain": null,
-      "manifest_hash": "581c1b814efc400448a76fdab36eb6dc54b41080749c6ff42f5099baa373afac",
+      "manifest_hash": "2b14152d436bff3954dcdfb497b792f3ebf376d23405380f597b05f1e80111c8",
       "retired": false,
       "conflict": false,
       "deploys_to_machines": [
@@ -184,9 +184,9 @@
       "deploys_to_repos": [],
       "last_deploy": {
         "primary-laptop": {
-          "hash": "581c1b814efc400448a76fdab36eb6dc54b41080749c6ff42f5099baa373afac",
-          "ts": "2026-05-05T04:48:29Z",
-          "action": "add"
+          "hash": "2b14152d436bff3954dcdfb497b792f3ebf376d23405380f597b05f1e80111c8",
+          "ts": "2026-05-06T04:07:49Z",
+          "action": "update"
         },
         "email-mac": {
           "hash": "581c1b814efc400448a76fdab36eb6dc54b41080749c6ff42f5099baa373afac",
@@ -202,7 +202,7 @@
       "home_path": "/Users/chenry/Dropbox/Projects/AIAssistant/.claude/commands/ai-forge-ops.md",
       "scope": "platform",
       "domain": null,
-      "manifest_hash": "7ee8b786c437eb13bae22e997cf79e845e541b25a1d1ac86d72c2c50c6936131",
+      "manifest_hash": "fd1c6457736130d9565fe35309aedc5ecd516fecf9be370771cec6dc5c87885d",
       "retired": false,
       "conflict": false,
       "deploys_to_machines": [
@@ -211,9 +211,9 @@
       "deploys_to_repos": [],
       "last_deploy": {
         "primary-laptop": {
-          "hash": "7ee8b786c437eb13bae22e997cf79e845e541b25a1d1ac86d72c2c50c6936131",
-          "ts": "2026-05-05T23:26:34Z",
-          "action": "add"
+          "hash": "fd1c6457736130d9565fe35309aedc5ecd516fecf9be370771cec6dc5c87885d",
+          "ts": "2026-05-06T04:07:49Z",
+          "action": "update"
         }
       }
     },
@@ -224,7 +224,7 @@
       "home_path": "/Users/chenry/Dropbox/Projects/AIAssistant/.claude/commands/ai-registry.md",
       "scope": "platform",
       "domain": null,
-      "manifest_hash": "c9710782f1a273f4e2cc3e8d791705fed4f8e763e370057264b486a5ed4476bf",
+      "manifest_hash": "76e628116c7de922064e904a2f8bcae7f71e696c89c6fc216bb6c9f848e90a39",
       "retired": false,
       "conflict": false,
       "deploys_to_machines": [
@@ -234,9 +234,9 @@
       "deploys_to_repos": [],
       "last_deploy": {
         "primary-laptop": {
-          "hash": "c9710782f1a273f4e2cc3e8d791705fed4f8e763e370057264b486a5ed4476bf",
-          "ts": "2026-05-05T04:48:29Z",
-          "action": "add"
+          "hash": "76e628116c7de922064e904a2f8bcae7f71e696c89c6fc216bb6c9f848e90a39",
+          "ts": "2026-05-06T04:07:49Z",
+          "action": "update"
         },
         "email-mac": {
           "hash": "c9710782f1a273f4e2cc3e8d791705fed4f8e763e370057264b486a5ed4476bf",
@@ -252,7 +252,7 @@
       "home_path": "/Users/chenry/Dropbox/Projects/AIAssistant/.claude/commands/ai-skills.md",
       "scope": "platform",
       "domain": null,
-      "manifest_hash": "3a5d74bb369aedb75ea4beb77a577c62558bff476fda0ab01d60680544ef89f1",
+      "manifest_hash": "135fa9f63dcc52237b7a0fc30c581cd0ffe9b526fda90d3d6b75be4fae0bef93",
       "retired": false,
       "conflict": false,
       "deploys_to_machines": [
@@ -262,9 +262,9 @@
       "deploys_to_repos": [],
       "last_deploy": {
         "primary-laptop": {
-          "hash": "3a5d74bb369aedb75ea4beb77a577c62558bff476fda0ab01d60680544ef89f1",
-          "ts": "2026-05-05T04:56:54Z",
-          "action": "add"
+          "hash": "135fa9f63dcc52237b7a0fc30c581cd0ffe9b526fda90d3d6b75be4fae0bef93",
+          "ts": "2026-05-06T04:07:49Z",
+          "action": "update"
         },
         "email-mac": {
           "hash": "3a5d74bb369aedb75ea4beb77a577c62558bff476fda0ab01d60680544ef89f1",
@@ -280,7 +280,7 @@
       "home_path": "/Users/chenry/Dropbox/Projects/AIAssistant/.claude/commands/ai-tasks.md",
       "scope": "platform",
       "domain": null,
-      "manifest_hash": "a6a6308fe3b565fdf11127480e17a329c012045992ac870e6cf3de65d40dc06e",
+      "manifest_hash": "99d60d60be3eb82a60b7724a297c8d827e025f2f2539779ba6d1fa2cacc6df6e",
       "retired": false,
       "conflict": false,
       "deploys_to_machines": [
@@ -290,9 +290,9 @@
       "deploys_to_repos": [],
       "last_deploy": {
         "primary-laptop": {
-          "hash": "a6a6308fe3b565fdf11127480e17a329c012045992ac870e6cf3de65d40dc06e",
-          "ts": "2026-05-05T04:48:29Z",
-          "action": "add"
+          "hash": "99d60d60be3eb82a60b7724a297c8d827e025f2f2539779ba6d1fa2cacc6df6e",
+          "ts": "2026-05-06T04:07:49Z",
+          "action": "update"
         },
         "email-mac": {
           "hash": "a6a6308fe3b565fdf11127480e17a329c012045992ac870e6cf3de65d40dc06e",
@@ -329,6 +329,72 @@
         }
       }
     },
+    "create-skill": {
+      "name": "create-skill",
+      "description": "Command: create-skill",
+      "home_repo": "AIAssistant",
+      "home_path": "/Users/chenry/Dropbox/Projects/AIAssistant/.claude/commands/create-skill.md",
+      "scope": "platform",
+      "domain": null,
+      "manifest_hash": "2d46a7b9ac1f54a6033bacd7cdbab47a51a1ff1ef8814ab9c24cfde45e6857e4",
+      "retired": false,
+      "conflict": false,
+      "deploys_to_machines": [
+        "primary-laptop"
+      ],
+      "deploys_to_repos": [],
+      "last_deploy": {
+        "primary-laptop": {
+          "hash": "2d46a7b9ac1f54a6033bacd7cdbab47a51a1ff1ef8814ab9c24cfde45e6857e4",
+          "ts": "2026-05-06T04:08:17Z",
+          "action": "add"
+        }
+      }
+    },
+    "cw-create-signed-letter": {
+      "name": "Create Signed Letter",
+      "description": "Render a signed formal letter (LOC, LOS, LOI, Recommendation, or generic) on ANL letterhead, output as PDF",
+      "home_repo": "AIAssistant",
+      "home_path": "/Users/chenry/Dropbox/Projects/AIAssistant/.claude/commands/cw-create-signed-letter.md",
+      "scope": "platform",
+      "domain": null,
+      "manifest_hash": "63a5b44a5e4588dfa19310c40b0ca8d21dc4cfe1363f99360517fa430c93a2e2",
+      "retired": false,
+      "conflict": false,
+      "deploys_to_machines": [
+        "primary-laptop"
+      ],
+      "deploys_to_repos": [],
+      "last_deploy": {
+        "primary-laptop": {
+          "hash": "63a5b44a5e4588dfa19310c40b0ca8d21dc4cfe1363f99360517fa430c93a2e2",
+          "ts": "2026-05-06T04:08:17Z",
+          "action": "add"
+        }
+      }
+    },
+    "cw-send-to-inbox": {
+      "name": "Send Task to Cowork Inbox",
+      "description": "Create a cowork task .md file in another machine's inbox for cross-machine work hand-off",
+      "home_repo": "AIAssistant",
+      "home_path": "/Users/chenry/Dropbox/Projects/AIAssistant/.claude/commands/cw-send-to-inbox.md",
+      "scope": "platform",
+      "domain": null,
+      "manifest_hash": "4b6f65a46d46dfe9639f63fedb95c9e5af2148bb1627ce2be4699ee26fb0a965",
+      "retired": false,
+      "conflict": false,
+      "deploys_to_machines": [
+        "primary-laptop"
+      ],
+      "deploys_to_repos": [],
+      "last_deploy": {
+        "primary-laptop": {
+          "hash": "4b6f65a46d46dfe9639f63fedb95c9e5af2148bb1627ce2be4699ee26fb0a965",
+          "ts": "2026-05-06T04:08:17Z",
+          "action": "add"
+        }
+      }
+    },
     "project-status": {
       "name": "Quick Project Status",
       "description": "Fast status check on a specific project or full portfolio",
@@ -336,7 +402,7 @@
       "home_path": "/Users/chenry/Dropbox/Projects/AIAssistant/.claude/commands/project-status.md",
       "scope": "platform",
       "domain": null,
-      "manifest_hash": "61ed795a5c02f53d93b4dcd364e4461ec4b7124fc41d92e14ab9bee87750bd84",
+      "manifest_hash": "8e4ca9ac49d95008068e47ba410ef4ccba4ec33fbd153bf7904fa8e915b7f170",
       "retired": false,
       "conflict": false,
       "deploys_to_machines": [
@@ -346,9 +412,9 @@
       "deploys_to_repos": [],
       "last_deploy": {
         "primary-laptop": {
-          "hash": "61ed795a5c02f53d93b4dcd364e4461ec4b7124fc41d92e14ab9bee87750bd84",
-          "ts": "2026-05-05T04:48:29Z",
-          "action": "add"
+          "hash": "8e4ca9ac49d95008068e47ba410ef4ccba4ec33fbd153bf7904fa8e915b7f170",
+          "ts": "2026-05-06T04:07:49Z",
+          "action": "update"
         },
         "email-mac": {
           "hash": "61ed795a5c02f53d93b4dcd364e4461ec4b7124fc41d92e14ab9bee87750bd84",
@@ -364,7 +430,7 @@
       "home_path": "/Users/chenry/Dropbox/Projects/AgentForge/.claude/commands/ai-forge.md",
       "scope": "domain",
       "domain": "agentforge",
-      "manifest_hash": "d8da1bcdf2c175db5729b1ad85244cebfaed2d7b43e04385ef3456ee6abe7962",
+      "manifest_hash": "b68748ddcfc9a7bda220066cdf7a63fc07f5851c531217d79380ed882fefc899",
       "retired": false,
       "conflict": false,
       "deploys_to_machines": [
@@ -373,9 +439,9 @@
       "deploys_to_repos": [],
       "last_deploy": {
         "primary-laptop": {
-          "hash": "d8da1bcdf2c175db5729b1ad85244cebfaed2d7b43e04385ef3456ee6abe7962",
-          "ts": "2026-05-06T03:43:23Z",
-          "action": "add"
+          "hash": "b68748ddcfc9a7bda220066cdf7a63fc07f5851c531217d79380ed882fefc899",
+          "ts": "2026-05-06T04:07:49Z",
+          "action": "update"
         }
       }
     },
@@ -386,7 +452,7 @@
       "home_path": "/Users/chenry/Dropbox/Projects/AgentForge/.claude/commands/worker.md",
       "scope": "domain",
       "domain": "agentforge",
-      "manifest_hash": "fdf9fddbfe5ec620f55a8eacbf453b3fbbee00ab91e09474eecaaec1f1d4e2d1",
+      "manifest_hash": "cbd1cd4cebe5ada61ecc3e81c402f725ea8c053644505b5c20ead90f577fb194",
       "retired": false,
       "conflict": false,
       "deploys_to_machines": [
@@ -395,9 +461,9 @@
       "deploys_to_repos": [],
       "last_deploy": {
         "primary-laptop": {
-          "hash": "fdf9fddbfe5ec620f55a8eacbf453b3fbbee00ab91e09474eecaaec1f1d4e2d1",
-          "ts": "2026-05-06T03:43:23Z",
-          "action": "add"
+          "hash": "cbd1cd4cebe5ada61ecc3e81c402f725ea8c053644505b5c20ead90f577fb194",
+          "ts": "2026-05-06T04:07:49Z",
+          "action": "update"
         }
       }
     },
@@ -664,8 +730,30 @@
           "action": "update"
         }
       }
+    },
+    "genesis-expert": {
+      "name": "genesis-expert",
+      "description": "Genesis Mission Grant Expert",
+      "home_repo": "Genesis Grants",
+      "home_path": "/Users/chenry/Dropbox/Projects/genesisGrants/.claude/commands/genesis-expert.md",
+      "scope": "domain",
+      "domain": "genesisGrants",
+      "manifest_hash": "3b9f98856c4659b92e9d443f9a457f01954aad3ecaddf4b7452fbe1630246a92",
+      "retired": false,
+      "conflict": false,
+      "deploys_to_machines": [
+        "primary-laptop"
+      ],
+      "deploys_to_repos": [],
+      "last_deploy": {
+        "primary-laptop": {
+          "hash": "3b9f98856c4659b92e9d443f9a457f01954aad3ecaddf4b7452fbe1630246a92",
+          "ts": "2026-05-06T04:08:17Z",
+          "action": "add"
+        }
+      }
     }
   },
   "written_by_machine": "primary-laptop",
-  "written_at": "2026-05-06T03:43:23.518140+00:00"
+  "written_at": "2026-05-06T04:07:43.292682+00:00"
 }
