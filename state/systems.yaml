@@ -32,7 +32,7 @@ systems:
     commands_target: ~/.claude/commands/
     tier2_source: systems/primary-laptop/CLAUDE.md
     subscriptions:
-      scopes: [universal, platform]
+      scopes: [universal, platform, domain]
       domains: ["*"]
 
   email-mac:

@@ -28,56 +28,88 @@
       "description": "Bootstrap a new project with directory structure, git, and Claude configuration",
       "home_repo": "ClaudeCommands",
       "home_path": "/Users/chenry/Dropbox/Projects/ClaudeCommands/commands/create-new-project.md",
-      "scope": "domain",
+      "scope": "universal",
       "domain": null,
       "manifest_hash": "2b5cd1d5bb24da99e6108f3c2235fdf2661cff9d812ceb7368af7cc02d146f26",
       "retired": false,
       "conflict": false,
-      "deploys_to_machines": [],
+      "deploys_to_machines": [
+        "primary-laptop"
+      ],
       "deploys_to_repos": [],
-      "last_deploy": {}
+      "last_deploy": {
+        "primary-laptop": {
+          "hash": "2b5cd1d5bb24da99e6108f3c2235fdf2661cff9d812ceb7368af7cc02d146f26",
+          "ts": "2026-05-06T03:43:23Z",
+          "action": "update"
+        }
+      }
     },
     "cursor-setup": {
       "name": "Cursor Setup",
       "description": "Configure Cursor IDE with Claude Code integration and project settings",
       "home_repo": "ClaudeCommands",
       "home_path": "/Users/chenry/Dropbox/Projects/ClaudeCommands/commands/cursor-setup.md",
-      "scope": "domain",
+      "scope": "universal",
       "domain": null,
       "manifest_hash": "60ee04a946bb5176dc5c79c14203ec1348a87c3068f89449412050de44226b6f",
       "retired": false,
       "conflict": false,
-      "deploys_to_machines": [],
+      "deploys_to_machines": [
+        "primary-laptop"
+      ],
       "deploys_to_repos": [],
-      "last_deploy": {}
+      "last_deploy": {
+        "primary-laptop": {
+          "hash": "60ee04a946bb5176dc5c79c14203ec1348a87c3068f89449412050de44226b6f",
+          "ts": "2026-05-06T03:43:23Z",
+          "action": "update"
+        }
+      }
     },
     "envman-expert": {
       "name": "EnvironmentManager Expert",
       "description": "Expert on venvman CLI for managing Python virtual environments",
       "home_repo": "ClaudeCommands",
       "home_path": "/Users/chenry/Dropbox/Projects/ClaudeCommands/commands/envman-expert.md",
-      "scope": "domain",
+      "scope": "universal",
       "domain": null,
       "manifest_hash": "381554b601ed150637088c8b4c41aa8b02a9494cffba14c39a06e3017ca5e53a",
       "retired": false,
       "conflict": false,
-      "deploys_to_machines": [],
+      "deploys_to_machines": [
+        "primary-laptop"
+      ],
       "deploys_to_repos": [],
-      "last_deploy": {}
+      "last_deploy": {
+        "primary-laptop": {
+          "hash": "381554b601ed150637088c8b4c41aa8b02a9494cffba14c39a06e3017ca5e53a",
+          "ts": "2026-05-06T03:43:23Z",
+          "action": "update"
+        }
+      }
     },
     "jupyter-dev": {
       "name": "Jupyter Development",
       "description": "Create and manage Jupyter notebooks for data analysis and development",
       "home_repo": "ClaudeCommands",
       "home_path": "/Users/chenry/Dropbox/Projects/ClaudeCommands/commands/jupyter-dev.md",
-      "scope": "domain",
+      "scope": "universal",
       "domain": null,
       "manifest_hash": "fa364bb0905114bdd457c6cbdfd5e40aa31a092f20fab40c0885c4f7321f9b3d",
       "retired": false,
       "conflict": false,
-      "deploys_to_machines": [],
+      "deploys_to_machines": [
+        "primary-laptop"
+      ],
       "deploys_to_repos": [],
-      "last_deploy": {}
+      "last_deploy": {
+        "primary-laptop": {
+          "hash": "fa364bb0905114bdd457c6cbdfd5e40aa31a092f20fab40c0885c4f7321f9b3d",
+          "ts": "2026-05-06T03:43:23Z",
+          "action": "update"
+        }
+      }
     },
     "ai-audit": {
       "name": "AI Platform Auditor",
@@ -335,9 +367,17 @@
       "manifest_hash": "d8da1bcdf2c175db5729b1ad85244cebfaed2d7b43e04385ef3456ee6abe7962",
       "retired": false,
       "conflict": false,
-      "deploys_to_machines": [],
+      "deploys_to_machines": [
+        "primary-laptop"
+      ],
       "deploys_to_repos": [],
-      "last_deploy": {}
+      "last_deploy": {
+        "primary-laptop": {
+          "hash": "d8da1bcdf2c175db5729b1ad85244cebfaed2d7b43e04385ef3456ee6abe7962",
+          "ts": "2026-05-06T03:43:23Z",
+          "action": "add"
+        }
+      }
     },
     "worker": {
       "name": "AgentForge Worker",
@@ -349,9 +389,17 @@
       "manifest_hash": "fdf9fddbfe5ec620f55a8eacbf453b3fbbee00ab91e09474eecaaec1f1d4e2d1",
       "retired": false,
       "conflict": false,
-      "deploys_to_machines": [],
+      "deploys_to_machines": [
+        "primary-laptop"
+      ],
       "deploys_to_repos": [],
-      "last_deploy": {}
+      "last_deploy": {
+        "primary-laptop": {
+          "hash": "fdf9fddbfe5ec620f55a8eacbf453b3fbbee00ab91e09474eecaaec1f1d4e2d1",
+          "ts": "2026-05-06T03:43:23Z",
+          "action": "add"
+        }
+      }
     },
     "kbdatalakeapps-dev": {
       "name": "KBDatalakeApps Development",
@@ -363,9 +411,17 @@
       "manifest_hash": "d90cd1ebb42d7a317207c28c15224a707f55257ace4b27d6846d3cff2e0447ff",
       "retired": false,
       "conflict": false,
-      "deploys_to_machines": [],
+      "deploys_to_machines": [
+        "primary-laptop"
+      ],
       "deploys_to_repos": [],
-      "last_deploy": {}
+      "last_deploy": {
+        "primary-laptop": {
+          "hash": "d90cd1ebb42d7a317207c28c15224a707f55257ace4b27d6846d3cff2e0447ff",
+          "ts": "2026-05-06T03:43:23Z",
+          "action": "update"
+        }
+      }
     },
     "kbdatalake-dashboard-dev": {
       "name": "KBDatalakeDashboard Development",
@@ -377,9 +433,17 @@
       "manifest_hash": "b2dc4c6adc141f5e28a9a03da71dbfbff6b81c2dfb43f3bf84f28d7755f041e2",
       "retired": false,
       "conflict": false,
-      "deploys_to_machines": [],
+      "deploys_to_machines": [
+        "primary-laptop"
+      ],
       "deploys_to_repos": [],
-      "last_deploy": {}
+      "last_deploy": {
+        "primary-laptop": {
+          "hash": "b2dc4c6adc141f5e28a9a03da71dbfbff6b81c2dfb43f3bf84f28d7755f041e2",
+          "ts": "2026-05-06T03:43:23Z",
+          "action": "add"
+        }
+      }
     },
     "kb-sdk-dev": {
       "name": "KBase SDK Development",
@@ -391,9 +455,17 @@
       "manifest_hash": "683fcdd4074ff5f159456f88690854a001cee64f99277c7c36dab26e7340d2c2",
       "retired": false,
       "conflict": false,
-      "deploys_to_machines": [],
+      "deploys_to_machines": [
+        "primary-laptop"
+      ],
       "deploys_to_repos": [],
-      "last_deploy": {}
+      "last_deploy": {
+        "primary-laptop": {
+          "hash": "683fcdd4074ff5f159456f88690854a001cee64f99277c7c36dab26e7340d2c2",
+          "ts": "2026-05-06T03:43:23Z",
+          "action": "update"
+        }
+      }
     },
     "kbutillib-dev": {
       "name": "KBUtilLib Development",
@@ -405,9 +477,17 @@
       "manifest_hash": "0896656af80d0ae0c8bffb690c1266835713a43d218564eeab9234dfd4a68799",
       "retired": false,
       "conflict": false,
-      "deploys_to_machines": [],
+      "deploys_to_machines": [
+        "primary-laptop"
+      ],
       "deploys_to_repos": [],
-      "last_deploy": {}
+      "last_deploy": {
+        "primary-laptop": {
+          "hash": "0896656af80d0ae0c8bffb690c1266835713a43d218564eeab9234dfd4a68799",
+          "ts": "2026-05-06T03:43:23Z",
+          "action": "update"
+        }
+      }
     },
     "kbutillib-expert": {
       "name": "KBUtilLib Expert",
@@ -419,9 +499,17 @@
       "manifest_hash": "96dd4cce71f9e697cbcf2008d5481bf95e224826b0cad8159a760d0abc0f849b",
       "retired": false,
       "conflict": false,
-      "deploys_to_machines": [],
+      "deploys_to_machines": [
+        "primary-laptop"
+      ],
       "deploys_to_repos": [],
-      "last_deploy": {}
+      "last_deploy": {
+        "primary-laptop": {
+          "hash": "96dd4cce71f9e697cbcf2008d5481bf95e224826b0cad8159a760d0abc0f849b",
+          "ts": "2026-05-06T03:43:23Z",
+          "action": "update"
+        }
+      }
     },
     "msmodelutl-expert": {
       "name": "MSModelUtil Expert",
@@ -433,9 +521,17 @@
       "manifest_hash": "8b83cc08973ec2ccf0861c729fdf83ecbb570f019abdab3d93490c9d664e8117",
       "retired": false,
       "conflict": false,
-      "deploys_to_machines": [],
+      "deploys_to_machines": [
+        "primary-laptop"
+      ],
       "deploys_to_repos": [],
-      "last_deploy": {}
+      "last_deploy": {
+        "primary-laptop": {
+          "hash": "8b83cc08973ec2ccf0861c729fdf83ecbb570f019abdab3d93490c9d664e8117",
+          "ts": "2026-05-06T03:43:23Z",
+          "action": "update"
+        }
+      }
     },
     "modelseeddb-expert": {
       "name": "ModelSEED Database Expert",
@@ -447,9 +543,17 @@
       "manifest_hash": "db68181d9fefaaad39722854a67695e3e7891799ecb28dd5442b22dbfa175302",
       "retired": false,
       "conflict": false,
-      "deploys_to_machines": [],
+      "deploys_to_machines": [
+        "primary-laptop"
+      ],
       "deploys_to_repos": [],
-      "last_deploy": {}
+      "last_deploy": {
+        "primary-laptop": {
+          "hash": "db68181d9fefaaad39722854a67695e3e7891799ecb28dd5442b22dbfa175302",
+          "ts": "2026-05-06T03:43:23Z",
+          "action": "update"
+        }
+      }
     },
     "fbapkg-expert": {
       "name": "FBA Packages Expert",
@@ -461,9 +565,17 @@
       "manifest_hash": "b78ac2669654b5ce954c27bfa05661f96681e00659c4ceda76c5a29143906934",
       "retired": false,
       "conflict": false,
-      "deploys_to_machines": [],
+      "deploys_to_machines": [
+        "primary-laptop"
+      ],
       "deploys_to_repos": [],
-      "last_deploy": {}
+      "last_deploy": {
+        "primary-laptop": {
+          "hash": "b78ac2669654b5ce954c27bfa05661f96681e00659c4ceda76c5a29143906934",
+          "ts": "2026-05-06T03:43:23Z",
+          "action": "update"
+        }
+      }
     },
     "modelseedpy-expert": {
       "name": "ModelSEEDpy Expert",
@@ -475,9 +587,17 @@
       "manifest_hash": "ffc037b2c0a6443bb7640c21948d0f36a24f7e73eda0c1258f50ced2e09362bb",
       "retired": false,
       "conflict": false,
-      "deploys_to_machines": [],
+      "deploys_to_machines": [
+        "primary-laptop"
+      ],
       "deploys_to_repos": [],
-      "last_deploy": {}
+      "last_deploy": {
+        "primary-laptop": {
+          "hash": "ffc037b2c0a6443bb7640c21948d0f36a24f7e73eda0c1258f50ced2e09362bb",
+          "ts": "2026-05-06T03:43:23Z",
+          "action": "update"
+        }
+      }
     },
     "kbmodelagent": {
       "name": "kbmodelagent",
@@ -489,9 +609,17 @@
       "manifest_hash": "27465a68e8df434b42e29ee50f79204c435b2444d5c20ea31fd61550f47ba748",
       "retired": false,
       "conflict": false,
-      "deploys_to_machines": [],
+      "deploys_to_machines": [
+        "primary-laptop"
+      ],
       "deploys_to_repos": [],
-      "last_deploy": {}
+      "last_deploy": {
+        "primary-laptop": {
+          "hash": "27465a68e8df434b42e29ee50f79204c435b2444d5c20ea31fd61550f47ba748",
+          "ts": "2026-05-06T03:43:23Z",
+          "action": "add"
+        }
+      }
     },
     "emailassistant-expert": {
       "name": "EmailAssistant Expert",
@@ -503,9 +631,17 @@
       "manifest_hash": "310f453d944bf4c2904989baec26bca9a691a9b99b34649ca2a3dbb9aaf2fc85",
       "retired": false,
       "conflict": false,
-      "deploys_to_machines": [],
+      "deploys_to_machines": [
+        "primary-laptop"
+      ],
       "deploys_to_repos": [],
-      "last_deploy": {}
+      "last_deploy": {
+        "primary-laptop": {
+          "hash": "310f453d944bf4c2904989baec26bca9a691a9b99b34649ca2a3dbb9aaf2fc85",
+          "ts": "2026-05-06T03:43:23Z",
+          "action": "update"
+        }
+      }
     },
     "emailassistant-ops": {
       "name": "EmailAssistant Operations",
@@ -517,11 +653,19 @@
       "manifest_hash": "af95ed12fdf9578789588240d8b2e2ec20e637177b82b04a81eb72ecb5950a41",
       "retired": false,
       "conflict": false,
-      "deploys_to_machines": [],
+      "deploys_to_machines": [
+        "primary-laptop"
+      ],
       "deploys_to_repos": [],
-      "last_deploy": {}
+      "last_deploy": {
+        "primary-laptop": {
+          "hash": "af95ed12fdf9578789588240d8b2e2ec20e637177b82b04a81eb72ecb5950a41",
+          "ts": "2026-05-06T03:43:23Z",
+          "action": "update"
+        }
+      }
     }
   },
   "written_by_machine": "primary-laptop",
-  "written_at": "2026-05-05T23:25:36.540773+00:00"
+  "written_at": "2026-05-06T03:43:23.518140+00:00"
 }
