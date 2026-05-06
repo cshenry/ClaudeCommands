@@ -21,7 +21,6 @@ Step 2 of the convention pivot.
 import json
 import os
 import sys
-import warnings
 from datetime import datetime, timezone
 from pathlib import Path
 

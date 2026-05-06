@@ -194,13 +194,6 @@ def _gitignore_needs_block(repo_root: Path) -> bool:
         return True
     text = gi.read_text(encoding="utf-8")
     needed = (".claude/commands/", ".claude/skills/")
-    for line in text.splitlines():
-        s = line.strip()
-        if s.startswith("#") or not s:
-            continue
-        if s in needed:
-            # Found at least one — check both.
-            pass
     have = {
         line.strip()
         for line in text.splitlines()
