@@ -370,14 +370,7 @@
           "action": "add"
         }
       },
-      "last_repo_deploy": {},
-      "last_runtime_deploy": {
-        "AIAssistant": {
-          "hash": "b9942f35d387f27e2a1008c2557c2b154680ca20205eb42a71dc71cb648a36e4",
-          "ts": "2026-05-07T04:59:47Z",
-          "action": "add"
-        }
-      }
+      "last_repo_deploy": {}
     },
     "budget-justification": {
       "name": "Budget Justification Generator",
@@ -855,14 +848,7 @@
           "action": "add"
         }
       },
-      "last_repo_deploy": {},
-      "last_runtime_deploy": {
-        "ProjectDocumentDatabase": {
-          "hash": "40dd334812f85fa462e8c6d4ff6a039dd00a3b618f3a3b2dd020ca27028dbcb0",
-          "ts": "2026-05-07T04:59:47Z",
-          "action": "add"
-        }
-      }
+      "last_repo_deploy": {}
     },
     "genesis-expert": {
       "name": "genesis-expert",
@@ -908,16 +894,39 @@
           "action": "add"
         }
       },
+      "last_repo_deploy": {}
+    },
+    "courier-expert": {
+      "name": "courier-expert",
+      "description": "Courier Expert",
+      "home_repo": "Courier",
+      "home_path": "/Users/chenry/Dropbox/Projects/Courier/agent-io/skills/courier-expert.md",
+      "scope": "domain",
+      "domain": "courier",
+      "manifest_hash": "c1a20c42e88c07e1456a8289afb76fadf37a4954ea1a7d107e3c8e1eb780272e",
+      "retired": false,
+      "conflict": false,
+      "deploys_to_machines": [
+        "primary-laptop"
+      ],
+      "deploys_to_repos": [],
+      "last_deploy": {
+        "primary-laptop": {
+          "hash": "c1a20c42e88c07e1456a8289afb76fadf37a4954ea1a7d107e3c8e1eb780272e",
+          "ts": "2026-05-07T05:13:26Z",
+          "action": "add"
+        }
+      },
       "last_repo_deploy": {},
       "last_runtime_deploy": {
-        "MeetingAIAssistant": {
-          "hash": "7ab62e974fd624b9d1b47a5276693d8db491e5437eb64d0053e834e535e84754",
-          "ts": "2026-05-07T04:59:47Z",
+        "Courier": {
+          "hash": "c1a20c42e88c07e1456a8289afb76fadf37a4954ea1a7d107e3c8e1eb780272e",
+          "ts": "2026-05-07T05:13:26Z",
           "action": "add"
         }
       }
     }
   },
   "written_by_machine": "primary-laptop",
-  "written_at": "2026-05-07T04:58:39.922357+00:00"
+  "written_at": "2026-05-07T05:13:26.454708+00:00"
 }
