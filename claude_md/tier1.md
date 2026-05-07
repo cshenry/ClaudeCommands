@@ -44,6 +44,18 @@ Code files go in the repo's existing source tree. Do not create code under `agen
 
 - If a repo has a `state/` directory, treat it as authoritative. Mutate only through the repo's documented API — never hand-edit.
 
+## Skills and slash commands
+
+Slash commands and skills you find under `.claude/commands/` (in any repo) or `~/.claude/commands/` are **runtime artifacts** populated by `claude-skills sync` from a git-tracked source. Never edit them directly — the next sync overwrites your changes, and they're gitignored so git won't record the fix either.
+
+To change a skill or slash command:
+
+1. Edit the source at `<home_repo>/agent-io/skills/<skill>.md`.
+2. Commit in the home repo.
+3. Run `claude-skills sync <machine> --apply` on each machine where the skill should land.
+
+If you don't know which repo a skill is homed in, run `claude-skills inventory` or check `~/Dropbox/Projects/ClaudeCommands/state/skill_registry.json` (`home_repo` field). The same rule applies to `CLAUDE.md` itself — the universal and per-machine sections are sync-managed; their sources live in `ClaudeCommands/claude_md/tier{1,2,3}.md`.
+
 ## Cross-machine architecture
 
 Three machines participate (primary-laptop, email-mac, h100). Tasks and data move between them via:
