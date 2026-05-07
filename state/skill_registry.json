@@ -505,6 +505,36 @@
       },
       "last_repo_deploy": {}
     },
+    "agentforge-expert": {
+      "name": "agentforge-expert",
+      "description": "AgentForge Expert",
+      "home_repo": "AgentForge",
+      "home_path": "/Users/chenry/Dropbox/Projects/AgentForge/agent-io/skills/agentforge-expert.md",
+      "scope": "domain",
+      "domain": "agentforge",
+      "manifest_hash": "84e2a068f805a7f0ecf5cd0805c1353bcb2ce44f66f21378cd69358689620339",
+      "retired": false,
+      "conflict": false,
+      "deploys_to_machines": [
+        "primary-laptop"
+      ],
+      "deploys_to_repos": [],
+      "last_deploy": {
+        "primary-laptop": {
+          "hash": "84e2a068f805a7f0ecf5cd0805c1353bcb2ce44f66f21378cd69358689620339",
+          "ts": "2026-05-07T05:37:48Z",
+          "action": "add"
+        }
+      },
+      "last_repo_deploy": {},
+      "last_runtime_deploy": {
+        "AgentForge": {
+          "hash": "84e2a068f805a7f0ecf5cd0805c1353bcb2ce44f66f21378cd69358689620339",
+          "ts": "2026-05-07T05:37:48Z",
+          "action": "add"
+        }
+      }
+    },
     "ai-forge": {
       "name": "ai-forge",
       "description": "Command: ai-forge",
@@ -917,16 +947,9 @@
           "action": "add"
         }
       },
-      "last_repo_deploy": {},
-      "last_runtime_deploy": {
-        "Courier": {
-          "hash": "c1a20c42e88c07e1456a8289afb76fadf37a4954ea1a7d107e3c8e1eb780272e",
-          "ts": "2026-05-07T05:13:26Z",
-          "action": "add"
-        }
-      }
+      "last_repo_deploy": {}
     }
   },
   "written_by_machine": "primary-laptop",
-  "written_at": "2026-05-07T05:13:26.454708+00:00"
+  "written_at": "2026-05-07T05:37:48.738296+00:00"
 }
