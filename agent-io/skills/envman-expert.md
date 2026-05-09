@@ -1,7 +1,7 @@
 ---
 name: EnvironmentManager Expert
 description: Expert on venvman CLI for managing Python virtual environments
-scope: universal
+scope: global
 ---
 
 # EnvironmentManager Expert
@@ -34,12 +34,17 @@ EnvironmentManager solves the problem of **scattered virtual environments clutte
 
 Before answering, read the relevant documentation from the repository:
 
-**Core Files:**
+**Always-load primary references:**
 - `/Users/chenry/Dropbox/Projects/EnvironmentManager/README.md` - Full documentation
 - `/Users/chenry/Dropbox/Projects/EnvironmentManager/venvman.py` - CLI implementation
 
-**When needed:**
+**Load on demand:**
 - `/Users/chenry/Dropbox/Projects/EnvironmentManager/data/projects.json` - Tracked projects
+
+**Context files** (auto-loaded with the skill):
+- `agent-io/skills/envman-expert/context/cli-reference.md` - Full venvman CLI reference
+- `agent-io/skills/envman-expert/context/development-guide.md` - Guide for extending venvman
+- `agent-io/skills/envman-expert/context/workflows.md` - Common venvman workflows
 
 ## Quick Reference
 
