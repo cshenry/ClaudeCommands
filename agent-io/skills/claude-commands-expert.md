@@ -1,7 +1,7 @@
 ---
 name: ClaudeCommands Expert
 description: Expert on the ClaudeCommands skill library and deployment system
-scope: repo:ClaudeCommands
+scope: universal
 ---
 
 # ClaudeCommands Expert

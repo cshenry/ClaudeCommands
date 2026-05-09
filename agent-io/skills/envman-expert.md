@@ -1,7 +1,7 @@
 ---
 name: EnvironmentManager Expert
 description: Expert on venvman CLI for managing Python virtual environments
-scope: global
+scope: universal
 ---
 
 # EnvironmentManager Expert

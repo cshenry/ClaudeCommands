@@ -12,27 +12,39 @@ Every skill file at `<home_repo>/agent-io/skills/<skill>.md` MUST begin with a Y
 ---
 name: <Human-Readable Name>
 description: <one-sentence description, under 100 chars>
-scope: <repo:RepoName | platform | global>
+scope: <universal | platform | domain>
 ---
 ```
 
 Optional fields (use only when meaningful):
 
 - `type: cowork` — for `cw-*` cowork skills.
-- `home: /Users/chenry/Dropbox/Projects/<Repo>` — explicit home, useful for `-expert` skills.
+- `home: <RepoName>` — explicit home repo when not derivable from file location (e.g., `home: AgentForge`). Tooling already tracks `home_repo` separately based on the file's source path; this field is informational only.
 - `version: <int>` — increment on substantive content refresh.
 
 The `---` opener must be on line 1. No blank line above. No blank lines between fields inside the block. The `---` closer must be immediately followed by a blank line, then the skill body (`# Title`).
 
 ## 2. `scope:` value-set (canonical)
 
-Exactly three values are allowed:
+The `scope:` field is the **deployment scope** — *who subscribes to this skill*, not where it lives. Where it lives is recorded separately in the registry's `home_repo` field (derived from the skill's file path); do not duplicate it in `scope:`.
 
-- **`repo:<RepoName>`** — Skill is tied to one home repo (e.g., `repo:AgentForge`, `repo:AIAssistant`, `repo:EmailAssistant`). All `-expert` skills MUST use this.
-- **`platform`** — Cross-machine skill that operates on the platform itself (e.g., `ai-skills`).
-- **`global`** — Deployable everywhere; not tied to a specific repo. Cowork skills (`cw-*`) use this with additional `type: cowork`.
+Exactly three values are allowed (matches the `claude_skills` tooling enum):
 
-`universal` is RETIRED. Convert any existing skill using it to `global`.
+- **`universal`** — Deploys broadly across all subscribed machines and target repos. Cross-cutting platform skills like `claude-commands-expert`, `envman-expert`, `cw-*` cowork skills.
+- **`platform`** — Deploys to platform-class machines (those with `subscriptions: ["platform"]` in `state/systems.yaml`). Skills like `ai-audit`, `ai-design`, `ai-forge-ops` that operate on the AI platform itself.
+- **`domain`** — Deploys narrowly to its home repo only. Component-expert skills like `agentforge-expert`, `emailassistant-expert`, and ops skills like `worker`, `emailassistant-ops`.
+
+Earlier drafts of this spec used `repo:<X> | platform | global`, conflating "where the skill lives" (home_repo) with "where it deploys" (scope). The tooling's vocabulary is canonical; the conventions spec follows it.
+
+`global`, `repo:<X>`, and any other value are RETIRED in skill frontmatter. The tooling discards unknown values and falls back to a default — silent drift. Convert via the rules:
+
+| Old value | New value |
+|---|---|
+| `global` | `universal` |
+| `repo:<X>` | `domain` (and tooling reads home_repo from file path) |
+| `universal` | `universal` (already correct) |
+| `platform` | `platform` (already correct) |
+| `domain` | `domain` (already correct) |
 
 ## 3. `$ARGUMENTS` placeholder (canonical form)
 
