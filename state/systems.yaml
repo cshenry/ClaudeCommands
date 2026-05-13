@@ -44,7 +44,7 @@ systems:
     commands_target: ~/.claude/commands/
     tier2_source: systems/email-mac/CLAUDE.md
     subscriptions:
-      scopes: [universal, platform]
+      scopes: [universal, platform, domain]
       domains: [emailassistant, projectdocumentdatabase, agentforge]
 
   h100:
@@ -56,7 +56,7 @@ systems:
     commands_target: ~/.claude/commands/
     tier2_source: systems/h100/CLAUDE.md
     subscriptions:
-      scopes: [universal]
+      scopes: [universal, domain]
       domains: [agentforge]
       requires_role: agentforge-worker
 
